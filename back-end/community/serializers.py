@@ -1,39 +1,10 @@
 from rest_framework import serializers
 from .models import Review , Forum, ReviewComment, ForumComment, Together, TogetherComment
 
-# - ForumListSerializer -get,post (자유 게시판 전체 조회, 글 작성)
-class ForumListSerializer(serializers.ModelSerializer):
-    # 현재 로그인 한 유저 네임 알기 위해서
-    username = serializers.CharField(source='user.username')
-
-    class Meta:
-        model = Forum
-        fields = ('id', 'title', 'username')
-
-# - ForumCommentSerializer -get,post,delete,put (자유 게시판 댓글 조회, 생성, 삭제, 수정)
-class ForumCommentSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = ForumComment
-        fields = '__all__'
-        read_only_fields = ('forum',)
-
-# - ForumSerializer - get,put,delete (자유 게시판 상세 조회, 수정, 삭제)
-class ForumSerializer(serializers.ModelSerializer):
-    
-    forumcomment_set = ForumCommentSerializer(many=True, read_only=True)
-    username = serializers.CharField(source='user.username')
-
-    class Meta:
-        model = Forum
-        fields = '__all__'
-        read_only_fields = ('user',)
-
-
 # - ReviewListSerializer - get,post (리뷰 게시판 전체 조회, 글 작성)
 class ReviewListSerializer(serializers.ModelSerializer):
 
-    username = serializers.CharField(source='user.username')
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Review
@@ -51,17 +22,45 @@ class ReviewCommentSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     
     reviewcomment_set = ReviewCommentSerializer(many=True, read_only=True)
-    username = serializers.CharField(source='user.username')
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Review
         fields = '__all__'
         read_only_fields = ('user',)
 
+# - ForumListSerializer -get,post (자유 게시판 전체 조회, 글 작성)
+class ForumListSerializer(serializers.ModelSerializer):
+    # 현재 로그인 한 유저 네임 알기 위해서
+    username = serializers.CharField(source='user.username', read_only=True)
+
+    class Meta:
+        model = Forum
+        fields = ('id', 'title', 'username')
+
+# - ForumCommentSerializer -get,post,delete,put (자유 게시판 댓글 조회, 생성, 삭제, 수정)
+class ForumCommentSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = ForumComment
+        fields = '__all__'
+        read_only_fields = ('forum',)
+
+# - ForumSerializer - get,put,delete (자유 게시판 상세 조회, 수정, 삭제)
+class ForumSerializer(serializers.ModelSerializer):
+    
+    forumcomment_set = ForumCommentSerializer(many=True, read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
+
+    class Meta:
+        model = Forum
+        fields = '__all__'
+        read_only_fields = ('user',)
+
 # - TogetherListSerializer - get,post (모임 게시판 전체 조회, 글 작성)
 class TogetherListSerializer(serializers.ModelSerializer):
     
-    username = serializers.CharField(source='user.username')
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Together
@@ -79,8 +78,10 @@ class TogetherCommentSerializer(serializers.ModelSerializer):
 class TogetherSerializer(serializers.ModelSerializer):
     
     togethercomment_set = TogetherCommentSerializer(many=True, read_only=True)
-    username = serializers.CharField(source='user.username')
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Together
         fields = '__all__'
+        read_only_fields = ('user',)
+

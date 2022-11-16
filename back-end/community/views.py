@@ -8,9 +8,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import (
+    ReviewListSerializer, ReviewSerializer, ReviewCommentSerializer, 
     ForumListSerializer, ForumSerializer, ForumCommentSerializer,
-    ReviewListSerializer, ReviewCommentSerializer, ReviewSerializer,
-    TogetherListSerializer, TogetherCommentSerializer, TogetherSerializer,
+    TogetherListSerializer, TogetherSerializer, TogetherCommentSerializer, 
 )
 from .models import  (
     Review, ReviewComment,
@@ -25,11 +25,11 @@ from .models import  (
 def review_list(request):
     if request.method == 'GET':
         reviews = Review.objects.order_by('-pk')
-        serializer = ForumListSerializer(reviews, many=True)
+        serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ForumSerializer(data=request.data)
+        serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -39,7 +39,7 @@ def review_list(request):
 def review_detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.method == 'GET':
-        serializer = ForumSerializer(review, many=True)
+        serializer = ReviewSerializer(review, many=True)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':
@@ -47,7 +47,7 @@ def review_detail(request, review_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = ForumSerializer(review, many=True)
+        serializer = ReviewSerializer(review, many=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
@@ -59,23 +59,38 @@ def review_detail(request, review_pk):
 @api_view(['GET'])
 def review_comment_list(request):
     if request.method == 'GET':
-          pass
+        comments = ReviewComment.objects.all()
+        serializer = ReviewCommentSerializer(comments, many=True)
+        return Response(serializer.data)
 
 # 리뷰 댓글 상세 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-def review_comment_detail(request):
+def review_comment_detail(request, comment_pk):
+    comment = ReviewComment.objects.get(pk=comment_pk)
     if request.method == 'GET':
-          pass
+        serializer = ReviewCommentSerializer(comment)
+        return Response(serializer.data)
+
     elif request.method == 'DELETE':
-        pass
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     elif request.method == 'PUT':
-        pass
+        serializer = ReviewCommentSerializer(comment, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
 
 # 리뷰 댓글 생성 (포스트)
 @api_view(['POST'])
-def review_comment_detail(request):
-    if request.method == 'POST':
-          pass
+def review_comment_create(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    serializer = ReviewCommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(review=review)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 #########################################
 # 자유게시판
@@ -84,42 +99,70 @@ def review_comment_detail(request):
 @api_view(['GET', 'POST'])
 def forum_list(request):
     if request.method == 'GET':
-        pass
+        reviews = Forum.objects.order_by('-pk')
+        serializer = ForumListSerializer(reviews, many=True)
+        return Response(serializer.data)
+
     elif request.method == 'POST':
-        pass
+        serializer = ForumSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 자유게시판 상세 페이지 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-def forum_detail(request):
+def forum_detail(request, forum_pk):
+    forum = Forum.objects.get(pk=forum_pk)
     if request.method == 'GET':
-          pass
+        serializer = ForumSerializer(forum, many=True)
+        return Response(serializer.data)
+
     elif request.method == 'DELETE':
-        pass
+        forum.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     elif request.method == 'PUT':
-        pass
+        serializer = ForumSerializer(forum, many=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
 # 자유게시판 댓글 전체 (겟)
 @api_view(['GET'])
 def forum_comment_list(request):
     if request.method == 'GET':
-          pass
+        comments = ForumComment.objects.all()
+        serializer = ForumCommentSerializer(comments, many=True)
+        return Response(serializer.data)
 
 # 자유게시판 댓글 상세 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-def forum_comment_detail(request):
+def forum_comment_detail(request, comment_pk):
+    comment = ForumComment.objects.get(pk=comment_pk)
     if request.method == 'GET':
-          pass
+        serializer = ForumCommentSerializer(comment)
+        return Response(serializer.data)
+
     elif request.method == 'DELETE':
-        pass
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     elif request.method == 'PUT':
-        pass
+        serializer = ForumCommentSerializer(comment, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
 
 # 자유게시판 댓글 생성 (포스트)
 @api_view(['POST'])
-def forum_comment_detail(request):
-    if request.method == 'POST':
-          pass
+def forum_comment_create(request, forum_pk):
+    forum = Forum.objects.get(pk=forum_pk)
+    serializer = ForumCommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(forum=forum)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 #########################################
 # 모여요
@@ -128,38 +171,66 @@ def forum_comment_detail(request):
 @api_view(['GET', 'POST'])
 def together_list(request):
     if request.method == 'GET':
-        pass
+        together = Together.objects.order_by('-pk')
+        serializer = TogetherListSerializer(together, many=True)
+        return Response(serializer.data)
+
     elif request.method == 'POST':
-        pass
+        serializer = TogetherSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 모여요 상세 페이지 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-def together_detail(request):
+def together_detail(request, together_pk):
+    together = Together.objects.get(pk=together_pk)
     if request.method == 'GET':
-          pass
+        serializer = TogetherSerializer(together, many=True)
+        return Response(serializer.data)
+
     elif request.method == 'DELETE':
-        pass
+        together.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     elif request.method == 'PUT':
-        pass
+        serializer = TogetherSerializer(together, many=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
 # 모여요 댓글 전체 (겟)
 @api_view(['GET'])
 def together_comment_list(request):
     if request.method == 'GET':
-        pass
+        comments = TogetherComment.objects.all()
+        serializer = TogetherCommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
 
 # 모여요 댓글 상세 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-def together_comment_detail(request):
+def together_comment_detail(request, comment_pk):
+    comment = TogetherComment.objects.get(pk=comment_pk)
     if request.method == 'GET':
-          pass
+        serializer = TogetherCommentSerializer(comment)
+        return Response(serializer.data)
+
     elif request.method == 'DELETE':
-        pass
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     elif request.method == 'PUT':
-        pass
+        serializer = TogetherCommentSerializer(comment, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
     
 # 모여요 댓글 생성 (포스트)
 @api_view(['POST'])
-def together_comment_detail(request):
-    if request.method == 'POST':
-          pass
+def together_comment_create(request, together_pk):
+    together = Together.objects.get(pk=together_pk)
+    serializer = TogetherCommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(together=together)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
