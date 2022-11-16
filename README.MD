@@ -12,7 +12,7 @@
 
 # ERD
 
-![](README_assets/c8c27fa1224aaac4c55498f043c10fbefd6fe34f.jpg)
+![](README_assets/76d93680f2c16a6cf8e62195738d48157629b0ef.jpg)
 
 # 영화 추천 알고리즘
 
