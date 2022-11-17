@@ -39,7 +39,7 @@ def review_list(request):
 def review_detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.method == 'GET':
-        serializer = ReviewSerializer(review, many=True)
+        serializer = ReviewSerializer(review)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':
@@ -47,7 +47,7 @@ def review_detail(request, review_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = ReviewSerializer(review, many=True)
+        serializer = ReviewSerializer(review)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
@@ -88,7 +88,7 @@ def review_comment_create(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     serializer = ReviewCommentSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(review=review)
+        serializer.save(user = request.user, review=review)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -115,7 +115,7 @@ def forum_list(request):
 def forum_detail(request, forum_pk):
     forum = Forum.objects.get(pk=forum_pk)
     if request.method == 'GET':
-        serializer = ForumSerializer(forum, many=True)
+        serializer = ForumSerializer(forum)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':
@@ -123,7 +123,7 @@ def forum_detail(request, forum_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = ForumSerializer(forum, many=True)
+        serializer = ForumSerializer(forum)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
@@ -160,8 +160,11 @@ def forum_comment_detail(request, comment_pk):
 def forum_comment_create(request, forum_pk):
     forum = Forum.objects.get(pk=forum_pk)
     serializer = ForumCommentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(forum=forum)
+    if serializer.is_valid(raise_exception=True):
+        # forumcomment = serializer.save(commit=False)
+        # forumcomment.user = request.user
+        # forumcomment.forum = forum
+        serializer.save(user = request.user, forum=forum)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 #########################################
@@ -186,7 +189,7 @@ def together_list(request):
 def together_detail(request, together_pk):
     together = Together.objects.get(pk=together_pk)
     if request.method == 'GET':
-        serializer = TogetherSerializer(together, many=True)
+        serializer = TogetherSerializer(together)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':
@@ -194,7 +197,7 @@ def together_detail(request, together_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        serializer = TogetherSerializer(together, many=True)
+        serializer = TogetherSerializer(together)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
@@ -232,5 +235,5 @@ def together_comment_create(request, together_pk):
     together = Together.objects.get(pk=together_pk)
     serializer = TogetherCommentSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(together=together)
+        serializer.save(user = request.user, together=together)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
