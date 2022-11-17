@@ -44,7 +44,7 @@ const routes = [
   },
   {
     //추후 path :id로 수정필요
-    path: '/forum/detail',
+    path: '/forum/:id',
     name: 'ForumDetailView',
     component : ForumDetailView
   },
