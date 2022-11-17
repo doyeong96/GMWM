@@ -18,7 +18,6 @@ export default {
   },
   computed : {
     Forums(){
-      console.log(this.$store.state.forums);
       return this.$store.state.forums
     }
   },

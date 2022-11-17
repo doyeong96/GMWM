@@ -66,7 +66,7 @@ const routes = [
   },
   {
     //추후 path 수정
-    path: '/review/detail',
+    path: '/review/:id',
     name: 'ReviewDetailView',
     component : ReviewDetailView,
   },
@@ -87,7 +87,7 @@ const routes = [
     component : TogetherUpdateView,
   },
   {//수정
-    path: '/together/detail',
+    path: '/together/:id',
     name: 'TogetherDetailView',
     component : TogetherDetailView,
   },

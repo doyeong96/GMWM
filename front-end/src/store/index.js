@@ -20,12 +20,22 @@ export default new Vuex.Store({
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
+    reviews: (state) => state.reviews,
+    review: (state) => state.review,
+    togethers: (state) => state.togethers,
+    together: (state) => state.together,
   },
   mutations: {
     SAVE_TOKEN : (state,token) => state.token = token,
     // forum
     GET_FORUMS : (state, forums) => state.forums = forums,
     GET_FORUM : (state, forum) => state.forum = forum,
+    // review
+    GET_REVIEWS : (state, reviews) => state.reviews = reviews,
+    GET_REVIEW : (state, review) => state.review = review,
+    // together
+    GET_TOGETHERS : (state, togethers) => state.togethers = togethers,
+    GET_TOGETHER : (state, together) => state.together = together,
   },
   actions: {
     // user
@@ -49,8 +59,7 @@ export default new Vuex.Store({
         data : {...payload},
         headers : getters.authHead
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         router.push({name : 'ForumView'})
       })
       .catch((err) => console.log(err))
@@ -62,7 +71,6 @@ export default new Vuex.Store({
         // headers : getters.authHead
       })
         .then((res) => {
-          console.log(res);
           commit('GET_FORUMS', res.data)
         })
         .catch((err) => console.log(err))
@@ -91,8 +99,62 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-
+    getReviews({commit}){
+      axios({
+        method : 'get',
+        url : `${API_URL}/community/review/`,
+        // headers : getters.authHead
+      })
+        .then((res) => {
+          commit('GET_REVIEWS', res.data)
+        })
+        .catch((err) => console.log(err))
+    },
+    getReviewDetail({commit},reviewId) {
+      axios({
+        url: `${API_URL}/community/review/${reviewId}`,
+      })
+      .then((res) => {
+        commit('GET_REVIEW',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
     // together
+    createTogether({getters}, payload){
+      axios({
+        method : 'post',
+        url : `${API_URL}/community/together/`,
+        data : {...payload},
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name : 'TogetherView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    getTogethers({commit}){
+      axios({
+        method : 'get',
+        url : `${API_URL}/community/together/`,
+        // headers : getters.authHead
+      })
+        .then((res) => {
+          commit('GET_TOGETHERS', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+          alert('작성된 글이 없습니다.')
+        })
+    },
+    getTogetherDetail({commit},togetherId) {
+      axios({
+        url: `${API_URL}/community/together/${togetherId}`,
+      })
+      .then((res) => {
+        commit('GET_TOGETHER',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
 
   },
   modules: {
