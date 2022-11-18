@@ -4,6 +4,7 @@
     {{together.title}}
     <TogetherComment
     :together-comments="together.togethercomment_set"
+    :together-id="together.id"
     />
   </div>
 </template>

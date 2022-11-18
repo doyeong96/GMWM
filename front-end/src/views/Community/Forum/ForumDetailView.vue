@@ -4,6 +4,7 @@
     {{forum.title}}
     <ForumComment
     :forum-comments="forum.forumcomment_set"
+    :forum-id="forum.id"
     />
   </div>
 </template>

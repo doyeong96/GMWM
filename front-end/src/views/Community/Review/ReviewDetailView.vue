@@ -4,6 +4,7 @@
     {{review.title}}
     <ReviewComment
     :review-comments="review.reviewcomment_set"
+    :review-id="review.id"
     />
   </div>
 </template>

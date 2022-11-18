@@ -107,6 +107,22 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
+    forumCommentCreate({getters}, payload){
+      const forumId = payload.forumId
+      const content = payload.content
+      axios({
+        method : 'post',
+        url : `${API_URL}/community/forum/${forumId}/forumcomments/`,
+        headers : getters.authHead,
+        data :  {
+          content,
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        router.go(router.currentRoute)
+      })
+    },
 
     // review
     createReview({getters}, payload){
@@ -142,6 +158,22 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
+    reviewCommentCreate({getters},payload) {
+      const content = payload.content
+      const reviewId = payload.reviewId
+      axios({
+        method : 'post',
+        url: `${API_URL}/community/review/${reviewId}/reviewcomments/`,
+        headers : getters.authHead,
+        data : {
+          content
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        router.go(router.currentRoute)
+      })
+     },
     // together
     createTogether({getters}, payload){
       axios({
@@ -177,6 +209,22 @@ export default new Vuex.Store({
         commit('GET_TOGETHER',res.data)
       })
       .catch((err) => console.log(err))
+    },
+    togetherCommentCreate({getters},payload) {
+      const content = payload.content
+      const togetherId = payload.togetherId
+      axios({
+        method : 'post',
+        url: `${API_URL}/community/together/${togetherId}/togethercomments/`,
+        headers : getters.authHead,
+        data : {
+          content
+        }
+      })
+      .then((res) => {
+        console.log(res)
+        router.go(router.currentRoute)
+      })
     },
 
   },

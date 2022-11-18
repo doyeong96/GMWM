@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{forumComment.nickname}}
     {{forumComment.content}}
   </div>
 </template>
