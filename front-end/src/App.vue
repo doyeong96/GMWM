@@ -2,10 +2,12 @@
   <div id="app">
     <nav>
       <router-link to="/">Home</router-link> |
+      <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
       <router-link :to="{name :'ForumView'}">Forum</router-link> |
       <router-link :to="{name :'ReviewView'}">Review</router-link> |
       <router-link :to="{name :'TogetherView'}">Together</router-link> |
-      <router-link :to="{name :'SignupView'}">Signup</router-link>
+      <router-link :to="{name :'SignupView'}">Signup</router-link> |
+      <router-link :to="{name :'LoginView'}">Login</router-link>
     </nav>
     <router-view/>
   </div>

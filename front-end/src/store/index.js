@@ -26,7 +26,7 @@ export default new Vuex.Store({
     together: (state) => state.together,
   },
   mutations: {
-    SAVE_TOKEN : (state,token) => state.token = token,
+    SET_TOKEN : (state,token) => state.token = token,
     // forum
     GET_FORUMS : (state, forums) => state.forums = forums,
     GET_FORUM : (state, forum) => state.forum = forum,
@@ -46,8 +46,20 @@ export default new Vuex.Store({
         data: {...payload}
       })
       .then((res) => {
-        commit('SAVE_TOKEN', res.data.key)
+        commit('SET_TOKEN', res.data.key)
         router.push({ name : 'HomeView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    login({commit},payload) {
+      axios({
+        method : 'post',
+        url : `${API_URL}/accounts/login/`,
+        data: {...payload}
+      })
+      .then((res) => {
+        commit('SET_TOKEN', res.data.key)
+        router.push({name : 'ForumView'})
       })
       .catch((err) => console.log(err))
     },

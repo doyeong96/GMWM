@@ -18,6 +18,10 @@ import TogetherUpdateView from '@/views/Community/Together/TogetherUpdateView'
 import TogetherDetailView from '@/views/Community/Together/TogetherDetailView'
 //User
 import SignupView from '@/views/User/SignupView'
+import LoginView from '@/views/User/LoginView'
+//Movie
+import ShowMoviesView from '@/views/Movie/ShowMoviesView'
+import SelectGenreView from '@/views/Movie/SelectGenreView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -96,8 +100,23 @@ const routes = [
     path: '/signup',
     name: 'SignupView',
     component : SignupView,
+  },
+  {
+    path: '/login',
+    name: 'LoginView',
+    component : LoginView,
+  },
+  //movie
+  {
+    path: '/showmovie',
+    name: 'ShowMoviesView',
+    component : ShowMoviesView,
+  },
+  {
+    path: '/selectgenre',
+    name: 'SelectGenreView',
+    component : SelectGenreView,
   }
-
 ]
 
 const router = new VueRouter({
