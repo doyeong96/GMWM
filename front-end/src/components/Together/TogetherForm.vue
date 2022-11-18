@@ -10,21 +10,19 @@
       
       <!-- 추후에는 컴포넌트 넣어서 주소 검색하면 위도 경도 나올 수 있게 -->
       <!-- const coords = new kakao.maps.LatLng(result[0].y, result[0].x); -->
-      <label for="map_lat">map_lat</label>
-      <input id='map_lat' type="text" v-model="map_lat">
-
-      <label for="map_lng">map_lng</label>
-      <input id='map_lng' type="text" v-model="map_lng">
 
       <label for="endtime">endtime</label>
       <input id='endtime' type="datetime-local" v-model="endtime">
-
+      
       <input type="submit">
     </form>
+    <TogetherFormMap/>
   </div>
 </template>
 
 <script>
+import TogetherFormMap from '@/components/Together/TogetherFormMap'
+
 export default {
   name : 'TogetherForm',
   data(){
@@ -35,6 +33,9 @@ export default {
       map_lng : 127.29820111515,
       endtime : null
     }
+  },
+  components : {
+    TogetherFormMap,
   },
   methods : {
     createTogether(){
