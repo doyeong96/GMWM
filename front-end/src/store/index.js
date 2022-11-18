@@ -26,6 +26,7 @@ export default new Vuex.Store({
     movie : {},
     // genre
     genres : [],
+    genre : {},
     selectedGenres : []
   },
   getters: {
@@ -37,6 +38,7 @@ export default new Vuex.Store({
     movies: (state) => state.movies,
     movie: (state) => state.movie,
     genres: (state) => state.genres,
+    genre : (state) => state.genre,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
@@ -271,7 +273,7 @@ export default new Vuex.Store({
         url : `${API_URL}/movies/genres/`,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         commit('GET_GENRES', res.data)
       })
       .catch((err) => console.log(err))
