@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
+      <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
       <router-link :to="{name :'ForumView'}">Forum</router-link> |
       <router-link :to="{name :'ReviewView'}">Review</router-link> |
       <router-link :to="{name :'TogetherView'}">Together</router-link> |

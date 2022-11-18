@@ -24,6 +24,9 @@ export default new Vuex.Store({
     // movie
     movies : [],
     movie : {},
+    // genre
+    genres : [],
+    selectedGenres : []
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
@@ -33,6 +36,7 @@ export default new Vuex.Store({
     together: (state) => state.together,
     movies: (state) => state.movies,
     movie: (state) => state.movie,
+    genres: (state) => state.genres,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
@@ -48,6 +52,8 @@ export default new Vuex.Store({
     // movie
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
+    // genre
+    GET_GENRES : (state, genres) => state.genres = genres
   },
   actions: {
     // user
@@ -258,7 +264,17 @@ export default new Vuex.Store({
         commit('GET_MOVIE',res.data)
       })
       .catch((err) => console.log(err))
-
+    },
+    // genre
+    getGenres({commit}){
+      axios({
+        url : `${API_URL}/movies/genres/`,
+      })
+      .then((res) => {
+        console.log(res);
+        commit('GET_GENRES', res.data)
+      })
+      .catch((err) => console.log(err))
     }
 
   },
