@@ -63,6 +63,17 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
+    logout({commit,getters}) {
+      axios({
+        method : 'post',
+        url: `${API_URL}/accounts/logout/`,
+        headers: getters.authHead,
+      })
+      .then(() => {
+        commit('SET_TOKEN',null)
+      })
+      .catch((err) => console.log(err))
+    },
     // forum
     createForum({getters}, payload){
       axios({
