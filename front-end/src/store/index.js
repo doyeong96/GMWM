@@ -10,13 +10,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
+    // user
     token : null,
+    // forum
     forums : [],
     forum : {},
+    // review
     reviews : [],
     review : {},
+    // together
     togethers : [],
     together : {},
+    // movie
+    movies : [],
+    movie : {},
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
@@ -24,6 +31,8 @@ export default new Vuex.Store({
     review: (state) => state.review,
     togethers: (state) => state.togethers,
     together: (state) => state.together,
+    movies: (state) => state.movies,
+    movie: (state) => state.movie,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
@@ -36,6 +45,9 @@ export default new Vuex.Store({
     // together
     GET_TOGETHERS : (state, togethers) => state.togethers = togethers,
     GET_TOGETHER : (state, together) => state.together = together,
+    // movie
+    GET_MOVIES : (state, movies) => state.movies = movies,
+    GET_MOVIE : (state,movie) => state.movie = movie,
   },
   actions: {
     // user
@@ -107,22 +119,6 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-    forumCommentCreate({getters}, payload){
-      const forumId = payload.forumId
-      const content = payload.content
-      axios({
-        method : 'post',
-        url : `${API_URL}/community/forum/${forumId}/forumcomments/`,
-        headers : getters.authHead,
-        data :  {
-          content,
-        }
-      })
-      .then((res) => {
-        console.log(res)
-        router.go(router.currentRoute)
-      })
-    },
 
     // review
     createReview({getters}, payload){
@@ -158,22 +154,6 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-    reviewCommentCreate({getters},payload) {
-      const content = payload.content
-      const reviewId = payload.reviewId
-      axios({
-        method : 'post',
-        url: `${API_URL}/community/review/${reviewId}/reviewcomments/`,
-        headers : getters.authHead,
-        data : {
-          content
-        }
-      })
-      .then((res) => {
-        console.log(res)
-        router.go(router.currentRoute)
-      })
-     },
     // together
     createTogether({getters}, payload){
       axios({
@@ -210,22 +190,28 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-    togetherCommentCreate({getters},payload) {
-      const content = payload.content
-      const togetherId = payload.togetherId
+    // movies
+    getMovies({commit}){
       axios({
-        method : 'post',
-        url: `${API_URL}/community/together/${togetherId}/togethercomments/`,
-        headers : getters.authHead,
-        data : {
-          content
-        }
+        url : `${API_URL}/movies/`,
       })
       .then((res) => {
-        console.log(res)
-        router.go(router.currentRoute)
+        // console.log(res.data);
+        commit('GET_MOVIES', res.data)
       })
+      .catch((err) => console.log(err))
     },
+    getMovieDetail({commit}, movieId){
+      axios({
+        url : `${API_URL}/movies/${movieId}/`,
+      })
+      .then((res) => {
+        // console.log(res);
+        commit('GET_MOVIE',res.data)
+      })
+      .catch((err) => console.log(err))
+
+    }
 
   },
   modules: {

@@ -22,6 +22,8 @@ import LoginView from '@/views/User/LoginView'
 //Movie
 import ShowMoviesView from '@/views/Movie/ShowMoviesView'
 import SelectGenreView from '@/views/Movie/SelectGenreView'
+import MovieDetailView from '@/views/Movie/MovieDetailView'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -111,6 +113,11 @@ const routes = [
     path: '/showmovie',
     name: 'ShowMoviesView',
     component : ShowMoviesView,
+  },
+  {
+    path : '/showmovie/:id',
+    name : 'MovieDetailView',
+    component : MovieDetailView,
   },
   {
     path: '/selectgenre',
