@@ -6,7 +6,7 @@
     <!-- <input type="checkbox" v-model="select" @click="test">{{genre.name}} -->
     <!-- {{genre.name}} -->
     <!-- <button @click="test2">확정</button> -->
-    <!-- <span @click="genreSelect">
+    <!-- <span @click="genreSelect">S
       {{genre.name}}
     </span> -->
     <!-- <button @click="test2">{{genre.name}}</button> -->
