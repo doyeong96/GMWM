@@ -25,6 +25,10 @@ export default {
     methods : {
       pick(){
         this.$store.dispatch('selectGenres')
+        // 빼고싶은데 안되네
+        // while (this.$store.getters.selectedGenres.lenght === 0) {
+        //   this.$store.getters.selectedGenres.pop()
+        // }
       }
     },
 }

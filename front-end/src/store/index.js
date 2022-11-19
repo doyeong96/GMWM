@@ -25,7 +25,6 @@ export default new Vuex.Store({
     movies : [],
     movie : {},
     recommendMovies : [],
-    recommendMovie : {},
     // genre
     genres : [],
     genre : {},
