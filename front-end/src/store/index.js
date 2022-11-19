@@ -39,6 +39,7 @@ export default new Vuex.Store({
     movie: (state) => state.movie,
     genres: (state) => state.genres,
     genre : (state) => state.genre,
+    selectedGenres : (state) => state.selectedGenres,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
