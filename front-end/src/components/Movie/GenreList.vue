@@ -6,6 +6,7 @@
       :key="genre.id"
       :genre="genre"
     />
+    <button @click="pick">선택완료</button>
   </div>
 </template>
 
@@ -20,7 +21,12 @@ export default {
       genres(){
         return this.$store.getters.genres
       }
-    }
+    },
+    methods : {
+      pick(){
+        this.$store.dispatch('selectGenres')
+      }
+    },
 }
 </script>
 

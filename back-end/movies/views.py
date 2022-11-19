@@ -26,7 +26,20 @@ def movie_detail(request, movie_pk):
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
 
-
+# 영화 추천 알고리즘
+@api_view(['POST'])
+def movie_recommend(request):
+    selectedgenres = request.data
+    movies = Movie.objects.all()
+    recommends = set()
+    for movie in movies:
+        for genre in movie.genres.all():
+            for selectedgenre in selectedgenres:
+                if genre.id == selectedgenre:
+                    recommends.add(movie)
+    recommends = list(recommends)
+    serializer =  MovieSerializer(recommends, many=True)
+    return Response(serializer.data)
 
 # 배우
 @api_view(['GET'])

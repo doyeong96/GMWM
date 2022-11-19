@@ -24,6 +24,8 @@ export default new Vuex.Store({
     // movie
     movies : [],
     movie : {},
+    recommendMovies : [],
+    recommendMovie : {},
     // genre
     genres : [],
     genre : {},
@@ -40,6 +42,7 @@ export default new Vuex.Store({
     genres: (state) => state.genres,
     genre : (state) => state.genre,
     selectedGenres : (state) => state.selectedGenres,
+    recommendMovies : (state) => state.recommendMovies,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
@@ -55,8 +58,10 @@ export default new Vuex.Store({
     // movie
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
+    RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
     // genre
-    GET_GENRES : (state, genres) => state.genres = genres
+    GET_GENRES : (state, genres) => state.genres = genres,
+    // RESET_GENRES : (state) => state.selectedGenres = []
   },
   actions: {
     // user
@@ -248,6 +253,7 @@ export default new Vuex.Store({
       })
     },
     // movies
+    // getMovies, getMovieDetail 주소만 수정해주면 될 것 같음
     getMovies({commit}){
       axios({
         url : `${API_URL}/movies/`,
@@ -278,8 +284,21 @@ export default new Vuex.Store({
         commit('GET_GENRES', res.data)
       })
       .catch((err) => console.log(err))
+    },
+    // 선택장르 보내기, 영화 추천받기
+    selectGenres({getters, commit}){
+      console.log(getters.selectedGenres);
+      axios({
+        url : `${API_URL}/movies/recommend/`,
+        method : 'POST',
+        data : getters.selectedGenres,
+      })
+      .then((res) => {
+        console.log(res);
+        commit('RECOMMEND_MOVIES', res.data)
+      })
+      .catch((err) => console.log(err))
     }
-
   },
   modules: {
   }
