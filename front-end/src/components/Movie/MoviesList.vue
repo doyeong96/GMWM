@@ -18,7 +18,7 @@ export default {
     },
     computed : {
       movies(){
-        return this.$store.getters.recommendMovies
+        return this.$store.getters.movies
       }
     }
 }
