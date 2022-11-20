@@ -13,7 +13,7 @@ export default {
     MoviesList
   },
   created(){
-    // return this.$store.getters.recommendMovies
+    //검색기능
     this.$store.dispatch('getMovies')
   },
 }

@@ -3,7 +3,7 @@
     <h2>ReviewForm</h2>
     <label for="moviename">영화검색</label>
     <!-- <input id="moviename" @keyup.enter="searchMovie" type="text" v-model="movie_name"> -->
-    <input id="moviename" @input="searchMovie" type="text">
+    <input id="moviename" @input="searchMovie" type="text" v-model="movie_title">
 
     <form @submit.prevent="onSubmit">
       <label for="title">title</label>
@@ -66,8 +66,8 @@ export default {
     updateReview(){	
       const title = this.title	
       const review = this.review	
-      const movie_title = this.movie_title	
-      const poster_path = this.poster_path	
+      const movie_title = this.$store.getters.selectedMovie[0][0]	
+      const poster_path = this.$store.getters.selectedMovie[0][1]
       const score = this.score	
       const id = this.Review.id	
       const payload = {	
@@ -87,6 +87,7 @@ export default {
       this.$store.dispatch('searchMovie', movie_name)
     },
     select(findMovie){
+      this.movie_title = findMovie.title
       this.$store.getters.selectedMovie.push([findMovie.title, findMovie.poster_path])
       console.log(this.$store.getters.selectedMovie);
     }
@@ -95,11 +96,15 @@ export default {
     findMovies(){
       return this.$store.getters.searchMovie
     },
-    findMovieImg(){
+    findMovieImg(){ 
       return `https://image.tmdb.org/t/p/w500${this.$store.getters.searchMovie.poster_path}`
     }
 
   },
+  created() {
+    this.$store.dispatch('setSelectedMovie')
+    this.$store.dispatch('setSearchMovies')
+  }
 }
 </script>
 
