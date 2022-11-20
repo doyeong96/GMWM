@@ -1,6 +1,10 @@
 <template>
   <div>
     <h2>ReviewForm</h2>
+    <label for="moviename">영화검색</label>
+    <input id="moviename" @keyup.enter="searchMovie" type="text" v-model="movie_name">
+    <!-- <input id="moviename" @input="searchMovie" type="text" v-model="movie_name"> -->
+
     <form @submit.prevent="createReview">
       <label for="title">title</label>
       <input id="title" type="text" v-model="title">
@@ -19,6 +23,10 @@
 
       <input type="submit">
     </form>
+    <div v-if="findMovie">
+      <p>{{findMovie.title}}</p>
+      <img :src="findMovieImg" alt="">
+    </div>
   </div>
 </template>
 
@@ -27,6 +35,7 @@ export default {
   name : 'ReviewForm',
   data(){
     return {
+      movie_name : null,
       title : null,
       review : null,
       movie_title : null,
@@ -47,9 +56,21 @@ export default {
       }
 
       this.$store.dispatch('createReview', payload)
-
+    },
+    searchMovie(){
+      const movie_name = this.movie_name
+      this.$store.dispatch('searchMovie', movie_name)
     }
-  }
+  },
+  computed : {
+    findMovie(){
+      return this.$store.getters.searchMovie
+    },
+    findMovieImg(){
+      return `https://image.tmdb.org/t/p/w500${this.$store.getters.searchMovie.poster_path}`
+    }
+
+  },
 }
 </script>
 

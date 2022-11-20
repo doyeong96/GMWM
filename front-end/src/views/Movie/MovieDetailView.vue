@@ -2,15 +2,10 @@
   <div>
     <h2> MovieDetailView</h2>
     {{movie.title}}
+    <p v-for="actor in movieActors" :key="actor.id">{{ actor.name }}</p>
     <p>{{movie.overview}}</p>
-    <!-- <p v-if=""></p> -->
     <iframe width="560" height="315" :src="movieYoutube"></iframe>
     <img :src="movieImg" alt="">
-    <!-- <img :src="movieImg" alt=""> -->
-    <!-- <img :src="movie.poster_path" alt=""> -->
-    <!-- <iframe width="560" height="315" :src=`https://www.youtube.com/embed/${youtube_key}`></iframe> -->
-    <!-- {{movie.youtube_key}} -->
-    <!-- {{this.movie2.title}} -->
   </div>
 </template>
 
@@ -26,11 +21,15 @@ export default {
   },
   movieYoutube(){
     return `https://www.youtube.com/embed/${this.$store.getters.movie.youtube_key}`
+  },
+  movieActors(){
+    return this.$store.getters.actors 
   }
   },
   created(){
     this.$store.dispatch('getMovieDetail', this.$route.params.id)
-  }
+    this.$store.dispatch('getMovieActors', this.$route.params.id)
+  },
 }
 </script>
 

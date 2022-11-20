@@ -1,6 +1,7 @@
 <template>
   <div>
-    <router-link :to="{name : 'MovieDetailView', params : {id : movie.id} }">{{movie.title}}</router-link>
+    <!-- <router-link :to="{name : 'MovieDetailView', params : {id : movie.id} }">{{movie.title}}</router-link> -->
+    <a :href="movieId">{{movie.title}}</a>
     <p><img :src="movieImg" alt=""></p>
   </div>
 </template>
@@ -15,6 +16,9 @@ export default {
       movieImg(){
         return `https://image.tmdb.org/t/p/w500${this.movie.poster_path}`
       },
+      movieId(){
+        return `http://localhost:8080/showmovie/${this.movie.id}/`
+      }
     }
 }
 </script>

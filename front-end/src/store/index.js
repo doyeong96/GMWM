@@ -25,10 +25,13 @@ export default new Vuex.Store({
     movies : [],
     movie : {},
     recommendMovies : [],
+    searchMovie : null,
     // genre
     genres : [],
     genre : {},
-    selectedGenres : []
+    selectedGenres : [],
+    // 영화배우
+    actors : []
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
@@ -42,6 +45,8 @@ export default new Vuex.Store({
     genre : (state) => state.genre,
     selectedGenres : (state) => state.selectedGenres,
     recommendMovies : (state) => state.recommendMovies,
+    actors : (state) => state.actors,
+    searchMovie : (state) => state.searchMovie,
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,
@@ -58,9 +63,12 @@ export default new Vuex.Store({
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
+    SERCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
-    // RESET_GENRES : (state) => state.selectedGenres = []
+    // 영화배우
+    GET_MOVIE_ACTORS : (state, actors) => state.actors = actors,
+    
   },
   actions: {
     // user
@@ -295,6 +303,32 @@ export default new Vuex.Store({
       .then((res) => {
         console.log(res);
         commit('RECOMMEND_MOVIES', res.data)
+      })
+      .catch((err) => console.log(err))
+    },
+    // 영화배우 정보 가져오기
+    getMovieActors({commit}, movieId){
+      axios({
+        url : `${API_URL}/movies/recommend/actors/`,
+        method : 'POST',
+        data : {movieId},
+      })
+      .then((res) => {
+        // console.log(res)
+        commit('GET_MOVIE_ACTORS', res.data)
+      })
+      .catch((err) => console.log(err))
+    },
+    // 리뷰 작성시 영화 검색
+    searchMovie({commit}, movie_name){
+      axios({
+        url : `${API_URL}/movies/search/`,
+        method : 'POST',
+        data : {movie_name}
+      })
+      .then((res) => {
+        console.log(res)
+        commit('SERCH_MOVIE', res.data)
       })
       .catch((err) => console.log(err))
     }
