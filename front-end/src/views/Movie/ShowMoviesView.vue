@@ -13,6 +13,7 @@ export default {
     MoviesList
   },
   created(){
+    // return this.$store.getters.recommendMovies
     this.$store.dispatch('getMovies')
   },
 }

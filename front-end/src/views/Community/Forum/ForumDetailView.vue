@@ -2,8 +2,6 @@
   <div>
     <h2>ForumDetailView</h2>
     {{forum.title}}
-    <router-link :to="{ name : 'ForumUpdateView' }">UPDATE</router-link> <br>
-    <button @click="deleteForum">삭제</button>
     <ForumComment
     :forum-comments="forum.forumcomment_set"
     :forum-id="forum.id"
@@ -24,12 +22,7 @@ export default {
   },
   computed : {
     forum() {
-      return this.$store.getters.forum
-    }
-  },
-  methods : {
-    deleteForum() {
-      this.$store.dispatch('deleteForum', this.forum.id)
+      return this.$store.state.forum
     }
   }
 }

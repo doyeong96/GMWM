@@ -18,7 +18,7 @@ export default {
   },
   computed : {
     Forums(){
-      return this.$store.getters.forums
+      return this.$store.state.forums
     }
   },
 

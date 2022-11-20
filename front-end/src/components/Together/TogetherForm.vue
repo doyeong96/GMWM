@@ -1,24 +1,22 @@
 <template>
   <div>
     <h2>TogetherForm</h2>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="createTogether">
       <label for="title">title</label>
       <input id='title' type="text" v-model="title">
 
       <label for="content">content</label>
       <input id='content' type="text" v-model="content">
       
+      <!-- 추후에는 컴포넌트 넣어서 주소 검색하면 위도 경도 나올 수 있게 -->
+      <!-- const coords = new kakao.maps.LatLng(result[0].y, result[0].x); -->
 
       <label for="endtime">endtime</label>
       <input id='endtime' type="datetime-local" v-model="endtime">
       
       <input type="submit">
     </form>
-    <TogetherFormMap
-    :map-lat="this.map_lat"
-    :map-lng="this.map_lng"
-    @to-form="mapPosi"
-    />
+    <TogetherFormMap/>
   </div>
 </template>
 
@@ -29,19 +27,15 @@ export default {
   name : 'TogetherForm',
   data(){
     return {
-      title : this.Together.title,
-      content : this.Together.content,
-      map_lat : this.Together.map_lat,
-      map_lng : this.Together.map_lng,
-      endtime : this.Together.endtime,
+      title : null,
+      content : null,
+      map_lat : 36.3553193257957,
+      map_lng : 127.29820111515,
+      endtime : null
     }
   },
   components : {
     TogetherFormMap,
-  },
-  props : {
-    Together : Object,
-    action : String,
   },
   methods : {
     createTogether(){
@@ -57,54 +51,8 @@ export default {
 
       this.$store.dispatch('createTogether', payload)
 
-    },
-    updateTogether() {
-      const title = this.title
-      const content = this.content
-      const map_lat = this.map_lat
-      const map_lng = this.map_lng
-      const endtime = this.endtime
-      const id = this.Together.id
-      const payload = {
-        title, content, map_lat, map_lng, endtime,id
-      }
-
-      this.$store.dispatch('updateTogether', payload)
-    },
-    onSubmit() {
-      if (this.action === 'create') {
-        this.createTogether()
-      } else {
-        this.updateTogether()
-      }
-    },
-    mapPosi(posi) {
-      this.map_lng = posi.posiX
-      this.map_lat = posi.posiY
-      console.log(posi.posiY,posi.posiX)
-    },
-    updateTime() {
-      var now = new Date(this.Together.endtime);
-      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-      now.setMilliseconds(null)
-      now.setSeconds(null)
-      document.getElementById('endtime').value = now.toISOString().slice(0, -1);
-    },
-    createTime() {
-      var now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    now.setMilliseconds(null)
-    now.setSeconds(null)
-    document.getElementById('endtime').value = now.toISOString().slice(0, -1);
     }
-  },
-  mounted() {
-    if (this.Together.endtime) {
-      this.updateTime()
-    } else {
-      this.createTime()
-    }
-  },
+  }
 }
 </script>
 
