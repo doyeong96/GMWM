@@ -26,6 +26,7 @@ export default new Vuex.Store({
     movie : {},
     recommendMovies : [],
     searchMovie : null,
+    selectedMovie : [],
     // genre
     genres : [],
     genre : {},
@@ -47,6 +48,7 @@ export default new Vuex.Store({
     recommendMovies : (state) => state.recommendMovies,
     actors : (state) => state.actors,
     searchMovie : (state) => state.searchMovie,
+    selectedMovie : (state) => state.selectedMovie
   },
   mutations: {
     SET_TOKEN : (state,token) => state.token = token,

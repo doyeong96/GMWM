@@ -23,9 +23,10 @@
 
       <input type="submit">
     </form>
-    <div v-if="findMovie">
+    <div v-for="findMovie in findMovies" :key="findMovie.id">
       <p>{{findMovie.title}}</p>
-      <img :src="findMovieImg" alt="">
+      <!-- <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" alt=""> -->
+      <button @click="select(findMovie)">확정</button>
     </div>
   </div>
 </template>
@@ -48,9 +49,9 @@ export default {
       const title = this.title
       const review = this.review
       // const movie_title = this.movie_title
-      const movie_title = this.findMovie.title
+      const movie_title = this.$store.getters.selectedMovie[0][0]
       // const poster_path = this.poster_path
-      const poster_path = this.findMovieImg
+      const poster_path = this.$store.getters.selectedMovie[0][1]
       const score = this.score
 
       const payload = {
@@ -62,10 +63,14 @@ export default {
     searchMovie(event){
       const movie_name = event.target.value
       this.$store.dispatch('searchMovie', movie_name)
+    },
+    select(findMovie){
+      this.$store.getters.selectedMovie.push([findMovie.title, findMovie.poster_path])
+      console.log(this.$store.getters.selectedMovie);
     }
   },
   computed : {
-    findMovie(){
+    findMovies(){
       return this.$store.getters.searchMovie
     },
     findMovieImg(){

@@ -3,7 +3,9 @@
     <h2>ReviewDetailView</h2>
     {{review.title}}
     {{review.movie_title}}
-    <img :src="review.poster_path" alt="">
+    <!-- <img :src="review.poster_path" alt=""> -->
+    <!-- <img :src=`https://image.tmdb.org/t/p/w500${}` alt=""> -->
+    <img :src="`https://image.tmdb.org/t/p/w500${review.poster_path}`" alt="">
     <ReviewComment
     :review-comments="review.reviewcomment_set"
     :review-id="review.id"
