@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>카카오 맵 테스트</h1>
-    <input type="text" @keyup.enter="searchPlace">
+    <input type="text" @keyup.enter="searchPlace" v-model.trim="keyword">
     <div id="map"></div>
   </div>
 </template>
@@ -12,14 +12,20 @@ export default {
   data() {
     return {
       map: [],
-      coords : {}
-      
+      coords : [],
+      lat : null,
+      lng : null,
+      keyword : '',
     };
+  },
+  props : {
+    mapLng : Number,
+    mapLat : Number,
   },
   methods: {
     initMap() {
       const container = document.getElementById("map");
-      const center = new kakao.maps.LatLng(36.3553193257957, 127.29820111515)
+      const center = new kakao.maps.LatLng(this.mapLat, this.mapLng)
       const options = {
         center: center,
         level: 3,
@@ -34,54 +40,58 @@ export default {
         });
         infowindow.open(this.map, marker);
     },
-
-    searchPlace(e){
-      const keyword = e.target.value.trim()
+    searchPlace(){
+      
+      const keyword = this.keyword
       const geocoder = new kakao.maps.services.Geocoder()
-      // console.log(this.map);
+      
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(36.3198394355058, 127.382690416398),
+        center: new kakao.maps.LatLng(this.mapLat, this.mapLng),
         level: 3,
       };
       const map = new kakao.maps.Map(container, options);
-      geocoder.addressSearch(keyword, function(result, status) {
 
-      // 정상적으로 검색이 완료됐으면 
-      if (status === kakao.maps.services.Status.OK) {
-
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+      const createOverlay = result => {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
         // 결과값으로 받은 위치를 마커로 표시합니다
         const marker = new kakao.maps.Marker({
             map: map,
             position: coords
         });
-        console.log(marker);
-
         // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
+        const infowindow = new kakao.maps.InfoWindow({
             content: `<div style="width:150px;text-align:center;padding:6px 0;">${keyword}</div>`
         });
         infowindow.open(map, marker);
-
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-    } 
-});    
-
-        // marker
-
-        // const infowindow = new kakao.maps.infowindow({
-        //   conent : keyword
-        // })
-
-        // infowindow
-        // infowindow.open(this.map, marker)
-        // marker.setMap(this.map);
-
-        // this.map.setCenter(coords)
-        
-      // })
+      }
+      const addressSearch = address => {
+        return new Promise((resolve, reject) => {
+          geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+              resolve(result)
+            } else {
+              reject(status)
+            }
+          })
+        })
+      }
+      (async () => {
+        try {
+          const result = await addressSearch(keyword)
+          const posiX = result[0].x
+          const posiY = result[0].y
+          const posi = {
+            posiX,posiY
+          }
+          this.$emit('to-form', posi)
+          createOverlay(result)
+        } catch (e) {
+          console.log(e)
+        }
+      })()
     }
   },
   mounted() {

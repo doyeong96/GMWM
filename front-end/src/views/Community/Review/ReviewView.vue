@@ -2,8 +2,7 @@
   <div>
     <h2>ReviewView</h2>
     <router-link :to="{ name : 'ReviewCreateView'}">CREATE</router-link> <br>
-    <!-- <a :href="createUrl">CREATE</a> <br> -->
-    <router-link :to="{ name : 'ReviewUpdateView'}">UPDATE</router-link> <br>
+    
     <ReviewList/>
   </div>
 </template>
@@ -19,11 +18,6 @@ export default {
   },
   created() {
       this.$store.dispatch('getReviews')
-  },
-  computed:{
-    createUrl(){
-      return 'http://localhost:8080/review/create'
-    }
   },
 }
 </script>
