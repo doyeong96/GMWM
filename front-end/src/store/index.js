@@ -67,15 +67,17 @@ export default new Vuex.Store({
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
-    SERCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
+    SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
+    SET_SELECTEDMOVIES : (state, data) => state.selectedMovie = data,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
+    SET_GENRES : (state, data) => state.selectedGenres = data,
     // 영화배우
     GET_MOVIE_ACTORS : (state, actors) => state.actors = actors,
     
   },
   actions: {
-    // user
+    // user /////////////////////////////////////////////////////////
     signUp({commit},payload) {
       axios({
         method : 'post',
@@ -111,7 +113,21 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-    // forum
+    // forum /////////////////////////////////////////////////////////
+    forumCommentUpdate({getters}, payload) {
+      const forumCommentId = payload.commentId
+      const content = payload.content
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/forumcomments/${forumCommentId}/`,
+        headers : getters.authHead,
+        data : {content}
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => console.log(err))
+    },
     deleteFourmComment({getters}, forumCommentId) {
       axios({
         method : 'delete',
@@ -200,7 +216,7 @@ export default new Vuex.Store({
       })
     },
 
-    // review
+    // review /////////////////////////////////////////////////////////
     deleteReviewComment({getters}, reviewCommentId) {
       axios({
         method : 'delete',
@@ -292,7 +308,7 @@ export default new Vuex.Store({
         router.go(router.currentRoute)
       })
      },
-    // together
+    // together /////////////////////////////////////////////////////////
     deleteTogetherComment({getters}, togetherCommentId) {
       axios({
         method : 'delete',
@@ -387,7 +403,7 @@ export default new Vuex.Store({
         router.go(router.currentRoute)
       })
     },
-    // movies
+    // movies /////////////////////////////////////////////////////////
     // getMovies, getMovieDetail 주소만 수정해주면 될 것 같음
     getMovies({commit}){
       axios({
@@ -431,6 +447,7 @@ export default new Vuex.Store({
       .then((res) => {
         console.log(res);
         commit('RECOMMEND_MOVIES', res.data)
+        commit('SET_GENRES',[])
       })
       .catch((err) => console.log(err))
     },
@@ -456,9 +473,15 @@ export default new Vuex.Store({
       })
       .then((res) => {
         console.log(res)
-        commit('SERCH_MOVIE', res.data)
+        commit('SEARCH_MOVIE', res.data)
       })
       .catch((err) => console.log(err))
+    },
+    setSelectedMovie({commit}){
+      commit('SET_SELECTEDMOVIES', [])
+    },
+    setSearchMovies({commit}) {
+      commit('SEARCH_MOVIE', null)
     }
   },
   modules: {
