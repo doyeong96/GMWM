@@ -1,9 +1,7 @@
 <template>
   <div>
     <h2>ReviewUpdateView</h2>
-    <ReviewForm
-    :Review="Review" action="update"
-    />
+    <ReviewForm/>
   </div>
 </template>
 
@@ -14,11 +12,6 @@ export default {
   name : 'ReviewUpdateView',
   components : {
      ReviewForm,
-  },
-  computed : {
-    Review() {
-      return this.$store.getters.review
-    }
   }
 }
 </script>

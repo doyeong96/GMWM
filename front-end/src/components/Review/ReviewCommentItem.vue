@@ -1,7 +1,6 @@
 <template>
   <div>
     {{reviewComment.content}}
-    <button @click="deleteReviewComment">삭제</button>
   </div>
 </template>
 
@@ -9,12 +8,7 @@
 export default {
   name:'ReviewCommentItem',
   props : {
-    reviewComment : Object,
-  },
-  methods : {
-    deleteReviewComment() {
-      this.$store.dispatch('deleteReviewComment', this.reviewComment.id)
-    }
+    reviewComment : Object
   }
 }
 </script>

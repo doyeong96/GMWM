@@ -1,9 +1,7 @@
 <template>
   <div>
     <h2>ForumUpdateView</h2>
-    <ForumForm
-    :forum="forum" action="update"
-    />
+    <ForumForm/>
   </div>
 </template>
 
@@ -14,11 +12,6 @@ export default {
   name : 'ForumUpdateView',
   components : {
     ForumForm,
-  },
-  computed : {
-    forum() {
-      return this.$store.getters.forum
-    }
   }
 }
 </script>

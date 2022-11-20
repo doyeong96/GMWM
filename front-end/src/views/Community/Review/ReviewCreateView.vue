@@ -1,9 +1,7 @@
 <template>
   <div>
     <h2>ReviewCreateView</h2>
-    <ReviewForm
-    :Review="Review" action="create"
-    />
+    <ReviewForm/>
   </div>
 </template>
 
@@ -15,11 +13,6 @@ export default {
   components : {
     ReviewForm,
   },
-  data() {
-    return {
-      Review : {id:null, title :'',review:'',movie_title:'',poster_path:'',score:0,}
-    }
-  }
 }
 
 </script>
