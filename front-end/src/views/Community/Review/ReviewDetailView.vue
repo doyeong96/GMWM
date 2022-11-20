@@ -6,6 +6,8 @@
     <!-- <img :src="review.poster_path" alt=""> -->
     <!-- <img :src=`https://image.tmdb.org/t/p/w500${}` alt=""> -->
     <img :src="`https://image.tmdb.org/t/p/w500${review.poster_path}`" alt="">
+    <router-link :to="{ name : 'ReviewUpdateView'}">UPDATE</router-link> <br>	
+    <button @click="deleteReview">삭제</button>
     <ReviewComment
     :review-comments="review.reviewcomment_set"
     :review-id="review.id"
@@ -27,8 +29,14 @@ export default {
   computed : {
     review() {
       return this.$store.getters.review
-    }
-  }
+    },
+  },
+  methods : {	
+    deleteReview() {	
+      this.$store.dispatch('deleteReview', this.review.id)	
+    }	
+  },
+  
 }
 </script>
 

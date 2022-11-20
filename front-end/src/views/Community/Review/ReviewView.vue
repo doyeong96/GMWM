@@ -3,7 +3,6 @@
     <h2>ReviewView</h2>
     <router-link :to="{ name : 'ReviewCreateView'}">CREATE</router-link> <br>
     <!-- <a :href="createUrl">CREATE</a> <br> -->
-    <router-link :to="{ name : 'ReviewUpdateView'}">UPDATE</router-link> <br>
     <ReviewList/>
   </div>
 </template>

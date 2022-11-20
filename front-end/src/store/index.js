@@ -36,6 +36,8 @@ export default new Vuex.Store({
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
+    forums: (state) => state.forums,	
+    forum: (state) => state.forum,
     reviews: (state) => state.reviews,
     review: (state) => state.review,
     togethers: (state) => state.togethers,
@@ -110,6 +112,45 @@ export default new Vuex.Store({
       .catch((err) => console.log(err))
     },
     // forum
+    deleteFourmComment({getters}, forumCommentId) {
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/forumcomments/${forumCommentId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+    },
+    deleteForum({getters}, forumId){
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/forum/${forumId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name : 'ForumView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    updateForum({getters}, payload) {
+      const id = payload.id
+      const title = payload.title
+      const content = payload.content
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/forum/${id}/`,
+        data : {
+          title : title,
+          content : content
+        },
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name :'ForumDetailView', params : { id : id} })
+      })
+      .catch((err) => console.log(err))
+    },
     createForum({getters}, payload){
       axios({
         method : 'post',
@@ -160,6 +201,48 @@ export default new Vuex.Store({
     },
 
     // review
+    deleteReviewComment({getters}, reviewCommentId) {
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/reviewcomments/${reviewCommentId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+    },
+    deleteReview({getters}, reviewId){
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/review/${reviewId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name : 'ReviewView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    updateReview({getters}, payload) {
+      const title = payload.title
+      const review = payload.review
+      const movie_title = payload.movie_title
+      const poster_path = payload.poster_path
+      const score = payload.score
+      const payloads = {
+        title, review, movie_title, poster_path, score
+      }
+      const id = payload.id
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/review/${id}/`,
+        data : payloads,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name :'ReviewDetailView', params : { id : id} })
+      })
+      .catch((err) => console.log(err))
+    },
     createReview({getters}, payload){
       axios({
         method : 'post',
@@ -210,6 +293,48 @@ export default new Vuex.Store({
       })
      },
     // together
+    deleteTogetherComment({getters}, togetherCommentId) {
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/togethercomments/${togetherCommentId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+    },
+    deleteTogether({getters}, togetherId){
+      axios({
+        method : 'delete',
+        url : `${API_URL}/community/together/${togetherId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name : 'TogetherView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    updateTogether({getters}, payload) {
+      const title = payload.title
+      const content = payload.content
+      const map_lat = payload.map_lat
+      const map_lng = payload.map_lng
+      const endtime = payload.endtime
+      const payloads = {
+        title, content, map_lat, map_lng, endtime
+      }
+      const id = payload.id
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/together/${id}/`,
+        data : payloads,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.push({name :'TogetherDetailView', params : { id : id} })
+      })
+      .catch((err) => console.log(err))
+    },
     createTogether({getters}, payload){
       axios({
         method : 'post',
@@ -234,6 +359,7 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
           alert('작성된 글이 없습니다.')
+          router.push({name : 'TogetherCreateView'})
         })
     },
     getTogetherDetail({commit},togetherId) {
