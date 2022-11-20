@@ -2,6 +2,8 @@
   <div>
     <h2>ReviewDetailView</h2>
     {{review.title}}
+    {{review.movie_title}}
+    <img :src="review.poster_path" alt="">
     <ReviewComment
     :review-comments="review.reviewcomment_set"
     :review-id="review.id"

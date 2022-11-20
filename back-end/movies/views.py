@@ -47,17 +47,17 @@ def movie_recommend(request):
 # 영화 검색
 @api_view(['POST'])
 def movie_search(request):
-    print('++++++++++++++++++++++++++++++++++')
     movie_title = request.data.get('movie_name')
     # print(movie_title)
     # print(type(movie_title))
-    movies = Movie.objects.all()
-    for movie in movies:
-        if  movie.title == movie_title:
-            search_movie = movie
-            break
+    # movies = Movie.objects.all()
+    movies = Movie.objects.filter(title__contains = movie_title)
+    # for movie in movies:
+    #     if  movie.title == movie_title:
+    #         search_movie = movie
+    #         break
     # print(search_movie)
-    serializer =  MovieSerializer(search_movie)
+    serializer =  MovieSerializer(movies, many=True)
     return Response(serializer.data)
 
 

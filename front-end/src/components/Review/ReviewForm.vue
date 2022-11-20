@@ -2,8 +2,8 @@
   <div>
     <h2>ReviewForm</h2>
     <label for="moviename">영화검색</label>
-    <input id="moviename" @keyup.enter="searchMovie" type="text" v-model="movie_name">
-    <!-- <input id="moviename" @input="searchMovie" type="text" v-model="movie_name"> -->
+    <!-- <input id="moviename" @keyup.enter="searchMovie" type="text" v-model="movie_name"> -->
+    <input id="moviename" @input="searchMovie" type="text">
 
     <form @submit.prevent="createReview">
       <label for="title">title</label>
@@ -12,11 +12,11 @@
       <label for="review">review</label>
       <input id="review" type="text" v-model="review">
       
-      <label for="movie_title">movie_title</label>
+      <!-- <label for="movie_title">movie_title</label>
       <input id="movie_title" type="text" v-model="movie_title">
       
       <label for="poster_path">poster_path</label>
-      <input id="poster_path" type="text" v-model="poster_path">
+      <input id="poster_path" type="text" v-model="poster_path"> -->
       
       <label for="score">score</label>
       <input id="score" type="number" v-model="score">
@@ -47,8 +47,10 @@ export default {
     createReview(){
       const title = this.title
       const review = this.review
-      const movie_title = this.movie_title
-      const poster_path = this.poster_path
+      // const movie_title = this.movie_title
+      const movie_title = this.findMovie.title
+      // const poster_path = this.poster_path
+      const poster_path = this.findMovieImg
       const score = this.score
 
       const payload = {
@@ -57,8 +59,8 @@ export default {
 
       this.$store.dispatch('createReview', payload)
     },
-    searchMovie(){
-      const movie_name = this.movie_name
+    searchMovie(event){
+      const movie_name = event.target.value
       this.$store.dispatch('searchMovie', movie_name)
     }
   },

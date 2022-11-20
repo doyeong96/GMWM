@@ -23,8 +23,6 @@ export default {
   computed:{
     createUrl(){
       return 'http://localhost:8080/review/create'
-      // return `http://localhost:8080/showmovie/review/create`
-      // // /review/create
     }
   },
 }
