@@ -1,9 +1,7 @@
 <template>
   <div>
     <h2>TogetherCreateView</h2>
-    <TogetherForm
-    :Together="Together" action="create"
-    />
+    <TogetherForm/>
   </div>
 </template>
 
@@ -14,11 +12,6 @@ export default {
   name : 'TogetherCreateView',
   components : {
     TogetherForm,
-  },
-  data() {
-    return {
-      Together : {id:null, title:'', content:'',endtime:null,map_lat:36.3553193257957,map_lng:127.29820111515,}
-    }
   }
 }
 </script>

@@ -2,6 +2,7 @@
   <div>
     <h2>ForumView</h2>
     <router-link :to="{ name : 'ForumCreateView'}">CREATE</router-link> <br>
+    <router-link :to="{ name : 'ForumUpdateView' }">UPDATE</router-link> <br>
     <ForumList/>
   </div>
 </template>
