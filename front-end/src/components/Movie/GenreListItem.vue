@@ -1,6 +1,7 @@
 <template>
   <div>
     <input type="checkbox" @click="genreSelect">{{genre.name}}
+    <!-- <button @click="genreSelect">{{genre.name}}</button> -->
     
   </div>
 </template>

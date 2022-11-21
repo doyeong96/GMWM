@@ -25,6 +25,7 @@ export default {
     methods : {
       pick(){
         this.$store.dispatch('selectGenres')
+        this.$router.push({ name: 'ShowMoviesView'})
       }
     },
 }

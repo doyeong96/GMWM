@@ -26,6 +26,7 @@ export default new Vuex.Store({
     movies : [],
     movie : {},
     recommendMovies : [],
+    bestMovie : [],
     searchMovie : null,
     selectedMovieTitle : '',
     selectedMoviePoster : '',
@@ -51,6 +52,7 @@ export default new Vuex.Store({
     genre : (state) => state.genre,
     selectedGenres : (state) => state.selectedGenres,
     recommendMovies : (state) => state.recommendMovies,
+    bestMovie : (state) => state.bestMovie,
     actors : (state) => state.actors,
     searchMovie : (state) => state.searchMovie,
     selectedMovieTitle : (state) => state.selectedMovieTitle,
@@ -73,6 +75,7 @@ export default new Vuex.Store({
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
+    BEST_MOVIES : (state, bestMovie) => state.bestMovie = bestMovie,
     SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
     SET_SELECTEDMOVIESTITLE : (state, data) => state.selectedMovieTitle = data,
     SET_SELECTEDMOVIESPOSTER : (state,data) => state.selectedMoviePoster = data,
@@ -557,7 +560,8 @@ export default new Vuex.Store({
       })
       .then((res) => {
         console.log(res);
-        commit('RECOMMEND_MOVIES', res.data)
+        commit('BEST_MOVIES', res.data[0])
+        commit('RECOMMEND_MOVIES', res.data[1])
         commit('SET_GENRES',[])
       })
       .catch((err) => console.log(err))
