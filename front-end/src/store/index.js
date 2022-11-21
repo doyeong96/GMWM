@@ -13,6 +13,7 @@ export default new Vuex.Store({
     // user
     token : null,
     user : null,
+    userProfile : null,
     // forum
     forums : [],
     forum : {},
@@ -41,6 +42,7 @@ export default new Vuex.Store({
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
     user: (state) => state.user,
+    userProfile: (state) => state.userProfile,
     forums: (state) => state.forums,	
     forum: (state) => state.forum,
     reviews: (state) => state.reviews,
@@ -64,6 +66,7 @@ export default new Vuex.Store({
     // user
     SET_TOKEN : (state,token) => state.token = token,
     SET_USER: (state,user) => state.user = user,
+    SET_USERPROFILE: (state,nowUser) => state.userProfile = nowUser,
     // forum
     GET_FORUMS : (state, forums) => state.forums = forums,
     GET_FORUM : (state, forum) => state.forum = forum,
@@ -142,14 +145,15 @@ export default new Vuex.Store({
         commit('SET_USER',res.data)
       })
     },
-    customGetUserInfo({getters}) {
+    customGetUserInfo({getters,commit},username) {
       axios({
-        url: `${API_URL}/profile/${userId}/`,
+        url: `${API_URL}/profile/${username}/`,
         method: 'get',
         headers: this.getters.authHead
       })
       .then((res) => {
-        console.log(res)
+        console.log(res.data)
+        commit('SET_USERPROFILE',res.data)
       })
     } ,
     passwordChange({commit,getters},payload) {

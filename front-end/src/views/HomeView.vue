@@ -11,18 +11,14 @@
       <!-- <button @click="select(findMovie)">확정</button> -->
       <!-- <a :href="findMovieId">{{}}</a> -->
     </div>
-
-    <ProfileAv/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ProfileAv from '@/components/ProfileAv'
 export default {
   name: 'HomeView',
   components: {
-    ProfileAv,
   },
   methods : {
     searchMovieHome(event){

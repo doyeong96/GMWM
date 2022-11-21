@@ -7,17 +7,17 @@ import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/avatars-identicon-sprites';
 export default {
   name : 'ProfileAv',
+  props : {
+    username : String,
+  },
   computed: {
     avatar(){
       return createAvatar(style, {
         dataUri: true,
         size: 128,
-        seed: this.user.username,
+        seed: this.username,
      });
     },
-    user() {
-      return this.$store.getters.user
-    }
   },
 }
 </script>

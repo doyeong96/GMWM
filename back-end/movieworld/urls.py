@@ -24,5 +24,5 @@ urlpatterns = [
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
     path('withdrawal/', accounts_views.withdrawal),
-    path('profile/<int:user_pk>/', accounts_views.getuserinfo),
+    path('profile/<str:username>/', accounts_views.getuserinfo),
 ]
