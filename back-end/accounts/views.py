@@ -10,3 +10,9 @@ def withdrawal(request):
         user = get_object_or_404(User,pk=request.user.pk)
         user.delete()
     return Response('check')
+
+@api_view(['GET'])
+def getuserinfo(request, user_pk):
+    if request.method == 'GET':
+        user = get_object_or_404(User,pk=request.user.pk)
+        pass

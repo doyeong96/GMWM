@@ -20,6 +20,7 @@ import TogetherDetailView from '@/views/Community/Together/TogetherDetailView'
 import SignupView from '@/views/User/SignupView'
 import LoginView from '@/views/User/LoginView'
 import PasswordChangeView from '@/views/User/PasswordChangeView'
+import ProfileView from '@/views/User/ProfileView'
 //Movie
 import ShowMoviesView from '@/views/Movie/ShowMoviesView'
 import SelectGenreView from '@/views/Movie/SelectGenreView'
@@ -113,6 +114,11 @@ const routes = [
     path: '/passwordchange',
     name: 'PasswordChangeView',
     component : PasswordChangeView,
+  },
+  {
+    path: '/profile',
+    name: 'ProfileView',
+    component : ProfileView,
   },
   //movie
   {
