@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      Review : {id:null, title :'',review:'',movie_title:'',poster_path:'',score:0,}
+      Review : {id:null, title :'',review:'',movie_title:null,poster_path:null,score:null,}
     }
   }
 }

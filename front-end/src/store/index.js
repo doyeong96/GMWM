@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     // user
     token : null,
+    user : null,
     // forum
     forums : [],
     forum : {},
@@ -26,7 +27,8 @@ export default new Vuex.Store({
     movie : {},
     recommendMovies : [],
     searchMovie : null,
-    selectedMovie : [],
+    selectedMovieTitle : '',
+    selectedMoviePoster : '',
     // genre
     genres : [],
     genre : {},
@@ -36,6 +38,7 @@ export default new Vuex.Store({
   },
   getters: {
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
+    user: (state) => state.user,
     forums: (state) => state.forums,	
     forum: (state) => state.forum,
     reviews: (state) => state.reviews,
@@ -50,10 +53,13 @@ export default new Vuex.Store({
     recommendMovies : (state) => state.recommendMovies,
     actors : (state) => state.actors,
     searchMovie : (state) => state.searchMovie,
-    selectedMovie : (state) => state.selectedMovie
+    selectedMovieTitle : (state) => state.selectedMovieTitle,
+    selectedMoviePoster : (state) => state.selectedMoviePoster,
   },
   mutations: {
+    // user
     SET_TOKEN : (state,token) => state.token = token,
+    SET_USER: (state,user) => state.user = user,
     // forum
     GET_FORUMS : (state, forums) => state.forums = forums,
     GET_FORUM : (state, forum) => state.forum = forum,
@@ -68,7 +74,8 @@ export default new Vuex.Store({
     GET_MOVIE : (state,movie) => state.movie = movie,
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
     SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
-    SET_SELECTEDMOVIES : (state, data) => state.selectedMovie = data,
+    SET_SELECTEDMOVIESTITLE : (state, data) => state.selectedMovieTitle = data,
+    SET_SELECTEDMOVIESPOSTER : (state,data) => state.selectedMoviePoster = data,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
     SET_GENRES : (state, data) => state.selectedGenres = data,
@@ -78,7 +85,7 @@ export default new Vuex.Store({
   },
   actions: {
     // user /////////////////////////////////////////////////////////
-    signUp({commit},payload) {
+    signUp({commit,dispatch},payload) {
       axios({
         method : 'post',
         url : `${API_URL}/accounts/signup/`,
@@ -86,11 +93,13 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('SET_TOKEN', res.data.key)
-        router.push({ name : 'HomeView'})
+        dispatch('getUserInfo')
+        alert('로그인 되셨습니다.')
+        router.push({ name : 'ForumView'})
       })
       .catch((err) => console.log(err))
     },
-    login({commit},payload) {
+    login({commit,dispatch},payload) {
       axios({
         method : 'post',
         url : `${API_URL}/accounts/login/`,
@@ -98,6 +107,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('SET_TOKEN', res.data.key)
+        dispatch('getUserInfo')
         router.push({name : 'ForumView'})
       })
       .catch((err) => console.log(err))
@@ -110,10 +120,77 @@ export default new Vuex.Store({
       })
       .then(() => {
         commit('SET_TOKEN',null)
+        commit('SET_USER', null)
+        router.push({name : 'LoginView'})
+      })
+      .catch((err) => console.log(err))
+    },
+    getUserInfo({commit, getters}) {
+      axios({
+        url: `${API_URL}/accounts/user/`,
+        method: 'get',
+        headers: getters.authHead,
+      })
+      .then((res) => {
+        console.log(res.data)
+        commit('SET_USER',res.data)
+      })
+    },
+    passwordChange({commit,getters},payload) {
+      console.log(payload)
+      axios({
+        method : 'post',
+        url: `${API_URL}/accounts/password/change/`,
+        headers: getters.authHead,
+        data : {...payload}
+      })
+      .then((res) => {
+        console.log(res)
+        commit('SET_TOKEN',null)
+        commit('SET_USER', null)
+        alert('비밀번호 변경이 완료됐습니다 다시 로그인 해주세요')
+        router.push({name : 'LoginView'})
+      })
+      .catch((err) => {
+        console.log(err)
+        alert('제대로 입력해주세요')
+      })
+    },
+    withDrawal({getters,commit}) {
+      axios({
+        method : 'delete',
+        url : `${API_URL}/withdrawal/`,
+        headers : getters.authHead
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      axios({
+        method : 'post',
+        url: `${API_URL}/accounts/logout/`,
+        headers: getters.authHead,
+      })
+      .then(() => {
+        commit('SET_TOKEN',null)
+        commit('SET_USER', null)
+        router.push({name : 'LoginView'})
       })
       .catch((err) => console.log(err))
     },
     // forum /////////////////////////////////////////////////////////
+    likesForum({getters}, forumId) {
+      axios({
+        method : 'post',
+        url : `${API_URL}/community/forumlikes/${forumId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
     forumCommentUpdate({getters}, payload) {
       const forumCommentId = payload.commentId
       const content = payload.content
@@ -177,7 +254,9 @@ export default new Vuex.Store({
       .then(() => {
         router.push({name : 'ForumView'})
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {console.log(err)
+        alert('내용을 채워주세요')
+      })
     },
     getForums({commit}){
       axios({
@@ -217,6 +296,19 @@ export default new Vuex.Store({
     },
 
     // review /////////////////////////////////////////////////////////
+    likesReview({getters}, reviewId) {
+      axios({
+        method : 'post',
+        url : `${API_URL}/community/reviewlikes/${reviewId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
     deleteReviewComment({getters}, reviewCommentId) {
       axios({
         method : 'delete',
@@ -270,7 +362,11 @@ export default new Vuex.Store({
         console.log(res);
         router.push({name : 'ReviewView'})
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err.response.data)
+        alert('빈 부분이 있거나 평점이 0~5점인지 확인하세요')
+        
+      })
     },
     getReviews({commit}){
       axios({
@@ -309,6 +405,19 @@ export default new Vuex.Store({
       })
      },
     // together /////////////////////////////////////////////////////////
+    likesTogether({getters}, togetherId) {
+      axios({
+        method : 'post',
+        url : `${API_URL}/community/togetherlikes/${togetherId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
     deleteTogetherComment({getters}, togetherCommentId) {
       axios({
         method : 'delete',
@@ -361,7 +470,9 @@ export default new Vuex.Store({
       .then(() => {
         router.push({name : 'TogetherView'})
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {console.log(err)
+        alert('내용을 채워주세요')
+      })
     },
     getTogethers({commit}){
       axios({
@@ -477,8 +588,13 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
+    selectMovie({commit}, findMovie) {
+      commit('SET_SELECTEDMOVIESTITLE', findMovie.title)
+      commit('SET_SELECTEDMOVIESPOSTER', findMovie.poster_path)
+    },
     setSelectedMovie({commit}){
-      commit('SET_SELECTEDMOVIES', [])
+      commit('SET_SELECTEDMOVIESTITLE', '')
+      commit('SET_SELECTEDMOVIESPOSTER','')
     },
     setSearchMovies({commit}) {
       commit('SEARCH_MOVIE', null)

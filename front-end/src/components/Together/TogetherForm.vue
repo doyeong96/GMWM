@@ -10,7 +10,7 @@
       
 
       <label for="endtime">endtime</label>
-      <input id='endtime' type="datetime-local" v-model="endtime">
+      <input id='endtime' type="datetime-local" @change="inputTime">
       
       <input type="submit">
     </form>
@@ -44,6 +44,9 @@ export default {
     action : String,
   },
   methods : {
+    inputTime(event){
+      this.endtime = event.target.value
+    },
     createTogether(){
       const title = this.title
       const content = this.content
