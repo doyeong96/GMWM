@@ -5,18 +5,18 @@
         <span id="navspan" class="navbar-brand"><img id="navImg" src="@/assets/nav.png" alt="logo"></span>
 
         <div>
-          <router-link to="/">Home</router-link> |
-          <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
-          <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
-          <router-link :to="{name :'ForumView'}">Forum</router-link> |
-          <router-link :to="{name :'ReviewView'}">Review</router-link> |
-          <router-link :to="{name :'TogetherView'}">Together</router-link> |
-          <router-link :to="{name : 'ProfileView'}">Profile</router-link> |
-          <router-link :to="{name :'SignupView'}">Signup</router-link> |
-          <router-link :to="{name :'LoginView'}">Login</router-link> | 
-          <router-link :to="{name :'PasswordChangeView'}">Passwordchange</router-link> |
-          <button @click="Withdrawal">회원탈퇴</button>
-          <button @click="Logout">Logout</button>
+      <router-link to="/">Home</router-link> |
+      <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
+      <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
+      <router-link :to="{name :'ForumView'}">Forum</router-link> |
+      <router-link :to="{name :'ReviewView'}">Review</router-link> |
+      <router-link :to="{name :'TogetherView'}">Together</router-link> |
+      <!-- <router-link :to="{name : 'ProfileView',params : { username : user.username}}">Profile</router-link> | -->
+      <router-link :to="{name :'SignupView'}">Signup</router-link> |
+      <router-link :to="{name :'LoginView'}">Login</router-link> | 
+      <router-link :to="{name :'PasswordChangeView'}">Passwordchange</router-link> |
+      <button @click="Withdrawal">회원탈퇴</button>
+      <button @click="Logout">Logout</button>
         </div>
       
       </div>
@@ -31,6 +31,11 @@ export default {
     Logout() { this.$store.dispatch('logout')},
     Withdrawal() {
       this.$store.dispatch('withDrawal')
+    },
+    computed : {
+      user() {
+        return this.$store.getters.user
+      }
     }
   }
 
