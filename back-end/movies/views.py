@@ -10,6 +10,19 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieSerializer, ActorSerializer, GenreSerializer
 from .models import Movie, Genre, Actor
 
+
+# 영화 좋아요
+@api_view(['POST'])
+def likes_movie(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        movie.like_users.remove(request.user)
+    else:
+        movie.like_users.add(request.user)
+    data = movie.like_users.all().count()
+    # data = str(data)
+    return Response(data)
+
 # 영화 리스트
 @api_view(['GET'])
 def movie_list(request):

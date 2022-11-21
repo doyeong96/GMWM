@@ -536,6 +536,19 @@ export default new Vuex.Store({
     },
     // movies /////////////////////////////////////////////////////////
     // getMovies, getMovieDetail 주소만 수정해주면 될 것 같음
+    likesMovie({getters}, movieId) {
+      axios({
+        method : 'post',
+        url : `${API_URL}/movies/movielikes/${movieId}/`,
+        headers : getters.authHead
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
     getMovies({commit}){
       axios({
         url : `${API_URL}/movies/`,

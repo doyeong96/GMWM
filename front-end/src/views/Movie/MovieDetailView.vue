@@ -2,8 +2,16 @@
   <div>
     <h2> MovieDetailView</h2>
     {{movie.title}}
+    <p>좋아요 누른 사람 : {{likeUsers}} </p>
+    <div v-if="movie.like_users.includes(user.pk)">
+      <button @click="likesMovie">좋아요 취소</button>
+    </div>
+    <div v-else>
+      <button @click="likesMovie">좋아요</button>
+    </div>
     <p v-for="actor in movieActors" :key="actor.id">{{ actor.name }}</p>
     <p>{{movie.overview}}</p>
+    <p>리뷰작성</p>
     <iframe width="560" height="315" :src="movieYoutube"></iframe>
     <img :src="movieImg" alt="">
   </div>
@@ -24,7 +32,21 @@ export default {
   },
   movieActors(){
     return this.$store.getters.actors 
-  }
+  },
+  user() {
+      return this.$store.getters.user
+    },
+  likeUsers() {
+      return (this.movie.like_users.length)
+    },
+  userProfile() {
+    return this.$store.getters.userProfile
+  },
+  },
+  methods : {
+    likesMovie() {
+      this.$store.dispatch('likesMovie', this.movie.id)
+    }
   },
   created(){
     this.$store.dispatch('getMovieDetail', this.$route.params.id)

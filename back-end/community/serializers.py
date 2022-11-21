@@ -3,7 +3,7 @@ from .models import Review , Forum, ReviewComment, ForumComment, Together, Toget
 
 # - ReviewListSerializer - get,post (리뷰 게시판 전체 조회, 글 작성)
 class ReviewListSerializer(serializers.ModelSerializer):
-
+    username = serializers.CharField(source='user.username', read_only=True)
     nickname = serializers.CharField(source='user.nickname', read_only=True)
 
     class Meta:
@@ -13,7 +13,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 # - ReviewCommentSerializer - get,post,del,put (리뷰 게시판 댓글 조회, 생성, 삭제, 수정)
 class ReviewCommentSerializer(serializers.ModelSerializer):
     nickname = serializers.CharField(source='user.nickname', read_only=True)
-
+    
     class Meta:
         model = ReviewComment
         fields = '__all__'
@@ -62,7 +62,7 @@ class ForumSerializer(serializers.ModelSerializer):
 
 # - TogetherListSerializer - get,post (모임 게시판 전체 조회, 글 작성)
 class TogetherListSerializer(serializers.ModelSerializer):
-    
+    username = serializers.CharField(source='user.username', read_only=True)
     nickname = serializers.CharField(source='user.nickname', read_only=True)
 
     class Meta:

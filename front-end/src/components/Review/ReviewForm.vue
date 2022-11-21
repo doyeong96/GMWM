@@ -2,7 +2,6 @@
   <div>
     <h2>ReviewForm</h2>
     <label for="moviename">영화검색</label>
-    <!-- <input id="moviename" @keyup.enter="searchMovie" type="text" v-model="movie_name"> -->
     <input id="moviename" @input="searchMovie" type="text" v-model="movie_title">
 
     <form @submit.prevent="onSubmit">
@@ -12,11 +11,6 @@
       <label for="review">review</label>
       <input id="review" type="text" v-model="review">
       
-      <!-- <label for="movie_title">movie_title</label>
-      <input id="movie_title" type="text" v-model="movie_title">
-      
-      <label for="poster_path">poster_path</label>
-      <input id="poster_path" type="text" v-model="poster_path"> -->
       
       <label for="score">score</label>
       <input id="score" type="number" v-model="score">

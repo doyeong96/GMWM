@@ -32,18 +32,12 @@ export default {
     Withdrawal() {
       this.$store.dispatch('withDrawal')
     },
-    computed : {
+  },
+  computed : {
       user() {
         return this.$store.getters.user
       }
     }
-  },
-  computed : {
-    user() {
-      return this.$store.getters.user
-    }
-  }
-
 }
 </script>
 <style>
