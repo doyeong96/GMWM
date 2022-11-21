@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
 
     <label for="moviename">홈에서 영화검색</label>
     <input id="moviename" @input="searchMovieHome" type="text">

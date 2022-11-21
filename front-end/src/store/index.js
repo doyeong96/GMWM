@@ -604,7 +604,7 @@ export default new Vuex.Store({
         data : {movie_name}
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         commit('SEARCH_MOVIE', res.data)
       })
       .catch((err) => console.log(err))
@@ -628,7 +628,7 @@ export default new Vuex.Store({
         data : {movie_name}
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         commit('SEARCH_MOVIE_HOME', res.data)
       })
       .catch((err) => console.log(err))
