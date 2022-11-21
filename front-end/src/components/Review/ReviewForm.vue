@@ -98,7 +98,6 @@ export default {
     },
     findMovieImg(){ 
       return `https://image.tmdb.org/t/p/w500${this.$store.getters.searchMovie.poster_path}`
-<<<<<<< Updated upstream
     }
 
   },
