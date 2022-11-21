@@ -30,6 +30,7 @@ export default new Vuex.Store({
     searchMovie : null,
     selectedMovieTitle : '',
     selectedMoviePoster : '',
+    searchMovieHome : null,
     // genre
     genres : [],
     genre : {},
@@ -57,6 +58,7 @@ export default new Vuex.Store({
     searchMovie : (state) => state.searchMovie,
     selectedMovieTitle : (state) => state.selectedMovieTitle,
     selectedMoviePoster : (state) => state.selectedMoviePoster,
+    searchMovieHome : (state) => state.searchMovieHome,
   },
   mutations: {
     // user
@@ -79,6 +81,7 @@ export default new Vuex.Store({
     SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
     SET_SELECTEDMOVIESTITLE : (state, data) => state.selectedMovieTitle = data,
     SET_SELECTEDMOVIESPOSTER : (state,data) => state.selectedMoviePoster = data,
+    SEARCH_MOVIE_HOME : (state, searchMovieHome) => state.searchMovieHome = searchMovieHome,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
     SET_GENRES : (state, data) => state.selectedGenres = data,
@@ -406,7 +409,7 @@ export default new Vuex.Store({
         console.log(res)
         router.go(router.currentRoute)
       })
-     },
+    },
     // together /////////////////////////////////////////////////////////
     likesTogether({getters}, togetherId) {
       axios({
@@ -602,7 +605,20 @@ export default new Vuex.Store({
     },
     setSearchMovies({commit}) {
       commit('SEARCH_MOVIE', null)
-    }
+    },
+    // 홈 화면 영화 검색
+    searchMovieHome({commit}, movie_name){
+      axios({
+        url : `${API_URL}/movies/search/`,
+        method : 'POST',
+        data : {movie_name}
+      })
+      .then((res) => {
+        console.log(res)
+        commit('SEARCH_MOVIE_HOME', res.data)
+      })
+      .catch((err) => console.log(err))
+    },
   },
   modules: {
   }
