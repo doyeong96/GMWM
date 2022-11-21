@@ -27,6 +27,7 @@ export default new Vuex.Store({
     recommendMovies : [],
     bestMovie : [],
     searchMovie : null,
+<<<<<<< Updated upstream
     selectedMovie : [],
     // genre
     genres : [],
@@ -52,6 +53,7 @@ export default new Vuex.Store({
     bestMovie : (state) => state.bestMovie,
     actors : (state) => state.actors,
     searchMovie : (state) => state.searchMovie,
+<<<<<<< Updated upstream
     selectedMovie : (state) => state.selectedMovie
   },
   mutations: {
@@ -71,6 +73,7 @@ export default new Vuex.Store({
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies = recommendMovies,
     BEST_MOVIES : (state, bestMovie) => state.bestMovie = bestMovie,
     SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
+<<<<<<< Updated upstream
     SET_SELECTEDMOVIES : (state, data) => state.selectedMovie = data,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
