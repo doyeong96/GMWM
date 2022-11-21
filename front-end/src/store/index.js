@@ -136,6 +136,16 @@ export default new Vuex.Store({
         commit('SET_USER',res.data)
       })
     },
+    customGetUserInfo({getters}) {
+      axios({
+        url: `${API_URL}/profile/${userId}/`,
+        method: 'get',
+        headers: this.getters.authHead
+      })
+      .then((res) => {
+        console.log(res)
+      })
+    } ,
     passwordChange({commit,getters},payload) {
       console.log(payload)
       axios({
