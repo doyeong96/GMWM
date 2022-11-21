@@ -49,14 +49,15 @@ export default {
   },
   methods : {
     createReview(){
+      
       const title = this.title
       const review = this.review
       // const movie_title = this.movie_title
-      const movie_title = this.$store.getters.selectedMovie[0][0]
-      // const poster_path = this.poster_path
-      const poster_path = this.$store.getters.selectedMovie[0][1]
+      const movie_title = this.$store.getters.selectedMovieTitle
+      const poster_path = this.$store.getters.selectedMoviePoster
+      console.log(this.$store.getters.selectedMovieTitle)
       const score = this.score
-
+      
       const payload = {
         title, review, movie_title, poster_path, score
       }
@@ -66,8 +67,8 @@ export default {
     updateReview(){	
       const title = this.title	
       const review = this.review	
-      const movie_title = this.$store.getters.selectedMovie[0][0]	
-      const poster_path = this.$store.getters.selectedMovie[0][1]
+      const movie_title = this.movie_title
+      const poster_path = this.poster_path
       const score = this.score	
       const id = this.Review.id	
       const payload = {	
@@ -88,8 +89,9 @@ export default {
     },
     select(findMovie){
       this.movie_title = findMovie.title
-      this.$store.getters.selectedMovie.push([findMovie.title, findMovie.poster_path])
-      console.log(this.$store.getters.selectedMovie);
+      this.poster_path = findMovie.poster_path
+      this.$store.dispatch('selectMovie', findMovie)
+      console.log(this.$store.getters.selectedMovieTitle)
     }
   },
   computed : {
@@ -98,7 +100,7 @@ export default {
     },
     findMovieImg(){ 
       return `https://image.tmdb.org/t/p/w500${this.$store.getters.searchMovie.poster_path}`
-    }
+    },
 
   },
   created() {

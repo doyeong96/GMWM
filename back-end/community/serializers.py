@@ -28,7 +28,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user','like_users')
+
 
 # - ForumListSerializer -get,post (자유 게시판 전체 조회, 글 작성)
 class ForumListSerializer(serializers.ModelSerializer):
@@ -57,7 +58,7 @@ class ForumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forum
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user','like_users')
 
 # - TogetherListSerializer - get,post (모임 게시판 전체 조회, 글 작성)
 class TogetherListSerializer(serializers.ModelSerializer):
@@ -86,5 +87,5 @@ class TogetherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Together
         fields = '__all__'
-        read_only_fields = ('user',)
+        read_only_fields = ('user','like_users')
 

@@ -8,7 +8,9 @@
       <router-link :to="{name :'ReviewView'}">Review</router-link> |
       <router-link :to="{name :'TogetherView'}">Together</router-link> |
       <router-link :to="{name :'SignupView'}">Signup</router-link> |
-      <router-link :to="{name :'LoginView'}">Login</router-link> |
+      <router-link :to="{name :'LoginView'}">Login</router-link> | 
+      <router-link :to="{name :'PasswordChangeView'}">Passwordchange</router-link> |
+      <button @click="Withdrawal">회원탈퇴</button>
       <button @click="Logout">Logout</button>
     </nav>
     <router-view/>
@@ -17,7 +19,10 @@
 <script>
 export default {
   methods : {
-    Logout() { this.$store.dispatch('logout')}
+    Logout() { this.$store.dispatch('logout')},
+    Withdrawal() {
+      this.$store.dispatch('withDrawal')
+    }
   }
 
 }
