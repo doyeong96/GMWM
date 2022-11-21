@@ -116,7 +116,7 @@ const routes = [
     component : PasswordChangeView,
   },
   {
-    path: '/profile',
+    path: '/profile/:username',
     name: 'ProfileView',
     component : ProfileView,
   },

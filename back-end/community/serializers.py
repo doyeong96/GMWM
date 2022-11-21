@@ -8,7 +8,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ('id', 'title', 'nickname')
+        fields = ('id', 'title', 'nickname','user_id','username')
 
 # - ReviewCommentSerializer - get,post,del,put (리뷰 게시판 댓글 조회, 생성, 삭제, 수정)
 class ReviewCommentSerializer(serializers.ModelSerializer):
@@ -35,10 +35,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 class ForumListSerializer(serializers.ModelSerializer):
     # 현재 로그인 한 유저 네임 알기 위해서
     nickname = serializers.CharField(source='user.nickname', read_only=True)
-
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Forum
-        fields = ('id', 'title', 'nickname')
+        fields = ('id', 'title', 'nickname','user_id','username')
 
 # - ForumCommentSerializer -get,post,delete,put (자유 게시판 댓글 조회, 생성, 삭제, 수정)
 class ForumCommentSerializer(serializers.ModelSerializer):
@@ -67,7 +67,7 @@ class TogetherListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Together
-        fields = ('id', 'title', 'nickname','endtime')
+        fields = ('id', 'title', 'nickname','endtime','user_id','username')
 
 # - TogetherCommentSerializer - get,post,del,put (모임 게시판 댓글 조회, 생성, 삭제, 수정)
 class TogetherCommentSerializer(serializers.ModelSerializer):
