@@ -9,8 +9,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import MovieSerializer, ActorSerializer, GenreSerializer
 from .models import Movie, Genre, Actor
-
-
+import random
 # 영화 좋아요
 @api_view(['POST'])
 def likes_movie(request, movie_pk):
@@ -45,30 +44,22 @@ def movie_detail(request, movie_pk):
 def movie_recommend(request):
     print('영화 추천 알고리즘')
     selectedgenres = request.data
-    movies = Movie.objects.all()
-
-    # 쉬운 알고리즘 부분 =======================
-    recommends = set()
-    for movie in movies:
-        for genre in movie.genres.all():
-            for selectedgenre in selectedgenres:
-                if genre.id == selectedgenre:
-                    recommends.add(movie)
-    recommends = list(recommends)
-    genre_movies_coll = []
+    moviesss = Movie.objects.all()
+    moviesss = list(moviesss)
+    movies = random.sample(moviesss,1500)
+    
     #==============================================
     # 장르별 알고리즘부분 =========================
+    genre_movies_coll = []
     for selgenre in selectedgenres:
         genre_movies = []
         for movie in movies:
             for genre in movie.genres.all():
                 if genre.id == selgenre:
                     genre_movies.append(movie)
-        genre_movies_coll.append(genre_movies)
-    for i in range(len(genre_movies_coll)):
-        globals()['serializer_'+str(i)] = MovieSerializer(genre_movies_coll[i], many=True)
-    print(serializer_0.data)
-    print(serializer_1.data)
+        random_genre_movies = random.sample(genre_movies,20)
+        genre_movies_coll.append(random_genre_movies)
+    
     #==============================================
 
     # 최고 추천 영화 부분 =========================
@@ -87,12 +78,14 @@ def movie_recommend(request):
     best_reco = []
     for obj,count,vote in reco:
         best_reco.append(obj)
-    best_reco = list(set(best_reco[:10]))
+    best_reco = list(set(best_reco[:15]))
     #===============================================
-    serializer = MovieSerializer(recommends, many=True)
     serializer_best =  MovieSerializer(best_reco, many=True)
-
-    return Response([serializer_best.data, serializer.data])
+    serializers =[serializer_best.data]
+    for i in range(len(genre_movies_coll)):
+        globals()['serializer_'+str(i)] = MovieSerializer(genre_movies_coll[i], many=True)
+        serializers.append(globals()['serializer_'+str(i)].data)
+    return Response(serializers)
 
 
 # 영화 검색
