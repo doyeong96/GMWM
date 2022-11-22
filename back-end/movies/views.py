@@ -55,8 +55,21 @@ def movie_recommend(request):
                 if genre.id == selectedgenre:
                     recommends.add(movie)
     recommends = list(recommends)
-    #===============================================
-
+    genre_movies_coll = []
+    #==============================================
+    # 장르별 알고리즘부분 =========================
+    for selgenre in selectedgenres:
+        genre_movies = []
+        for movie in movies:
+            for genre in movie.genres.all():
+                if genre.id == selgenre:
+                    genre_movies.append(movie)
+        genre_movies_coll.append(genre_movies)
+    for i in range(len(genre_movies_coll)):
+        globals()['serializer_'+str(i)] = MovieSerializer(genre_movies_coll[i], many=True)
+    print(serializer_0.data)
+    print(serializer_1.data)
+    #==============================================
 
     # 최고 추천 영화 부분 =========================
     reco = []
