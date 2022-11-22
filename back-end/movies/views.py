@@ -74,7 +74,7 @@ def movie_recommend(request):
     best_reco = []
     for obj,count,vote in reco:
         best_reco.append(obj)
-    best_reco = list(set(best_reco[:5]))
+    best_reco = list(set(best_reco[:10]))
     #===============================================
     serializer = MovieSerializer(recommends, many=True)
     serializer_best =  MovieSerializer(best_reco, many=True)
