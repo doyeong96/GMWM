@@ -11,7 +11,11 @@
       <router-link :to="{name :'ForumView'}">Forum</router-link> |
       <router-link :to="{name :'ReviewView'}">Review</router-link> |
       <router-link :to="{name :'TogetherView'}">Together</router-link> |
-      <!-- <router-link :to="{name : 'ProfileView',params : { username : user.username}}">Profile</router-link> | -->
+      <span v-if="isLogin">
+        <!-- <router-link :to="{name : 'ProfileView',params : { username : userNow.username} }">Profile</router-link> | -->
+        <a :href="`http://localhost:8080/profile/${userNow.username}/`">Profile</a> |
+        
+      </span>
       <router-link :to="{name :'SignupView'}">Signup</router-link> |
       <router-link :to="{name :'LoginView'}">Login</router-link> | 
       <router-link :to="{name :'PasswordChangeView'}">Passwordchange</router-link> |
@@ -34,10 +38,13 @@ export default {
     },
   },
   computed : {
-      user() {
-        return this.$store.getters.user
+      isLogin() {
+        return this.$store.getters.isLogin
+      },
+      userNow() {
+        return this.$store.getters.userNow
       }
-    }
+    },
 }
 </script>
 <style>

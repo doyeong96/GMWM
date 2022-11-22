@@ -29,4 +29,5 @@ urlpatterns = [
     path('userlikesreview/<str:username>/', accounts_views.userlikesreview),
     path('userlikestogether/<str:username>/', accounts_views.userlikestogether),
     path('userlikesmovie/<str:username>/', accounts_views.userlikesmovie),
+    path('getnowuesrinfo/', accounts_views.getnowuesrinfo),
 ]

@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
-
+from django.contrib.auth import get_user_model
 
 class CustomRegisterSerializer(RegisterSerializer):
     # 기본 설정 필드: username, password, email
@@ -14,6 +14,12 @@ class CustomRegisterSerializer(RegisterSerializer):
         data['nickname'] = self.validated_data.get('nickname', '')
         data['id'] = self.validated_data.get('id','')
         return data
+
+class AccountsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('id','username','nickname')
 
 # <project_name>/settings.py
 

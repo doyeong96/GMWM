@@ -14,6 +14,7 @@ export default new Vuex.Store({
     token : null,
     user : null,
     userProfile : null,
+    userNow : null,
     userLikesForums : null,
     userLikesReviews : null,
     userLikesTogethers : null,
@@ -45,9 +46,11 @@ export default new Vuex.Store({
     actors : []
   },
   getters: {
+    isLogin: (state) => state.token ? true : false,
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
     user: (state) => state.user,
     userProfile: (state) => state.userProfile,
+    userNow: (state) => state.userNow,
     userLikesForums: (state) => state.userLikesForums,
     userLikesReviews: (state) => state.userLikesReviews,
     userLikesTogethers: (state) => state.userLikesTogethers,
@@ -77,6 +80,7 @@ export default new Vuex.Store({
     SET_TOKEN : (state,token) => state.token = token,
     SET_USER: (state,user) => state.user = user,
     SET_USERPROFILE: (state,nowUser) => state.userProfile = nowUser,
+    SET_NOWUSER: (state,user) => state.userNow = user,
     SET_USERLIKESFORUM: (state, forums) => state.userLikesForums = forums ,
     SET_USERLIKESREVIEW: (state, reviews) => state.userLikesReviews = reviews ,
     SET_USERLIKESTOGETHER: (state, togethers) => state.userLikesTogethers = togethers ,
@@ -128,6 +132,7 @@ export default new Vuex.Store({
       .then((res) => {
         commit('SET_TOKEN', res.data.key)
         dispatch('getUserInfo')
+        dispatch('getNowUserInfo')
         alert('로그인 되셨습니다.')
         router.push({ name : 'ForumView'})
       })
@@ -142,6 +147,8 @@ export default new Vuex.Store({
       .then((res) => {
         commit('SET_TOKEN', res.data.key)
         dispatch('getUserInfo')
+        dispatch('getNowUserInfo')
+        alert('로그인 되셨습니다.')
         router.push({name : 'ForumView'})
       })
       .catch((err) => console.log(err))
@@ -169,6 +176,17 @@ export default new Vuex.Store({
         console.log(res.data)
         commit('SET_USER',res.data)
       })
+    },
+    getNowUserInfo({getters,commit}) {
+      axios({
+        url: `${API_URL}/getnowuesrinfo/`,
+        method: 'get',
+        headers: getters.authHead,
+      })
+      .then((res) => {
+        commit('SET_NOWUSER',res.data)
+      })
+      .catch((err)=> console.log(err))
     },
     customGetUserInfo({getters,commit},username) {
       axios({
