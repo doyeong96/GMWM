@@ -11,9 +11,9 @@
       <router-link :to="{name :'ForumView'}">Forum</router-link> |
       <router-link :to="{name :'ReviewView'}">Review</router-link> |
       <router-link :to="{name :'TogetherView'}">Together</router-link> |
-      <span v-if="isLogin">
+      <span v-if="this.isLogin">
         <!-- <router-link :to="{name : 'ProfileView',params : { username : userNow.username} }">Profile</router-link> | -->
-        <!-- <a :href="`http://localhost:8080/profile/${userNow.username}/`">Profile</a> | -->
+        <a :href="`http://localhost:8080/profile/${userNow?.username}/`">Profile</a> |
         
       </span>
       <router-link :to="{name :'SignupView'}">Signup</router-link> |
@@ -43,7 +43,7 @@ export default {
       },
       userNow() {
         return this.$store.getters.userNow
-      }
+      },
     },
 }
 </script>

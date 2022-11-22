@@ -6,7 +6,7 @@
 
     <div v-for="findMovie in findMovies" :key="findMovie.id">
       <p><a :href="`http://localhost:8080/showmovie/${findMovie.id}`"> {{findMovie.title}}</a></p>
-      <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" alt="">
+      <!-- <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" alt=""> -->
       <!-- <button @click="select(findMovie)">확정</button> -->
       <!-- <a :href="findMovieId">{{}}</a> -->
     </div>

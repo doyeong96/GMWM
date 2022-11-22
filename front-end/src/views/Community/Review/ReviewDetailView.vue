@@ -43,7 +43,7 @@ export default {
       return this.$store.getters.user
     },
     likeUsers() {
-      return (this.review.like_users.length)
+      return (this.review?.like_users.length)
      
     }
   },
