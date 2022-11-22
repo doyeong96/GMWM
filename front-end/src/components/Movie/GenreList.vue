@@ -5,6 +5,7 @@
       v-for="genre in genres"
       :key="genre.id"
       :genre="genre"
+      :all="all"
     />
     <button @click="pick">선택완료</button>
   </div>
@@ -14,6 +15,11 @@
 import GenreListItem from '@/components/Movie/GenreListItem'
 export default {
     name : 'GenreList',
+    data(){
+      return{
+        all : 0
+      }
+    },
     components : {
       GenreListItem,
     },
@@ -25,8 +31,9 @@ export default {
     methods : {
       pick(){
         this.$store.dispatch('selectGenres')
+        this.$store.dispatch('selectGenresNum')
         this.$router.push({ name: 'ShowMoviesView'})
-      }
+      },
     },
 }
 </script>
