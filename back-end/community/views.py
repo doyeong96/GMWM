@@ -25,6 +25,7 @@ from .models import  (
 def review_list(request):
     if request.method == 'GET':
         reviews = Review.objects.order_by('-pk')
+        print(reviews)
         # reviews = get_list_or_404(Review.objects.order_by('-pk'))
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)

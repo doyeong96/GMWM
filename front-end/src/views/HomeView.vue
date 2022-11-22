@@ -21,8 +21,12 @@ export default {
   },
   methods : {
     searchMovieHome(event){
-      const movie_name = event.target.value
+      if (event.target.value) {
+        const movie_name = event.target.value
       this.$store.dispatch('searchMovieHome', movie_name)
+      } else {
+        this.$store.dispatch('searchMovieHome', 'dsofkasozvoxckvoxckvo')
+      }
     },
   },
   computed : {
@@ -36,5 +40,9 @@ export default {
       return `http://localhost:8080/showmovie/`
     }
   },
+  created() {
+    this.$store.dispatch('resetSearchMovieHome')
+  }
+  
 }
 </script>

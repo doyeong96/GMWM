@@ -11,7 +11,9 @@
     </div>
     <p v-for="actor in movieActors" :key="actor.id">{{ actor.name }}</p>
     <p>{{movie.overview}}</p>
-    <p>리뷰작성</p>
+    
+    <router-link :to="{ name: 'ReviewCreateView', params : { action : 'direct'} }">리뷰 작성</router-link>
+
     <iframe width="560" height="315" :src="movieYoutube"></iframe>
     <img :src="movieImg" alt="">
   </div>

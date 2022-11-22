@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>ReviewView</h2>
-    <router-link :to="{ name : 'ReviewCreateView'}">CREATE</router-link> <br>
+    <router-link :to="{ name : 'ReviewCreateView', params : { action : 'newCreate'} }">CREATE</router-link> <br>
     <!-- <a :href="createUrl">CREATE</a> <br> -->
     <ReviewList/>
   </div>

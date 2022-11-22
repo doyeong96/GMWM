@@ -1,8 +1,16 @@
 <template>
   <div>
     <h2>ReviewForm</h2>
-    <label for="moviename">영화검색</label>
-    <input id="moviename" @input="searchMovie" type="text" v-model="movie_title">
+    <div v-if="trues">
+      <label for="moviename">영화검색</label>
+    <input id="moviename" @input="searchMovie" type="text" v-model="movie_titleDirect" >
+    {{selectDirect()}}
+    </div>
+    <div v-else>
+      <label for="moviename">영화검색</label>
+    <input id="moviename" @input="searchMovie" type="text" v-model="movie_title" >
+    
+    </div>
 
     <form @submit.prevent="onSubmit">
       <label for="title">title</label>
@@ -22,6 +30,7 @@
       <!-- <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" alt=""> -->
       <button @click="select(findMovie)">확정</button>
     </div>
+    
   </div>
 </template>
 
@@ -35,11 +44,15 @@ export default {
       movie_title : this.Review.movie_title,	
       poster_path : this.Review.poster_path,	
       score : this.Review.score,
+      movie_titleDirect : this.movie.title,
+      poster_pathDirect : this.movie.poster_path,
     }
   },
   props : {	
     action : String,	
     Review : Object,	
+    movie : Object,
+    trues : Boolean,
   },
   methods : {
     createReview(){
@@ -78,14 +91,20 @@ export default {
       }	
     },
     searchMovie(event){
-      const movie_name = event.target.value
-      this.$store.dispatch('searchMovie', movie_name)
+      if (event.target.value) {
+       const movie_name = event.target.value
+      this.$store.dispatch('searchMovie', movie_name) 
+      } else {
+        this.$store.dispatch('searchMovie', 'ofkadfkaokokvokovxczovo')
+      }
     },
     select(findMovie){
       this.movie_title = findMovie.title
       this.poster_path = findMovie.poster_path
       this.$store.dispatch('selectMovie', findMovie)
-      console.log(this.$store.getters.selectedMovieTitle)
+    },
+    selectDirect() {
+      this.$store.dispatch('selectMovie', this.movie)
     }
   },
   computed : {

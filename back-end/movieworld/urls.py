@@ -25,4 +25,8 @@ urlpatterns = [
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
     path('withdrawal/', accounts_views.withdrawal),
     path('profile/<str:username>/', accounts_views.getuserinfo),
+    path('userlikesforum/<str:username>/', accounts_views.userlikesforum),
+    path('userlikesreview/<str:username>/', accounts_views.userlikesreview),
+    path('userlikestogether/<str:username>/', accounts_views.userlikestogether),
+    path('userlikesmovie/<str:username>/', accounts_views.userlikesmovie),
 ]

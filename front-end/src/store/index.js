@@ -14,6 +14,10 @@ export default new Vuex.Store({
     token : null,
     user : null,
     userProfile : null,
+    userLikesForums : null,
+    userLikesReviews : null,
+    userLikesTogethers : null,
+    userLikesMovies : null,
     // forum
     forums : [],
     forum : {},
@@ -43,6 +47,10 @@ export default new Vuex.Store({
     authHead: (state) => ({ Authorization: `Token ${state.token}`}),
     user: (state) => state.user,
     userProfile: (state) => state.userProfile,
+    userLikesForums: (state) => state.userLikesForums,
+    userLikesReviews: (state) => state.userLikesReviews,
+    userLikesTogethers: (state) => state.userLikesTogethers,
+    userLikesMovies: (state) => state.userLikesMovies,
     forums: (state) => state.forums,	
     forum: (state) => state.forum,
     reviews: (state) => state.reviews,
@@ -67,6 +75,10 @@ export default new Vuex.Store({
     SET_TOKEN : (state,token) => state.token = token,
     SET_USER: (state,user) => state.user = user,
     SET_USERPROFILE: (state,nowUser) => state.userProfile = nowUser,
+    SET_USERLIKESFORUM: (state, forums) => state.userLikesForums = forums ,
+    SET_USERLIKESREVIEW: (state, reviews) => state.userLikesReviews = reviews ,
+    SET_USERLIKESTOGETHER: (state, togethers) => state.userLikesTogethers = togethers ,
+    SET_USERLIKESMOVIE: (state, movies) => state.userLikesMovies = movies ,
     // forum
     GET_FORUMS : (state, forums) => state.forums = forums,
     GET_FORUM : (state, forum) => state.forum = forum,
@@ -152,10 +164,54 @@ export default new Vuex.Store({
         headers: this.getters.authHead
       })
       .then((res) => {
-        console.log(res.data)
         commit('SET_USERPROFILE',res.data)
       })
+      .catch((err) => console.log(err))
     } ,
+    userLikesForums({getters,commit}, username) {
+      axios({
+        url: `${API_URL}/userlikesforum/${username}/`,
+        method : 'get',
+        headers : this.getters.authHead
+      })
+      .then((res) => {
+        commit('SET_USERLIKESFORUM',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
+    userLikesReviews({getters,commit}, username) {
+      axios({
+        url: `${API_URL}/userlikesreview/${username}/`,
+        method : 'get',
+        headers : this.getters.authHead
+      })
+      .then((res) => {
+        commit('SET_USERLIKESREVIEW',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
+    userLikesTogethers({getters,commit}, username) {
+      axios({
+        url: `${API_URL}/userlikestogether/${username}/`,
+        method : 'get',
+        headers : this.getters.authHead
+      })
+      .then((res) => {
+        commit('SET_USERLIKESTOGETHER',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
+    userLikesMovies({getters,commit}, username) {
+      axios({
+        url: `${API_URL}/userlikesmovie/${username}/`,
+        method : 'get',
+        headers : this.getters.authHead
+      })
+      .then((res) => {
+        commit('SET_USERLIKESMOVIE',res.data)
+      })
+      .catch((err) => console.log(err))
+    },
     passwordChange({commit,getters},payload) {
       console.log(payload)
       axios({
@@ -645,6 +701,9 @@ export default new Vuex.Store({
         commit('SEARCH_MOVIE_HOME', res.data)
       })
       .catch((err) => console.log(err))
+    },
+    resetSearchMovieHome({commit}) {
+      commit('SEARCH_MOVIE_HOME', '')
     },
   },
   modules: {
