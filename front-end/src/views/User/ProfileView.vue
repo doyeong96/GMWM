@@ -1,36 +1,68 @@
 <template>
   <div>
-    <h2>{{userProfile.nickname}}님의 프로파일입니다.</h2>
-    <ProfileAv
-    :username="userProfile.username"
-    />
-    <p>좋아요한 자유글</p>
-    <div v-for="(forum,idxForum) in userLikesForums" :key="idxForum">
-      {{forum.title}}
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <ProfileInfo
+          :nickname="userProfile.nickname"
+          :username="userProfile.username"
+          />
+          <div class="container">
+            <button @click="select('forum')" class="btn btn-primary col-5 m-2">좋아요한 포럼</button>
+            <button @click="select('review')" class="btn btn-primary col-5 m-2">좋아요한 리뷰</button>
+            <button @click="select('together')" class="btn btn-primary col-5 m-2">좋아요한 구해</button>
+            <button @click="select('movie')" class="btn btn-primary col-5 m-2">좋아요한 영화</button>
+          </div>
+            
+        </div>
+        <div class="col-8">
+          <span v-if="sel === 'forum'">
+            <ProfileLikeForum
+            :user-likes-forums="userLikesForums"
+            />   
+          </span>
+          <span v-else-if=" sel === 'review'">
+            <ProfileLikeReview
+            :user-likes-reviews="userLikesReviews"
+            />
+          </span>
+          <span v-else-if="sel === 'together'">
+            <ProfileLikeTogether
+            :user-likes-togethers="userLikesTogethers"
+            />
+          </span>
+          <span v-else>
+            <ProfileLikeMovie
+            :user-likes-movies="userLikesMovies"
+            />
+          </span>
+        </div>
+      </div>
     </div>
-    <p>좋아요한  리뷰글</p>
-    <div v-for="(review,idxReview) in userLikesReviews" :key="idxReview+'l'">
-      {{review.title}}
-    </div>
-    <p>좋아요한 구해요글</p>
-    <div v-for="(together,idxTogether) in userLikesTogethers" :key="idxTogether+'r'">
-      {{together.title}}
-    </div>
-    <p>좋아요한 영화</p>
-    <div v-for="(movie,idxMovie) in userLikesMovies" :key="idxMovie+'c'">
-      {{movie.title}}
-      <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
-    </div>
+    
 
   </div>
 </template>
 
 <script>
-import ProfileAv from '@/components/ProfileAv'
+import ProfileInfo from '@/components/Profile/ProfileInfo'
+import ProfileLikeMovie from '@/components/Profile/ProfileLikeMovie'
+import ProfileLikeForum from '@/components/Profile/ProfileLikeForum'
+import ProfileLikeReview from '@/components/Profile/ProfileLikeReview'
+import ProfileLikeTogether from '@/components/Profile/ProfileLikeTogether'
 export default {
   name : 'ProfileView',
+  data() {
+    return {
+      sel : 'movie',
+    }
+  },
   components : {
-    ProfileAv,
+    ProfileInfo,
+    ProfileLikeTogether,
+    ProfileLikeReview,
+    ProfileLikeForum,
+    ProfileLikeMovie,
   },
   created() {
     this.$store.dispatch('customGetUserInfo',this.$route.params.username)
@@ -55,7 +87,16 @@ export default {
     userLikesMovies() {
       return this.$store.getters.userLikesMovies
     },
+    user() {
+      return this.$store.getters.user
+    },
     
+  },
+  methods : {
+    select(data) {
+      console.log(data)
+      this.sel = data
+    }
   },
 }
 </script>

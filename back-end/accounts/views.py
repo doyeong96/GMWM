@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import update_session_auth_hash, get_user_model
 from .models import User
-from .serializers import CustomRegisterSerializer
+from .serializers import CustomRegisterSerializer,AccountsSerializer
 from community.serializers import ForumListSerializer, ReviewListSerializer, TogetherListSerializer
 from movies.serializers import MovieSerializer
 # Create your views here.
@@ -14,6 +14,14 @@ def withdrawal(request):
         user = get_object_or_404(get_user_model(),pk=request.user.pk)
         user.delete()
     return Response('check')
+
+@api_view(['GET'])
+def getnowuesrinfo(request):
+    if request.method =='GET':
+        user = get_object_or_404(get_user_model(),pk=request.user.pk)
+        serializer = AccountsSerializer(user)
+        return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getuserinfo(request, username):
