@@ -8,13 +8,33 @@
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
               <figcaption >
-                <a :href="`http://localhost:8080/showmovie/${bestMovie.id}/`">{{bestMovie.title}}</a>
+                <a data-bs-toggle="modal" data-bs-target="#detailModal" :href="`http://localhost:8080/showmovie/${bestMovie.id}/`">{{bestMovie.title}}</a>
               </figcaption>
           </figure>
       </swiper-slide>
           
     </swiper>
+    <!-- Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-3" id="detailModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- <MovieDetailView/> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
+
 </template>
 
 <script>
@@ -22,9 +42,12 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
+import MovieDetailView from '@/views/Movie/MovieDetailView'
+
 export default {
     name : 'MoviesListSwiper',
     components : {
+      MovieDetailView,
       Swiper,
       SwiperSlide
     },
