@@ -36,6 +36,7 @@ export default new Vuex.Store({
     genres : [],
     genre : {},
     selectedGenres : [],
+    selectGenreNum : 0,
     // 영화배우
     actors : []
   },
@@ -54,6 +55,7 @@ export default new Vuex.Store({
     genres: (state) => state.genres,
     genre : (state) => state.genre,
     selectedGenres : (state) => state.selectedGenres,
+    selectGenreNum : (state) => state.selectGenreNum,
     recommendMovies : (state) => state.recommendMovies,
     bestMovie : (state) => state.bestMovie,
     actors : (state) => state.actors,
@@ -88,6 +90,17 @@ export default new Vuex.Store({
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
     SET_GENRES : (state, data) => state.selectedGenres = data,
+    DELETE_GENRE(state,genreId) {
+      const index = state.selectedGenres.indexOf(genreId)
+      state.selectedGenres.splice(index, 1)
+    },
+    DECREASE_GENRE(state){
+      state.selectGenreNum--
+    },
+    INCREASE_GENRE(state){
+      state.selectGenreNum++
+    },
+    SELECT_GENRE_NUM : (state,data) => state.selectGenreNum = data,
     // 영화배우
     GET_MOVIE_ACTORS : (state, actors) => state.actors = actors,
     
@@ -595,6 +608,14 @@ export default new Vuex.Store({
         commit('SET_GENRES',[])
       })
       .catch((err) => console.log(err))
+    },
+    // 선택장르 삭제
+    deleteGenre({commit}, genreId){
+      commit('DELETE_GENRE',genreId)
+    },
+    // 선택 완료하면 장르선택 0개로 돌리기
+    selectGenresNum({commit}){
+      commit('SELECT_GENRE_NUM',0)
     },
     // 영화배우 정보 가져오기
     getMovieActors({commit}, movieId){
