@@ -54,7 +54,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50; */
   /* background: linear-gradient(#292929 , #141414); */
 }
 
@@ -64,8 +64,8 @@ nav {
   /* background: linear-gradient(45deg, #141414, #292929); */
   /* margin-bottom: 20px;/ */
 }
-/*
-.home {
+
+/* .home {
   background: linear-gradient(#292929 , #141414);
 } */
 nav a {

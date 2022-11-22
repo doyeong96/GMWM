@@ -44,6 +44,12 @@ def movie_detail(request, movie_pk):
 def movie_recommend(request):
     print('영화 추천 알고리즘')
     selectedgenres = request.data
+    search_genres = Genre.objects.all()
+    show_genres = []
+    for select in selectedgenres:
+        for search_genre in search_genres:
+            if search_genre.id == select:
+                show_genres.append(search_genre.name)
     moviesss = Movie.objects.all()
     moviesss = list(moviesss)
     movies = random.sample(moviesss,1500)
@@ -85,6 +91,7 @@ def movie_recommend(request):
     for i in range(len(genre_movies_coll)):
         globals()['serializer_'+str(i)] = MovieSerializer(genre_movies_coll[i], many=True)
         serializers.append(globals()['serializer_'+str(i)].data)
+    serializers.append(show_genres)
     return Response(serializers)
 
 
