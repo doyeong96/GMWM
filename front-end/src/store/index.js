@@ -37,6 +37,7 @@ export default new Vuex.Store({
     selectedMovieTitle : '',
     selectedMoviePoster : '',
     searchMovieHome : null,
+    showGenres : null,
     // genre
     genres : [],
     genre : {},
@@ -68,6 +69,7 @@ export default new Vuex.Store({
     selectedGenres : (state) => state.selectedGenres,
     selectGenreNum : (state) => state.selectGenreNum,
     recommendMovies : (state) => state.recommendMovies,
+    showGenres : (state) => state.showGenres,
     bestMovie : (state) => state.bestMovie,
     actors : (state) => state.actors,
     searchMovie : (state) => state.searchMovie,
@@ -98,6 +100,8 @@ export default new Vuex.Store({
     GET_MOVIES : (state, movies) => state.movies = movies,
     GET_MOVIE : (state,movie) => state.movie = movie,
     RECOMMEND_MOVIES : (state, recommendMovies) => state.recommendMovies.push(recommendMovies),
+    RESET_RECOMMEND_MOVIES : (state) => state.recommendMovies = [],
+    SHOW_GENRES: (state,genres) => state.showGenres = genres,
     BEST_MOVIES : (state, bestMovie) => state.bestMovie = bestMovie,
     SEARCH_MOVIE : (state, searchMovie) => state.searchMovie = searchMovie,
     SET_SELECTEDMOVIESTITLE : (state, data) => state.selectedMovieTitle = data,
@@ -676,11 +680,12 @@ export default new Vuex.Store({
         data : getters.selectedGenres,
       })
       .then((res) => {
+        commit('RESET_RECOMMEND_MOVIES')
         commit('BEST_MOVIES', res.data[0])
-        console.log(res.data)
-        for (let i = 1; i < res.data.length; i++) {
+        for (let i = 1; i < res.data.length-1; i++) {
           commit('RECOMMEND_MOVIES', res.data[i])
         }
+        commit('SHOW_GENRES', res.data[res.data.length-1] )
         commit('SET_GENRES',[])
       })
       .catch((err) => console.log(err))

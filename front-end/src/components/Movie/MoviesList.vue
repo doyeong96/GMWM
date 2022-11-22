@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2>당신이 좋아할수도 있어요</h2>
+    <h2>당신이 좋아하는 {{this.genre}}장르</h2>
     <swiper
       class="swiper"
       :options="swiperOption"
   >
-      <swiper-slide v-for="movie in movies" :key="movie.id" id="swiperSlid">
+      <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
               <figcaption >
@@ -44,6 +44,10 @@ export default {
       Swiper,
       SwiperSlide
     },
+    props : {
+      genreMovies : Array,
+      genre : String,
+    },
     data(){
       return{      
         swiperOption: { 
@@ -60,15 +64,10 @@ export default {
         },
       }
     },
-    computed : {
-      movies(){
-        return this.$store.getters.recommendMovies
-      }
-    }
 }
 </script>
 
-<style>
+<style scoped>
 a {
   color: #FCF7FF;
   font-size: 24px;

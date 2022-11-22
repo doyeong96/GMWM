@@ -2,8 +2,13 @@
   <div>
     <h1>당신을 위한 강력추천 영화</h1>
     <MoviesListSwiper/>
-    <h2>ShowMoviesView</h2>
-    <MoviesList/>
+    <span v-for="(genremovies, idx) in selgenremovies" :key="idx">
+      <MoviesList
+      :genre-movies="genremovies"
+      :genre="showGenres[idx]"
+      />
+    </span>
+    
   </div>
 </template>
 
@@ -16,6 +21,14 @@ export default {
     MoviesList,
     MoviesListSwiper
   },
+  computed : {
+      selgenremovies(){
+        return this.$store.getters.recommendMovies
+      },
+      showGenres(){
+        return this.$store.getters.showGenres
+      },
+    },
   created(){
     //검색기능
     this.$store.dispatch('getMovies')
