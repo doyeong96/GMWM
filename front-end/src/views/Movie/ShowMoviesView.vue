@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>강력추천 영화</h1>
+    <h1>당신을 위한 강력추천 영화</h1>
     <MoviesListSwiper/>
     <h2>ShowMoviesView</h2>
     <MoviesList/>
