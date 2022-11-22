@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-4">
           <ProfileInfo
-          :nickname="userProfile.nickname"
-          :username="userProfile.username"
+          :nickname="userProfile?.nickname"
+          :username="userProfile?.username"
           />
           <div class="container">
             <button @click="select('forum')" class="btn btn-primary col-5 m-2">좋아요한 포럼</button>

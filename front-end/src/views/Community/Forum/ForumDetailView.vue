@@ -38,7 +38,7 @@ export default {
       return this.$store.getters.user
     },
     likeUsers() {
-      return (this.forum.like_users.length)
+      return (this.forum?.like_users.length)
      
     },
   },

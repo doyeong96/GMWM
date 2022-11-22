@@ -56,7 +56,7 @@ export default {
       return this.$store.getters.user
     },
     likeUsers() {
-      return (this.together.like_users.length)
+      return (this.together?.like_users.length)
      
     },
   },
