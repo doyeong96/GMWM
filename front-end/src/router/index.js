@@ -63,7 +63,7 @@ const routes = [
     component : ReviewView,
   },
   {
-    path: '/review/create',
+    path: '/review/create/:action',
     name: 'ReviewCreateView',
     component : ReviewCreateView,
   },
