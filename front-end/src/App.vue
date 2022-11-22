@@ -13,7 +13,7 @@
       <router-link :to="{name :'TogetherView'}">Together</router-link> |
       <span v-if="isLogin">
         <!-- <router-link :to="{name : 'ProfileView',params : { username : userNow.username} }">Profile</router-link> | -->
-        <a :href="`http://localhost:8080/profile/${userNow.username}/`">Profile</a> |
+        <!-- <a :href="`http://localhost:8080/profile/${userNow.username}/`">Profile</a> | -->
         
       </span>
       <router-link :to="{name :'SignupView'}">Signup</router-link> |

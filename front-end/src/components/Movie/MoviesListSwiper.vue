@@ -9,7 +9,7 @@
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
               <figcaption >
                 <a data-bs-toggle="modal" data-bs-target="#detailModal" :href="`http://localhost:8080/showmovie/${bestMovie.id}/`">{{bestMovie.title}}</a>
-              </figcaption>
+              </figcaption> 
           </figure>
       </swiper-slide>
           
@@ -24,6 +24,7 @@
           </div>
           <div class="modal-body">
             <!-- <MovieDetailView/> -->
+            <!-- <Detail/>  -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -42,12 +43,12 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-import MovieDetailView from '@/views/Movie/MovieDetailView'
+// import Detail from '@/components/Movie/Detail'
 
 export default {
     name : 'MoviesListSwiper',
     components : {
-      MovieDetailView,
+      // Detail,
       Swiper,
       SwiperSlide
     },
