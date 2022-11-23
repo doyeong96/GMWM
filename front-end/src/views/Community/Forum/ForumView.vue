@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>ForumView</h2>
-    <router-link :to="{ name : 'ForumCreateView'}">CREATE</router-link> <br>
+  <div class="forumContainer">
+    <h2>자유게시판</h2>
+    <router-link class="forumCreate" :to="{ name : 'ForumCreateView'}">글쓰러가기</router-link> <br>
     <ForumList/>
   </div>
 </template>
@@ -20,6 +20,16 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.forumContainer{
+  height: 500px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto ;
+  margin-top: 100px ;
+}
+.forumCreate{
+  display: flex;
+  justify-content: end;
+}
 </style>
