@@ -20,30 +20,15 @@
         <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
 
-    <!-- <div v-for="movie in movies" :key="movie.id">
-      <div class="card" style="width: 18rem;">
-        <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="card-img-top" alt="">
-      </div> -->
-
-
-    </div>
-    <!-- <MoviesListItem
-      v-for="movie in movies"
-      :key="movie.id"
-      :movie="movie"
-    /> -->
-  <!-- </div> -->
 </template>
 
 <script>
-// import MoviesListItem from '@/components/Movie/MoviesListItem'
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
 export default {
     name : 'MoviesList',
     components : {
-      // MoviesListItem,
       Swiper,
       SwiperSlide,
     },
@@ -82,8 +67,8 @@ a {
   color: rgb(137, 58, 58);
   display: inline-block;
   margin: 8px;
-  max-width: 320px;
-  min-width: 240px;
+  max-width: 240px;
+  min-width: 220px;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -156,7 +141,7 @@ width: 220px; */
   opacity: 1;
 }
 #swiperSlidImg{
-  height: 235px;
-  width: 220px;
+  height: 250px;
+  width: 240px;
 }
 </style>

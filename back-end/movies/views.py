@@ -52,7 +52,7 @@ def movie_recommend(request):
                 show_genres.append(search_genre.name)
     moviesss = Movie.objects.all()
     moviesss = list(moviesss)
-    movies = random.sample(moviesss,1500)
+    movies = random.sample(moviesss,2000)
     
     #==============================================
     # 장르별 알고리즘부분 =========================
