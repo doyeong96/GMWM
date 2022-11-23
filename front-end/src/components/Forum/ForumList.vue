@@ -13,6 +13,7 @@
                     <li>No</li>
                     <li>제목</li>
                     <li>작성자</li>
+                    <li>작성시간</li>
                 </ul>
             </li>
             <!-- 게시물이 출력될 영역 -->
@@ -26,6 +27,9 @@
                   </li>
                   <li>
                     <router-link :to="{ name : 'ProfileView', params : { username : forum.username} }">{{forum.nickname}}</router-link>
+                  </li>
+                  <li>
+                    {{createTime(forum.created_at)}}
                   </li>
                 </ul>
             </li>                                     
@@ -46,10 +50,6 @@
     </li>
 </ul>
 </div>
-     <!-- <ForumListItem
-                v-for ="forum in Forums" :key="forum.id"
-                :forum="forum"
-                /> -->
   </div>
 </template>
 
@@ -66,6 +66,16 @@ export default {
       return this.$store.getters.forums
     }
   },
+  methods : {
+    createTime(data) {
+      var now = new Date(data);
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    now.setMilliseconds(null)
+    now.setSeconds(null)
+    const nows = now.toISOString().slice(0, 10)+' '+now.toISOString().slice(11, 16)
+    return nows
+    }
+  }
 
 
 }
@@ -122,9 +132,10 @@ export default {
         vertical-align:baseline;
 }    
 
-    #ulTable > li > ul > li:first-child               {width:25%;} /*No 열 크기*/
+    #ulTable > li > ul > li:first-child               {width:10%;} /*No 열 크기*/
     #ulTable > li > ul > li:first-child +li           {width:50%;} /*제목 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li        {width:25%;} /*작성일 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li        {width:20%;} /*작성일 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li+li        {width:20%;} /*작성일 열 크기*/
 
 
     #divPaging {
