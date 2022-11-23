@@ -75,6 +75,20 @@ export default {
   background: -ms-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
   background: linear-gradient(to bottom, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6698cb', endColorstr='#5c8ab8', GradientType=0 );
+  color: white;
+  display: inline-block;
+  position: relative;
+  text-shadow: rgba(0, 0, 0, 0.15) 0px 1px 0px;
+  text-decoration: none;
+  padding: 10px 30px;
+  border-width: 1px 1px 4px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.21);
+  border-image: initial;
+  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px 12px;
 }
 .createBtn:active {
   background: #608FBF;
