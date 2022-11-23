@@ -28,8 +28,4 @@ export default {
   margin-right: auto ;
   margin-top: 100px ;
 }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 </style>
