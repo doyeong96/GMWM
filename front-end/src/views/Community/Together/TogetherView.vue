@@ -1,9 +1,8 @@
 <template>
   <div class="togetherContainer">
     <h2>구해요 게시판</h2>
-    <router-link :to="{ name : 'TogetherCreateView'}">CREATE</router-link> <br>
-    
     <TogetherList/>
+    <router-link :to="{ name : 'TogetherCreateView'}">CREATE</router-link>
   </div> 
 </template>
 
