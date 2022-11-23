@@ -8,17 +8,22 @@
       />
     </span>
     
+    </div>
+    
+    
   </div>
 </template>
 
 <script>
 import MoviesList from '@/components/Movie/MoviesList'
 import MoviesListSwiper from '@/components/Movie/MoviesListSwiper'
+import LoadingBar from '@/components/LoadingBar'
 export default {
   name : 'ShowMoviesView',
   components : {
     MoviesList,
-    MoviesListSwiper
+    MoviesListSwiper,
+    LoadingBar,
   },
   computed : {
       selgenremovies(){

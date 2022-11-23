@@ -13,6 +13,8 @@ urlpatterns = [
     path('recommend/', views.movie_recommend),
     # 영화배우 
     path('recommend/actors/', views.movie_recommend_actor),
+    # 영화장르
+    path('recommend/genres/', views.movie_recommend_genre),
     # 영화 검색 
     path('search/', views.movie_search),
 ]

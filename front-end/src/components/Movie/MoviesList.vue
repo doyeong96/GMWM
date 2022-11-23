@@ -1,22 +1,24 @@
 <template>
   <div>
     <h2>당신이 좋아하는 {{this.genre}}장르</h2>
-      <swiper
-        class="swiper"
-        :options="swiperOption"
-    >
-        <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
-            <figure class="hover-img">
-              <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
-                <figcaption >
-                  <a data-bs-toggle="modal" data-bs-target="#detailModal" :href="`http://localhost:8080/showmovie/${movie.id}/`">{{movie.title}}</a>
-                </figcaption> 
-            </figure>
-        </swiper-slide>
-          <div class="swiper-button-prev" slot="button-prev"></div>
-          <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-  </div>
+    <swiper
+      class="swiper"
+      :options="swiperOption"
+  >
+      <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
+        <router-view />
+      <router-link  :to="`/showmovie/${movie.id}`">
+          <figure class="hover-img">
+            <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
+              <figcaption >
+                {{movie.title}}
+              </figcaption> 
+          </figure>
+        </router-link>
+      </swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+    </swiper>
 
 </template>
 
@@ -28,7 +30,7 @@ export default {
     name : 'MoviesList',
     components : {
       Swiper,
-      SwiperSlide
+      SwiperSlide,
     },
     props : {
       genreMovies : Array,

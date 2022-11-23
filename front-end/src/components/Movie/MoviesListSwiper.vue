@@ -3,36 +3,26 @@
     <h1>당신을 위한 강력추천 영화</h1>
     <swiper
       class="swiper"
-      :options="swiperOption"
-  >
-      <swiper-slide v-for="bestMovie in bestMovies" :key="bestMovie.id" id="swiperSlid">
+      :options="swiperOption">       
+      
+      <swiper-slide v-for="(bestMovie,idx) in bestMovies" :key="idx" id="swiperSlid">
+        <router-view />
+      <router-link  :to="`/showmovie/${bestMovie.id}`">
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
               <figcaption >
-                <a data-bs-toggle="modal" data-bs-target="#detailModal" :href="`http://localhost:8080/showmovie/${bestMovie.id}/`">{{bestMovie.title}}</a>
+                {{bestMovie.title}}
+                <!-- <a data-bs-toggle="modal" data-bs-target="#detailModal" >{{bestMovie.title}}</a> -->
+
               </figcaption> 
           </figure>
+            <!-- <MovieDetail
+            :best-movie-id="bestMovie.id"
+            /> -->
+            </router-link>
       </swiper-slide>
-          
     </swiper>
     <!-- Modal -->
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-3" id="detailModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- <MovieDetailView/> -->
-            <!-- <Detail/>  -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
   </div>
@@ -43,7 +33,6 @@
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
-
 // import Detail from '@/components/Movie/Detail'
 
 export default {
@@ -51,7 +40,7 @@ export default {
     components : {
       // Detail,
       Swiper,
-      SwiperSlide
+      SwiperSlide,
     },
     data(){
       return{      
@@ -70,6 +59,15 @@ export default {
             spaceBetween: 10, 
             loop: true, 
         },
+        showModal : false,
+      }
+    },
+    watch: {
+    $route: {
+      immediate: true,
+      handler: function(newVal, oldVal) {
+        this.showModal = newVal.meta && newVal.meta.showModal;
+        }
       }
     },
     computed : {
@@ -81,6 +79,22 @@ export default {
 </script>
 
 <style scoped>
+/* .modal-route {
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: gray;
+}
+.modal-route  .modal-content {
+    width: 50%;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(198, 142, 142);
+  } */
 #swiperSlidImg{
   height: 450px;
   width: 350px;

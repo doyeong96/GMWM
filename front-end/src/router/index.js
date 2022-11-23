@@ -25,7 +25,8 @@ import ProfileView from '@/views/User/ProfileView'
 import ShowMoviesView from '@/views/Movie/ShowMoviesView'
 import SelectGenreView from '@/views/Movie/SelectGenreView'
 import MovieDetailView from '@/views/Movie/MovieDetailView'
-
+import Modal from '@/components/Modal.vue'
+import Content from '@/components/Movie/Content'
 Vue.use(VueRouter)
 
 const routes = [
@@ -125,12 +126,21 @@ const routes = [
     path: '/showmovie',
     name: 'ShowMoviesView',
     component : ShowMoviesView,
+    children: [
+      {
+        path: ':movieId',
+        component: Modal,
+        props: {
+          component: Content, 
+        }
+      }
+    ]
   },
-  {
-    path : '/showmovie/:id',
-    name : 'MovieDetailView',
-    component : MovieDetailView,
-  },
+  // {
+  //   path : '/showmovie/:id',
+  //   name : 'MovieDetailView',
+  //   component : MovieDetailView,
+  // },
   {
     path: '/selectgenre',
     name: 'SelectGenreView',

@@ -10,6 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
+    loadingStatus: false,
     // user
     token : null,
     user : null,
@@ -44,7 +45,8 @@ export default new Vuex.Store({
     selectedGenres : [],
     selectGenreNum : 0,
     // 영화배우
-    actors : []
+    actors : [],
+    detailGenres : []
   },
   getters: {
     isLogin: (state) => state.token ? true : false,
@@ -76,8 +78,10 @@ export default new Vuex.Store({
     selectedMovieTitle : (state) => state.selectedMovieTitle,
     selectedMoviePoster : (state) => state.selectedMoviePoster,
     searchMovieHome : (state) => state.searchMovieHome,
+    detailGenres : (state) => state.detailGenres,
   },
   mutations: {
+    LOADING_STATUS : (state,loadingStatus) => state.loadingStatus = loadingStatus,
     // user
     SET_TOKEN : (state,token) => state.token = token,
     SET_USER: (state,user) => state.user = user,
@@ -123,6 +127,7 @@ export default new Vuex.Store({
     SELECT_GENRE_NUM : (state,data) => state.selectGenreNum = data,
     // 영화배우
     GET_MOVIE_ACTORS : (state, actors) => state.actors = actors,
+    GET_MOVIE_GENRES : (state, genres) => state.detailGenres = genres,
     
   },
   actions: {
@@ -627,14 +632,15 @@ export default new Vuex.Store({
     },
     // movies /////////////////////////////////////////////////////////
     // getMovies, getMovieDetail 주소만 수정해주면 될 것 같음
-    likesMovie({getters}, movieId) {
+    likesMovie({dispatch,getters}, movieId) {
       axios({
         method : 'post',
         url : `${API_URL}/movies/movielikes/${movieId}/`,
         headers : getters.authHead
       })
       .then(() => {
-        router.go(router.currentRoute)
+        dispatch('getMovieDetail', movieId)
+        // router.go(router.currentRoute)
       })
       .catch((err) => {
         console.log(err)
@@ -651,6 +657,7 @@ export default new Vuex.Store({
       .catch((err) => console.log(err))
     },
     getMovieDetail({commit}, movieId){
+      
       axios({
         url : `${API_URL}/movies/${movieId}/`,
       })
@@ -673,7 +680,7 @@ export default new Vuex.Store({
     },
     // 선택장르 보내기, 영화 추천받기
     selectGenres({getters, commit}){
-      console.log(getters.selectedGenres);
+      commit('LOADING_STATUS', true)
       axios({
         url : `${API_URL}/movies/recommend/`,
         method : 'POST',
@@ -687,6 +694,8 @@ export default new Vuex.Store({
         }
         commit('SHOW_GENRES', res.data[res.data.length-1] )
         commit('SET_GENRES',[])
+        commit('LOADING_STATUS', false)
+        console.log('완료')
       })
       .catch((err) => console.log(err))
     },
@@ -699,6 +708,17 @@ export default new Vuex.Store({
       commit('SELECT_GENRE_NUM',0)
     },
     // 영화배우 정보 가져오기
+    getMovieGenres({commit}, movieId){
+      axios({
+        url : `${API_URL}/movies/recommend/genres/`,
+        method : 'POST',
+        data : {movieId},
+      })
+      .then((res) => {
+        commit('GET_MOVIE_GENRES', res.data)
+      })
+      .catch((err) => console.log(err))
+    },
     getMovieActors({commit}, movieId){
       axios({
         url : `${API_URL}/movies/recommend/actors/`,

@@ -132,6 +132,24 @@ def movie_recommend_actor(request):
     serializer = ActorSerializer(actor, many=True)
     return Response(serializer.data)
 
+# 영화별 장르
+@api_view(['POST'])
+def movie_recommend_genre(request):
+    movie_id = request.data.get('movieId')
+    movie_id = int(movie_id)
+    # movies = Movie.objects.all()
+    # for movie in movies:
+    #     if int(movie_id) == movie.id:
+    #         select_movie = movie
+    #         break
+    select_movie = Movie.objects.get(pk=movie_id)
+    genre = []
+    all_genres = select_movie.genres.all()
+    for all_genre in all_genres:
+        genre.append(all_genre)
+    serializer = ActorSerializer(genre, many=True)
+    return Response(serializer.data)
+
 # 장르
 @api_view(['GET'])
 def genre_list(request):
