@@ -1,12 +1,10 @@
 <template>
   <div>
-    <ul class="d-flex">
-      <li>
+    <ul class="commentItem">
         <ForumCommentItem
         v-for=" forumComment in forumComments" :key="forumComment.id"
         :forum-comment="forumComment"
         />
-      </li>
     </ul>
     <div class="mt-5">
       <ForumCommentForm
@@ -34,5 +32,9 @@ export default {
 </script>
 
 <style>
-
+.commentItem{
+  display: flex!important;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>

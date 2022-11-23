@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <li>
     {{forumComment.nickname}} : {{forumComment.content}}
     <button v-if="!isUpdate" @click="updateForumComment">수정</button>
     <div v-if="isUpdate">
@@ -9,7 +9,7 @@
     </div>
     <button v-if="!isUpdate" @click="deleteFourmComment">삭제</button>
     
-  </div>
+  </li>
 </template>
 
 <script>
