@@ -1,8 +1,6 @@
 <template>
-  <div v-if="this.$store.state.loadingStatus">
-      <LoadingBar :loading="this.$store.state.loadingStatus"></LoadingBar>
-    </div>
-  <div v-else>
+  
+  <div >
       <h4 id="scrollspyHeading1">{{movie.title}}</h4>
       <p>장르 : <span v-for="genre in movieGenres" :key="genre.id">{{ genre.name }},</span></p>
       <h4 id="scrollspyHeading2">출연진</h4>
@@ -42,12 +40,8 @@
 </template>
 
 <script>
-import LoadingBar from '@/components/LoadingBar'
 export default {
   name : 'MovieDetailView',
-  components : {
-    LoadingBar,
-  },
   computed : {
   movie() {
     return this.$store.getters.movie 

@@ -3,8 +3,7 @@
     <h2>당신이 좋아하는 {{this.genre}}장르</h2>
     <swiper
       class="swiper"
-      :options="swiperOption"
-  >
+      :options="swiperOption">
       <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
         <router-view />
       <router-link  :to="`/showmovie/${movie.id}`">
@@ -19,7 +18,7 @@
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
-
+    </div>
 </template>
 
 <script>

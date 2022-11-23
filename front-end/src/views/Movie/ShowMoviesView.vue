@@ -1,5 +1,8 @@
 <template>
-  <div>
+<div v-if="this.$store.state.loadingStatus">
+      <LoadingBar :loading="this.$store.state.loadingStatus"></LoadingBar>
+</div>
+  <div v-else>
     <MoviesListSwiper/>
     <span v-for="(genremovies, idx) in selgenremovies" :key="idx">
       <MoviesList
@@ -7,11 +10,7 @@
       :genre="showGenres[idx]"
       />
     </span>
-    
-    </div>
-    
-    
-  </div>
+</div>
 </template>
 
 <script>
