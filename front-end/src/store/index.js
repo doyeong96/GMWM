@@ -294,14 +294,14 @@ export default new Vuex.Store({
       .catch((err) => console.log(err))
     },
     // forum /////////////////////////////////////////////////////////
-    likesForum({getters}, forumId) {
+    likesForum({getters, dispatch}, forumId) {
       axios({
         method : 'post',
         url : `${API_URL}/community/forumlikes/${forumId}/`,
         headers : getters.authHead
       })
       .then(() => {
-        router.go(router.currentRoute)
+        dispatch('getForumDetail', forumId)
       })
       .catch((err) => {
         console.log(err)

@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h2>ForumComment</h2>
-    <ForumCommentItem
-    v-for=" forumComment in forumComments" :key="forumComment.id"
-    :forum-comment="forumComment"
-    />
-    <ForumCommentForm
-    :forum-id="forumId"
-    />
+    <ul class="d-flex">
+      <li>
+        <ForumCommentItem
+        v-for=" forumComment in forumComments" :key="forumComment.id"
+        :forum-comment="forumComment"
+        />
+      </li>
+    </ul>
+    <div class="mt-5">
+      <ForumCommentForm
+      :forum-id="forumId"
+      />
+    </div>
   </div>
 </template>
 

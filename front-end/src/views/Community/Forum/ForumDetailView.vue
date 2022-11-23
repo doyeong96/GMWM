@@ -1,38 +1,53 @@
 <template>
-  <div>
-    <h2>ForumDetailView</h2>
-    {{forum.title}}
-    <router-link :to="{ name : 'ForumUpdateView' }">UPDATE</router-link> <br>
-    <p>좋아요 누른 사람 : {{this.likeUsers}} </p>
-    <div v-if="forum.like_users.includes(user.pk)">
-      <button @click="likesForum" class=" badge bg-primary">좋아요 취소</button>
-      
+  <div class="forumContainer">
+    <div class="card align-items-start">  
+      <div class="card-body">
+        <h4 class="card-title">제목 : {{ forum.title }}</h4>
+        <span class="card-text">내용 : {{ forum.content }}</span>
+      </div>
     </div>
-    <div v-else>
-      <button @click="likesForum" class=" badge bg-primary">좋아요</button>
+
+    <div class='forumFlex'>
+      {{ this.likeUsers }} 명이 이 글을 좋아합니다.
+      <div>
+
+        <span v-if="forum.like_users.includes(user.pk)">
+          <button @click="likesForum" class=" badge bg-primary">좋아요 취소</button>
+        </span>
+
+        <span v-else>
+          <button @click="likesForum" class=" badge bg-primary">좋아요</button>
+        </span>
+
+        <button class="">
+          <span data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
+            삭제  
+          </span>
+        </button>
+        </div>
     </div>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
-      <span class=" badge bg-danger">삭제</span>
-      
-    </a>
-    
+    <br>
+
+    <hr>
+    <p class="d-flex">댓글 목록</p>
     <ForumComment
     :forum-comments="forum.forumcomment_set"
     :forum-id="forum.id"
     />
 
     <div class="modal fade" id="reveiwDeleteModal" tabindex="-1" aria-labelledby="reveiwDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
 
             <div class="modal-body">
-            <p>리뷰를 삭제하시겠습니까?</p>
+              <p>리뷰를 삭제하시겠습니까?</p>
             </div>
+
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-            <button class=" btn btn-danger" @click="deleteForum" data-bs-dismiss="modal">삭제</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              <button class=" btn btn-danger" @click="deleteForum" data-bs-dismiss="modal">삭제</button>
             </div>
-        </div>
+          </div>
         </div>
     </div>
   </div>
@@ -74,5 +89,16 @@ export default {
 </script>
 
 <style>
-
+.forumContainer{
+  height: 500px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto ;
+  margin-top: 100px ;
+}
+.forumFlex{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 </style>

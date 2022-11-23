@@ -59,8 +59,8 @@ export default {
 
 <style>
 #map {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   margin-left: auto;
   margin-right: auto;
   border: solid black;

@@ -1,10 +1,15 @@
 <template>
   <div>
-    <h2>댓글작성</h2>
     <form @submit.prevent="forumCommentCreate">
-    <label for="ForumComment">댓글 쓰기</label>
-    <input type="text" id="ForumComment" v-model="content">
-    <input type="submit" value="작성">
+      <div class="row g-3">
+        <!-- <div class="form-floating col-sm-11 mb-3"> -->
+        <div class="form-floating mb-3">
+          <input class="form-control" placeholder="제목을 작성하세요" id="ForumComment" type="text" v-model="content">
+          <label for="ForumComment">댓글 쓰기</label>
+        </div>
+        <!-- <button class="col-sm-1">등록</button> -->
+      </div>
+        <button class="ml-auto">등록</button>
     </form>
   </div>
 </template>

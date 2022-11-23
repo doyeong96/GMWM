@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h2>댓글수정</h2>
     <form @submit.prevent="forumCommentUpdate">
-    <input type="text" id="ForumComment" v-model="content">
+        <div class="form-floating col-sm-11 mb-3">
+          <input class="form-control" placeholder="제목을 작성하세요" id="ForumComment" type="text" v-model="content">
+          <label for="ForumComment">댓글 수정</label>
+        </div>
+
+    <!-- <input type="text" id="ForumComment" v-model="content"> -->
     <input type="submit" value="작성">
     </form>
   </div>

@@ -82,7 +82,6 @@ nav a {
 nav a.router-link-exact-active {
   color: #A62639;
 }
-
 #navspan {
   width: 50px;
   height: 50px;

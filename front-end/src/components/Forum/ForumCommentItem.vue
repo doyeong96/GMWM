@@ -1,7 +1,6 @@
 <template>
   <div>
-    {{forumComment.nickname}}
-    {{forumComment.content}}
+    {{forumComment.nickname}} : {{forumComment.content}}
     <button v-if="!isUpdate" @click="updateForumComment">수정</button>
     <div v-if="isUpdate">
       <ForumCommentUpdateForm
