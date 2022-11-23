@@ -5,19 +5,19 @@
       <h2 id="signUpTitle">회원가입 하쉴?</h2>
       <form @submit.prevent="signUp">
         <span>
-          <input placeholder = 'username' type="text" id="username" v-model="username"><br>
+          <input placeholder = '아이디를 입력하세요' type="text" id="username" v-model="username"><br>
         </span>
 
         <span>
-          <input placeholder = 'nickname' type="text" id="nickname" v-model="nickname"><br>
+          <input placeholder = '닉네임을 입력하세요' type="text" id="nickname" v-model="nickname"><br>
         </span>
 
         <span>
-          <input placeholder = 'password1' type="password" id="password1" v-model="password1"><br>
+          <input placeholder = '비밀번호를 입력하세요' type="password" id="password1" v-model="password1"><br>
         </span>
 
         <span>
-          <input placeholder = 'password2' type="password" id="password2" v-model="password2">
+          <input placeholder = '비밀번호를 확인하세요' type="password" id="password2" v-model="password2">
         </span>
 
         <button type="submit" id="signUpButton">회원가입</button>
@@ -77,13 +77,16 @@ export default {
   opacity: 0.9;
   border-radius: 30px;
 }
+
 #signUpButton{
   width: 300px;
   height: 50px;
   margin-top: 10px;
   border-radius: 10px;
-  font-size: large;
+  /* font-size: large; */
   background-color: #710627;
+  font-size: large;
+  font-weight: bold ;
 }
 
 #username,
@@ -96,11 +99,15 @@ export default {
   border-radius: 10px;
   font-size: large;
   background-color: #A7A7A9;
+  border: solid #02111B;
 }
-
-
+input::placeholder{
+  font-style: italic;
+  color: #60594D;
+}
 #signUpTitle{
-  padding-bottom: 35px;
+  padding-bottom: 10px;
+  font-size: xx-large;
   color: white;
 }
 </style>
