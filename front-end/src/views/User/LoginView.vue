@@ -3,19 +3,16 @@
     <div id="loginContainer" class="">
       <h1 id="loginTitle">로그인 하셈</h1>
       <form @submit.prevent="login">
-          <!-- <label for="username">username : </label> -->
           <span>
-            <input placeholder='username' type="text" id="username" v-model="username"><br>
+            <input placeholder='아이디를 입력하도록' type="text" id="username" v-model="username"><br>
           </span>
 
-          <!-- <label for="password"> password : </label> -->
           <span>
-            <input placeholder='password' type="password" id="password" v-model="password"><br>
+            <input placeholder='비밀번호를 입력하도록' type="password" id="password" v-model="password"><br>
           </span>
 
 
           <button type="submit" id="logInButton">로그인</button>
-          <!-- <input type="submit" value="logIn"> -->
       </form>
     </div>
   </div>
@@ -72,9 +69,9 @@ export default {
   margin-top: 10px;
   border-radius: 10px;
   font-size: large;
+  font-weight: bold ;
   background-color: #710627;
 }
-
 #password,
 #username{
   width: 300px;
@@ -83,11 +80,15 @@ export default {
   border-radius: 10px;
   font-size: large;
   background-color: #A7A7A9;
+  border: solid #02111B;
 }
-
-
+input::placeholder{
+  font-style: italic;
+  color: #60594D;
+}
 #loginTitle{
-  padding-bottom: 35px;
+  padding-bottom: 10px;
+  font-size: xx-large;
   color: white;
 }
 </style>

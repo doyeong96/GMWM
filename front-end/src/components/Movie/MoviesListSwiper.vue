@@ -1,5 +1,6 @@
 <template>
-  <div>    
+  <div>
+    <h1>당신을 위한 강력추천 영화</h1>
     <swiper
       class="swiper"
       :options="swiperOption"
