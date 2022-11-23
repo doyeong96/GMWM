@@ -1,10 +1,13 @@
 <template>
   <div>
     <h2>ForumList</h2>
+    <div class="forumListContainer">
+      
     <ForumListItem
     v-for ="forum in Forums" :key="forum.id"
     :forum="forum"
     />
+    </div>
   </div>
 </template>
 
@@ -27,5 +30,8 @@ export default {
 </script>
 
 <style>
-
+.forumListContainer{
+  display: flex;
+  flex-direction: column-reverse;
+}
 </style>
