@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>ReviewCreateView</h2>
+    <!-- <h2>리뷰 쓰기</h2> -->
     <div v-if="$route.params.action === 'direct'">
       <ReviewForm
     :Review="Review" action="create"

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>ReviewView</h2>
-    <router-link :to="{ name : 'ReviewCreateView', params : { action : 'newCreate'} }">CREATE</router-link> <br>
+  <div class="reviewContainer">
+    <h2>영화 리뷰</h2>
+    <router-link :to="{ name : 'ReviewCreateView', params : { action : 'newCreate'} }">리뷰쓰러가기</router-link> <br>
     <!-- <a :href="createUrl">CREATE</a> <br> -->
     <ReviewList/>
   </div>
@@ -27,6 +27,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.reviewContainer{
+  height: 500px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto ;
+  margin-top: 100px ;
+}
 </style>

@@ -5,15 +5,15 @@
       class="swiper"
       :options="swiperOption">
       <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
-        <router-view />
-      <router-link  :to="`/showmovie/${movie.id}`">
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
               <figcaption >
+                <router-view />
+              <router-link  :to="`/showmovie/${movie.id}`">
                 {{movie.title}}
+              </router-link>
               </figcaption> 
           </figure>
-        </router-link>
       </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>

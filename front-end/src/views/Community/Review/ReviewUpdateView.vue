@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>ReviewUpdateView</h2>
+    <!-- <h2>리뷰 수정</h2> -->
     <ReviewForm
     :Review="Review" action="update"
     :movie="movie" :trues="false"

@@ -4,16 +4,15 @@
     <div class="container" role="main">
         <!-- <h2>board Form</h2> -->
           <form class="m-4" @submit.prevent="onSubmit">
-            <div class="mb-3">
-              <span>
-                <label for="title">제목</label>
-                <input class="form-control" placeholder="제목을 작성하세요" id="title" type="text" v-model="title">
-              </span>
+
+            <div class="form-floating mb-3">
+              <input class="form-control" placeholder="제목을 작성하세요" id="title" type="text" v-model="title">
+              <label for="title">제목</label>
             </div>
 
-            <div class="mb-3">
+            <div class="form-floating mb-3">
+              <textarea style="height:300px" class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" v-model="content"></textarea>
               <label for="content">내용</label>
-              <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" v-model="content"></textarea>
             </div>
 
             <button class="createBtn">작성</button>

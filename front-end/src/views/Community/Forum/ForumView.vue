@@ -28,8 +28,4 @@ export default {
   margin-right: auto ;
   margin-top: 100px ;
 }
-.forumCreate{
-  display: flex;
-  justify-content: end;
-}
 </style>

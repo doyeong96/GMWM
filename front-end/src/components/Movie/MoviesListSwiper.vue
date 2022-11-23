@@ -6,20 +6,20 @@
       :options="swiperOption">       
       
       <swiper-slide v-for="(bestMovie,idx) in bestMovies" :key="idx" id="swiperSlid">
-        <router-view />
-      <router-link  :to="`/showmovie/${bestMovie.id}`">
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
               <figcaption >
+                <router-view />
+              <router-link  :to="`/showmovie/${bestMovie.id}`">
                 {{bestMovie.title}}
                 <!-- <a data-bs-toggle="modal" data-bs-target="#detailModal" >{{bestMovie.title}}</a> -->
+              </router-link>
 
               </figcaption> 
           </figure>
             <!-- <MovieDetail
             :best-movie-id="bestMovie.id"
             /> -->
-            </router-link>
       </swiper-slide>
     </swiper>
     <!-- Modal -->

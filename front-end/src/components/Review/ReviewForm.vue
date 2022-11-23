@@ -1,29 +1,43 @@
 <template>
-  <div>
-    <h2>ReviewForm</h2>
-    <div v-if="trues">
-      <label for="moviename">영화검색</label>
-    <input id="moviename" @input="searchMovie" type="text" v-model="movie_titleDirect" >
-    {{selectDirect()}}
+  <div class="reviewContainer">
+    <div class="row" role="main">
+        <div v-if="trues">
+          <div class="mx-auto w-25 form-floating">
+            <input class="form-control" id="moviename" @input="searchMovie" type="text" v-model="movie_titleDirect" >
+            <label for="moviename">영화검색</label>
+            {{selectDirect()}}
+          </div>
+        </div>
+
+      <div v-else>
+        <h2>리뷰 작성</h2>
+        <div class="mx-auto w-25 form-floating" >
+          <input class=" form-control" id="moviename" @input="searchMovie" type="text" v-model="movie_title" >
+          <label for="moviename">영화검색</label>
+        </div>
+      </div>      
     </div>
-    <div v-else>
-      <label for="moviename">영화검색</label>
-    <input id="moviename" @input="searchMovie" type="text" v-model="movie_title" >
-    
-    </div>
 
-    <form @submit.prevent="onSubmit">
-      <label for="title">title</label>
-      <input id="title" type="text" v-model="title">
+    <form class="m-4" @submit.prevent="onSubmit">
+      <div class="row g-3">
+        <div class="form-floating col-sm-9 m-3">
+          <input class="form-control" id="title" type="text" v-model="title">
+          <label for="title">title</label>
+        </div>
 
-      <label for="review">review</label>
-      <input id="review" type="text" v-model="review">
+        <div class="form-floating m-3 col-sm m-3">
+          <input class="form-control" id="score" type="number" v-model="score">
+          <label for="score">1~5점</label>
+        </div>
+      </div>
+
+      <div class="form-floating m-3">
+        <textarea class="form-control" id="review" type="text" v-model="review" style="height:300px"></textarea>
+        <label for="review">review</label>
+      </div>
       
-      
-      <label for="score">score</label>
-      <input id="score" type="number" v-model="score">
 
-      <input type="submit">
+      <button class="createBtn">작성</button>
     </form>
     <div v-for="findMovie in findMovies" :key="findMovie.id">
       <p>{{findMovie.title}}</p>
@@ -124,5 +138,38 @@ export default {
 </script>
 
 <style>
-
+.reviewContainer{
+  height: 500px;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto ;
+  margin-top: 100px ;
+}
+.createBtn{
+  background: rgba(102,152,203,1);
+  background: -moz-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(102,152,203,1)), color-stop(100%, rgba(92,138,184,1)));
+  background: -webkit-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+  background: -o-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+  background: -ms-linear-gradient(top, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+  background: linear-gradient(to bottom, rgba(102,152,203,1) 0%, rgba(92,138,184,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6698cb', endColorstr='#5c8ab8', GradientType=0 );
+  color: white;
+  display: inline-block;
+  position: relative;
+  text-shadow: rgba(0, 0, 0, 0.15) 0px 1px 0px;
+  text-decoration: none;
+  padding: 10px 30px;
+  border-width: 1px 1px 4px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.21);
+  border-image: initial;
+  border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px 12px;
+}
+.createBtn:active {
+  background: #608FBF;
+}
 </style>

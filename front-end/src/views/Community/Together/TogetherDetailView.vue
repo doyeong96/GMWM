@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>TogetherDetailView</h2>
     {{together.title}}
     {{endtims}}
     <!-- 업데이트 -->
