@@ -27,15 +27,21 @@
 
     </nav>
     <router-view/>
+    <portal-target name="modal" />
   </div>
 </template>
 <script>
+
+
 export default {
   methods : {
     Logout() { this.$store.dispatch('logout')},
     Withdrawal() {
       this.$store.dispatch('withDrawal')
     },
+  },
+  components : {
+    
   },
   computed : {
       isLogin() {

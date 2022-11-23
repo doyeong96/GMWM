@@ -22,6 +22,7 @@
 <script>
 export default {
   name : 'MovieDetailView',
+  props: ["movieId"],
   computed : {
   movie() {
     return this.$store.getters.movie 
@@ -51,12 +52,13 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('getMovieDetail', this.$route.params.id)
-    this.$store.dispatch('getMovieActors', this.$route.params.id)
+    console.log(this.movidId)
+    this.$store.dispatch('getMovieDetail', this.movieId)
+    this.$store.dispatch('getMovieActors', this.movieId)
   },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

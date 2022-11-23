@@ -6,12 +6,15 @@
       :options="swiperOption"
   >
       <swiper-slide v-for="movie in genreMovies" :key="movie.id" id="swiperSlid">
+        <router-view />
+      <router-link  :to="`/showmovie/${movie.id}`">
           <figure class="hover-img">
             <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
               <figcaption >
-                <a data-bs-toggle="modal" data-bs-target="#detailModal" :href="`http://localhost:8080/showmovie/${movie.id}/`">{{movie.title}}</a>
+                {{movie.title}}
               </figcaption> 
           </figure>
+        </router-link>
       </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -42,7 +45,7 @@ export default {
     components : {
       // MoviesListItem,
       Swiper,
-      SwiperSlide
+      SwiperSlide,
     },
     props : {
       genreMovies : Array,
