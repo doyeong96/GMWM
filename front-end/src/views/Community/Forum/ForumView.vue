@@ -1,8 +1,8 @@
 <template>
   <div class="forumContainer">
     <h2>자유게시판</h2>
-    <router-link class="forumCreate" :to="{ name : 'ForumCreateView'}">글쓰러가기</router-link> <br>
     <ForumList/>
+    <router-link class="forumCreate" :to="{ name : 'ForumCreateView'}">글쓰러가기</router-link>
   </div>
 </template>
 
@@ -22,10 +22,14 @@ export default {
 
 <style scoped>
 .forumContainer{
-  height: 500px;
-  width: 1000px;
+  height: 1000px;
+  width: 1500px;
   margin-left: auto;
   margin-right: auto ;
   margin-top: 100px ;
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 </style>

@@ -1,41 +1,39 @@
 <template>
-  
-  <div >
-      <h4 id="scrollspyHeading1">{{movie.title}}</h4>
-      <p>장르 : <span v-for="genre in movieGenres" :key="genre.id">{{ genre.name }},</span></p>
-      <h4 id="scrollspyHeading2">출연진</h4>
-      <span v-for="actor in movieActors" :key="actor.id">{{ actor.name }},</span>
-      <h4 id="scrollspyHeading3">영화소개</h4>
+  <div class="detail_all">
+    <div class="detail_page">
+      <div class="detail_info">
+        <h1 >{{movie.title}}</h1>
+        <h2>장르 : <span v-for="genre in movieGenres" :key="genre.id">{{ genre.name }},</span></h2>
+        <h3>출연진 : <span v-for="actor in movieActors" :key="actor.id">{{ actor.name }},</span></h3>
+        <h3>개봉일 : {{movie.release_date}}</h3>
+        <h3><img src="@/assets/stars.png" alt="평점" style="width:50px; height:40px;"> : {{movie.vote_average	}}</h3>
+        <h3>좋아요 : {{likeUsers}} </h3>
+      <div v-if="movie.like_users.includes(user.pk)">
+        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+      </div>
+      <div v-else>
+        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+      </div>
+        <iframe width="560" height="315" :src="movieYoutube"></iframe>
+      </div>
+      <div class="posterimg">
       <img :src="movieImg" alt="">
-      <iframe width="560" height="315" :src="movieYoutube"></iframe>
-      <p  id="over" >{{movie.overview}}</p>
-      <h4 id="scrollspyHeading4">리뷰작성</h4>
-      <p> <router-link :to="{ name: 'ReviewCreateView', params : { action : 'direct'} }">리뷰 작성</router-link></p>
-      <h4 id="scrollspyHeading5">좋아요</h4>
-      <p>좋아요 누른 사람 : {{likeUsers}} </p>
-    <div v-if="movie.like_users.includes(user.pk)">
-      <button @click="likesMovie">좋아요 취소</button>
+      </div>
     </div>
-    <div v-else>
-      <button @click="likesMovie">좋아요</button>
+    <div class="detail_page">
+      <div class="overview">
+        <p  id="over" >{{movie.overview}}</p>
+      </div>
     </div>
-    <!-- </div> -->
-    <!-- <h2> MovieDetailView</h2>
-    {{movie.title}}
-    <p>좋아요 누른 사람 : {{likeUsers}} </p>
-    <div v-if="movie.like_users.includes(user.pk)">
-      <button @click="likesMovie">좋아요 취소</button>
+    <div class="detail_page">
+      <p> <router-link :to="{ name: 'ReviewCreateView', params : { action : 'direct'} }">리뷰 작성하러 가기</router-link></p>
+      
     </div>
-    <div v-else>
-      <button @click="likesMovie">좋아요</button>
-    </div>
-    <p v-for="actor in movieActors" :key="actor.id">{{ actor.name }}</p>
-    <p>{{movie.overview}}</p>
-    
-    <router-link :to="{ name: 'ReviewCreateView', params : { action : 'direct'} }">리뷰 작성</router-link>
+      
+      
+      
+      
 
-    <iframe width="560" height="315" :src="movieYoutube"></iframe>
-    <img :src="movieImg" alt=""> -->
   </div>
 </template>
 
@@ -82,14 +80,48 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 50px;
+}
+.detail_all {
+  background-color: #36454f;
+  color:#ffffff;
+}
 #over {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: break-word;
-  width: 550px;
+  
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+.detail_info {
+  width:100%;
+  float: left;
+  padding: 10px;
+  text-align: left;
+}
+.posterimg {
+  width:70%;
+  float:left;
+  margin-right : 30px;
+  text-align: right;
+  padding-top:92px;
+}
+.detail_page {
+  width : 100%;
+  padding : 10px;
+  top: 10px;
+  left: 50%;
+  margin : auto;
+  overflow: hidden;
+  display: flex;
+  padding-top: 20px;
+}
+.overview {
+  width: 100%;
+  /* line-height: 200%; */
 }
 
 </style>

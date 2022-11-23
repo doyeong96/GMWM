@@ -1,25 +1,26 @@
 <template>
-  <div>
-    <span>
+  <ul id="ulTable">
+  <ul>
+    <li>
+      {{forum.id}}
+    </li>
+    <li class="left">
       <label for="">제목</label>
       <router-link :to="{ name : 'ForumDetailView', params : { id : forum.id} }"><h3>{{forum.title}}</h3></router-link>
-    </span>
+    </li>
 
-    <span>
+    <li>
       <label for="">작성자</label>
       <router-link :to="{ name : 'ProfileView', params : { username : forum.username} }"><p>{{forum.nickname}}</p></router-link>
-    </span>
-    <hr>
-  </div>
+    </li>
+  </ul>
+</ul>
 
-  <!-- <tr>
-    <td>3</td>
-    <th>
-      <a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
-      <p>테스트</p>
-    </th>
-    <td>2017.07.13</td>
-</tr> -->
+                     <!-- <li>1</li>
+                    <li class="left">제목제목제목제목1</li>
+                    <li>2014.07.09</li>
+                    <li>자바킹</li>
+                    <li>0</li> -->
 </template>
 
 <script>
@@ -31,8 +32,79 @@ export default {
 }
 </script>
 
-<style>
-.forumListContainer{
-  display: inline-block;
+<style scoped type="text/css">
+    body{
+        line-height:2em;        
+        font-family:"맑은 고딕";
 }
-</style>
+    ul, li{ 
+        list-style:none;
+        text-align:center;
+        padding:0;
+        margin:0;
+}
+
+    #mainWrapper{
+        width: 800px;
+        margin: 0 auto; /*가운데 정렬*/
+    }
+
+    #mainWrapper > ul > li:first-child {
+        text-align: center;
+        font-size:14pt;
+        height:40px;
+        vertical-align:middle;
+        line-height:30px;
+}
+
+    #ulTable {margin-top:10px;}
+    
+
+    #ulTable > li:first-child > ul > li {
+        background-color:#c9c9c9;
+        font-weight:bold;
+        text-align:center;
+}
+
+    #ulTable > li > ul {
+        clear:both;
+        padding:0px auto;
+        position:relative;
+        min-width:40px;
+}
+    #ulTable > li > ul > li { 
+        float:left;
+        font-size:10pt;
+        border-bottom:1px solid silver;
+        vertical-align:baseline;
+}    
+
+    #ulTable > li > ul > li:first-child               {width:10%;} /*No 열 크기*/
+    #ulTable > li > ul > li:first-child +li           {width:45%;} /*제목 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li        {width:20%;} /*작성일 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li+li     {width:15%;} /*작성자 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li+li+li{width:10%;} /*조회수 열 크기*/
+
+    #divPaging {
+          clear:both; 
+        margin:0 auto; 
+        width:220px; 
+        height:50px;
+}
+
+    #divPaging > div {
+        float:left;
+        width: 30px;
+        margin:0 auto;
+        text-align:center;
+}
+
+    #liSearchOption {clear:both;}
+    #liSearchOption > div {
+        margin:0 auto; 
+        margin-top: 30px; 
+        width:auto; 
+        height:100px;
+
+}
+

@@ -45,7 +45,6 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 5em;
   border: 1px solid #ccc;
   border-radius: 1em;
   box-shadow: 0 0 1em #00000033;
