@@ -1,13 +1,15 @@
 <template>
   <li>
     {{reviewComment.nickname}} : {{reviewComment.content}}
+    <span v-if="reviewComment.user === user.pk">
     <button  class="createBtn" v-if="!isUpdate" @click="updateReviewComment">수정</button>
     <div v-if="isUpdate">
       <ReviewCommentUpdateForm
       :comment-all="reviewComment"
       />
     </div>
-    <button class="deleteBtn " v-if="!isUpdate" @click="deleteReviewComment">삭제</button>
+    <button class="deleteBtn mx-2 " v-if="!isUpdate" @click="deleteReviewComment">삭제</button>
+  </span>
   </li>
 </template>
 
@@ -34,7 +36,12 @@ export default {
     updateReviewComment() {
     this.isUpdate = !this.isUpdate
   }
-  }
+  },
+  computed : {
+    user() {
+      return this.$store.getters.user
+    }
+  },
 }
 </script>
 

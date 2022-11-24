@@ -49,7 +49,7 @@ export default {
 }
 button{
   background:#C3DFE0;
-  color:#fff;
+  color:#02020B;
   border:none;
   position:relative;
   height:60px;

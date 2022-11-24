@@ -72,6 +72,9 @@ export default {
   },
   created() {
     this.$store.dispatch('resetSearchMovieHome')
+    //검색기능
+    this.$store.dispatch('getMovies')
+
   }
   
 }
