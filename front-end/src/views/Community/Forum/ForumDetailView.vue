@@ -1,9 +1,18 @@
 <template>
   <div class="forumContainer">
-    <div class="card align-items-start">  
-      <div class="card-body">
+    <!-- <div class="card">  
+      <div class="card-body" style="float: left;">
         <h4 class="card-title">제목 : {{ forum.title }}</h4>
         <span class="card-text">내용 : {{ forum.content }}</span>
+      </div>
+    </div> -->
+
+    <div class="forum">
+      <div id="forum-title" >
+        <h2> 제목 : {{ forum.title }} </h2>
+        <div id="forum-content">
+          <p> 내용 : {{ forum.content }} </p>
+        </div>
       </div>
     </div>
 
@@ -96,7 +105,7 @@ export default {
 }
 </script>
 
-<style scpoed>
+<style scoped>
 .forumContainer{
   height: 500px;
   width: 1000px;
@@ -105,8 +114,29 @@ export default {
   margin-top: 100px ;
 }
 .forumFlex{
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: flex-end;
 }
+#forum-content{
+  float: left;
+  width: 800px;
+}
+#forum-title{
+  width: 800px;
+  float: left;
+  border: solid black 1px;
+  border-radius: 10px ;
+}
+h2{
+  float: left;
+}
+#forum-content > p{
+  float: left;
+}
+
+/* .forum{
+  border: solid black 1px;
+  border-radius: 10px ;
+} */
 </style>

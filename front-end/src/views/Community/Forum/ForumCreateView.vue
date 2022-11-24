@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .forumCreateContainer{
   height: 500px;
   width: 1000px;
