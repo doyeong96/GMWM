@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+<div id="whole">
+  <div class="home" >
     
     <!-- <div class="input-group mb-3">
       <span class="input-group-text">돋보기</span>
@@ -19,7 +20,7 @@
         <div class="card mx-2 my-2">
           
           <div class="card-body">
-            <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" style="width: 280px; height:400px;" alt="">
+            <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" style="width: 210px; height:300px;" alt="">
           </div>
 
           <ul class="list-group list-group-flush">
@@ -34,6 +35,7 @@
     </div>
 
   </div>
+</div>
 </template>
 
 <script>
@@ -80,6 +82,17 @@ export default {
   width: 1500px;
   margin-left: auto;
   margin-right: auto ;
-  margin-top: 100px ;
+  margin-bottom: 400px ;
+  
+}
+#whole {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('@/assets/userpage (4).jpg');
+  background-size: cover;
+  max-height: 100%;
 }
 </style>

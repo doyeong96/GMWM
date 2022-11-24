@@ -102,10 +102,10 @@ def movie_search(request):
 
     movies = Movie.objects.filter(title__contains = movie_title)
     movies = list(movies)
-    if len(movies) < 13:
+    if len(movies) < 8:
         movies = movies
     else:
-        movies = movies[:12]
+        movies = movies[:8]
     serializer =  MovieSerializer(movies, many=True)
     return Response(serializer.data)
 
