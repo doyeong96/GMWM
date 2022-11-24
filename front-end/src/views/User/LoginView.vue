@@ -14,6 +14,7 @@
 
           <button type="submit" id="logInButton">LogIn</button>
       </form>
+      <p>회원이 아니신가요? <router-link :to="{name :'SignupView'}">Signup</router-link></p>
     </div>
   </div>
 </template>

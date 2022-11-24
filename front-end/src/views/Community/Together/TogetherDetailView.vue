@@ -25,7 +25,7 @@
         <!-- <button @click="likesTogether" class=" badge bg-primary">좋아요</button> -->
         <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
       </span>
-
+      <span v-if="together.user === user.pk">
       <button class="deleteBtn mx-2">
         <span data-bs-toggle="modal" data-bs-target="#togetherDeleteModal">
           삭제  
@@ -33,6 +33,7 @@
       </button>
 
         <router-link class="createBtn" :to="{ name : 'TogetherUpdateView'}">수정</router-link>
+      </span>
         </div>
     </div>
     <br>

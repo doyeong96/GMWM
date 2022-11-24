@@ -26,14 +26,14 @@
             <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
             <!-- <button @click="likesReview">좋아요</button> -->
           </span>
-
+          <span v-if="review.user === user.pk">
           <button class="deleteBtn ">
             <span  data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
               삭제  
             </span>
           </button>
           <router-link class="createBtn mx-2" :to="{ name : 'ReviewUpdateView'}">수정</router-link> <br>	
-
+        </span>
       <div class="modal fade" id="reveiwDeleteModal" tabindex="-1" aria-labelledby="reveiwDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">

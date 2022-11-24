@@ -1,6 +1,7 @@
 <template>
   <li>
     {{forumComment.nickname}} : {{forumComment.content}}
+    <span v-if="forumComment.user === user.pk">
     <button  class="createBtn" v-if="!isUpdate" @click="updateForumComment">수정</button>
     <div v-if="isUpdate">
       <ForumCommentUpdateForm
@@ -8,7 +9,7 @@
       />
     </div>
     <button class="deleteBtn mx-2" v-if="!isUpdate" @click="deleteFourmComment">삭제</button>
-    
+  </span>
   </li>
 </template>
 
@@ -34,6 +35,11 @@ export default {
   },
   updateForumComment() {
     this.isUpdate = !this.isUpdate
+  }
+ },
+ computed : {
+  user() {
+    return this.$store.getters.user
   }
  }
 }

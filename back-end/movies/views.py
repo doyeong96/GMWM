@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieSerializer, ActorSerializer, GenreSerializer
+from .serializers import MovieSerializer, ActorSerializer, GenreSerializer,MovieListSerializer
 from .models import Movie, Genre, Actor
 import random
 # 영화 좋아요
@@ -28,7 +28,7 @@ def movie_list(request):
     if request.method == 'GET':
         movies = Movie.objects.all()
         # movies = get_list_or_404(Movie.objects.order_by('-pk'))
-        serializer = MovieSerializer(movies, many=True)
+        serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
 
 # 영화 상세
@@ -63,7 +63,7 @@ def movie_recommend(request):
             for genre in movie.genres.all():
                 if genre.id == selgenre:
                     genre_movies.append(movie)
-        random_genre_movies = random.sample(genre_movies,20)
+        random_genre_movies = random.sample(genre_movies,min(20,len(genre_movies)))
         genre_movies_coll.append(random_genre_movies)
     
     #==============================================
@@ -86,10 +86,10 @@ def movie_recommend(request):
         best_reco.append(obj)
     best_reco = list(set(best_reco[:15]))
     #===============================================
-    serializer_best =  MovieSerializer(best_reco, many=True)
+    serializer_best =  MovieListSerializer(best_reco, many=True)
     serializers =[serializer_best.data]
     for i in range(len(genre_movies_coll)):
-        globals()['serializer_'+str(i)] = MovieSerializer(genre_movies_coll[i], many=True)
+        globals()['serializer_'+str(i)] = MovieListSerializer(genre_movies_coll[i], many=True)
         serializers.append(globals()['serializer_'+str(i)].data)
     serializers.append(show_genres)
     return Response(serializers)

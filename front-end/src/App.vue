@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <span id="navspan" class="navbar-brand"><router-link :to="{name :'ShowMoviesView'}"><img id="navImg" src="@/assets/nav.png" alt="logo"></router-link></span>
         <div>
-        <router-link to="/">Home</router-link> |
+        <router-link to="/home">Home</router-link> |
         <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
         <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
         <router-link :to="{name :'ForumView'}">Forum</router-link> |
@@ -138,7 +138,7 @@ nav a.router-link-exact-active {
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 5;
   right : -11px;
   top : 43px;
   

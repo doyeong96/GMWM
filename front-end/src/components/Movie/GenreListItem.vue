@@ -1,8 +1,8 @@
 <template>
   <label id="genre">
     <div :class="{'afterBtn':want}" class="genreBtn">
-      <span id="genreSpan">
-        <input id="genreInput" type="checkbox" @change="check" @click="genreSelect" :value="genre.name" v-model="want">
+      <span id="genreSpan" style="color:#02020B;">
+        <input  id="genreInput" type="checkbox" @change="check" @click="genreSelect" :value="genre.name" v-model="want">
         {{genre.name}}
       </span>
     </div>

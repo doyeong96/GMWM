@@ -1,6 +1,7 @@
 <template>
   <li>
     {{togetherComment.nickname}} : {{togetherComment.content}}
+    <span v-if="togetherComment.user === user.pk">
     <button  class="createBtn" v-if="!isUpdate" @click="updateTogetherComment">수정</button>
     <div v-if="isUpdate">
       <TogetherCommentUpdateForm
@@ -8,6 +9,7 @@
       />
     </div>
     <button class="deleteBtn mx-2" v-if="!isUpdate" @click="deleteTogetherComment">삭제</button>
+  </span>
   </li>
 </template>
 
@@ -33,6 +35,11 @@ export default {
   },
   updateTogetherComment() {
     this.isUpdate = !this.isUpdate
+  }
+ },
+ computed : {
+  user() {
+    return this.$store.getters.user
   }
  }
 }

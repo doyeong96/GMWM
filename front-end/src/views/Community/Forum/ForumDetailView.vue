@@ -32,14 +32,16 @@
 
           <!-- <button @click="likesForum" class=" badge bg-primary">좋아요</button> -->
         </span>
-
+        
+        <span v-if="forum.user === user.pk">
         <button class="deleteBtn mx-2">
           <span data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
             삭제  
           </span>
         </button>
-
+      
         <router-link class="createBtn" :to="{ name : 'ForumUpdateView' }">수정</router-link>
+      </span>
         </div>
     </div>
     <br>
@@ -91,7 +93,6 @@ export default {
     },
     likeUsers() {
       return (this.forum?.like_users.length)
-     
     },
   },
   methods : {

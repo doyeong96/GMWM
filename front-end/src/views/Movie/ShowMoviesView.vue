@@ -32,10 +32,6 @@ export default {
         return this.$store.getters.showGenres
       },
     },
-  created(){
-    //검색기능
-    this.$store.dispatch('getMovies')
-  },
 }
 </script>
 

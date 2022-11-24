@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import Genre, Movie, Actor
 
 #Movie
+
+class MovieListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = ('title','id','poster_path')
+
 class MovieSerializer(serializers.ModelSerializer):
 
     class Meta:
