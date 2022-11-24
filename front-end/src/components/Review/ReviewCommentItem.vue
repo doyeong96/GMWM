@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <li>
     {{reviewComment.content}}
     <button @click="deleteReviewComment">삭제</button>
-  </div>
+  </li>
 </template>
 
 <script>

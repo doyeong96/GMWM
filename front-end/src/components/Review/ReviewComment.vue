@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h2>ReviewComment</h2>
-    <ReviewCommentItem
-    v-for="reviewcomment in reviewComments" :key="reviewcomment.id"
-    :review-comment="reviewcomment"
-    />
-    <ReviewCommentForm
-    :review-id="reviewId"
-    />
+    <ul class="commentItem">
+      <ReviewCommentItem
+      v-for="reviewcomment in reviewComments" :key="reviewcomment.id"
+      :review-comment="reviewcomment"
+      />
+    </ul>
+    <div class="mt-5">
+      <ReviewCommentForm
+      :review-id="reviewId"
+      />
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.commentItem{
+  display: flex!important;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>

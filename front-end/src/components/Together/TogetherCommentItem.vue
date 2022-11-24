@@ -1,8 +1,8 @@
 <template>
-  <div>
-    {{togetherComment.content}}
+  <li>
+    {{togetherComment.nickname}} : {{togetherComment.content}}
     <button @click="deleteTogetherComment">삭제</button>
-  </div>
+  </li>
 </template>
 
 <script>

@@ -24,6 +24,8 @@
             삭제  
           </span>
         </button>
+
+        <router-link :to="{ name : 'ForumUpdateView' }">수정</router-link>
         </div>
     </div>
     <br>
@@ -40,12 +42,13 @@
           <div class="modal-content">
 
             <div class="modal-body">
-              <p>리뷰를 삭제하시겠습니까?</p>
+              <p>게시물을 삭제하시겠습니까?</p>
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
               <button class=" btn btn-danger" @click="deleteForum" data-bs-dismiss="modal">삭제</button>
+              <!-- <router-link :to="{ name : 'ForumUpdateView' }">UPDATE</router-link> -->
             </div>
           </div>
         </div>
@@ -88,7 +91,7 @@ export default {
 }
 </script>
 
-<style>
+<style scpoed>
 .forumContainer{
   height: 500px;
   width: 1000px;

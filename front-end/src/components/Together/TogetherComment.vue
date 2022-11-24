@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h4>댓글</h4>
-    <TogetherCommentItem
-    v-for="togethercomment in togetherComments" :key="togethercomment.id"
-    :together-comment="togethercomment"
-    />
-    <TogetherCommentForm
-    :together-id="togetherId"
-    />
+    <ul class="commentItem">
+      <TogetherCommentItem
+      v-for="togethercomment in togetherComments" :key="togethercomment.id"
+      :together-comment="togethercomment"
+      />
+    </ul>
+    <div class="mt-5">
+      <TogetherCommentForm
+      :together-id="togetherId"
+      />
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.commentItem{
+  display: flex!important;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>

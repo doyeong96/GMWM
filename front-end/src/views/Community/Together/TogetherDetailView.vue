@@ -1,19 +1,38 @@
 <template>
-  <div>
-    {{together.title}}
-    {{endtims}}
-    <!-- 업데이트 -->
-    <router-link :to="{ name : 'TogetherUpdateView'}">UPDATE</router-link> <br>
+  <div class="togetherContainer">
+    <div class="card">
+      <h2 class="card-header">
+        {{together.title}}
+      </h2>
+      <div class="card-body">
+        <p class="card-title">내용 : {{together.content}}</p>
+        <p class="card-text">{{endtims}} 모여요</p>
+      </div>
+    </div>
+
     <!-- 좋아요 -->
-    <p>좋아요 누른 사람 : {{likeUsers}} </p>
-    <div v-if="together.like_users.includes(user.pk)">
-      <button @click="likesTogether">좋아요 취소</button>
+    <div class='forumFlex'>
+      {{ this.likeUsers }} 명이 이 글을 좋아합니다.
+    <div>
+
+      <span  v-if="together.like_users.includes(user.pk)">
+        <button @click="likesTogether" class=" badge bg-primary">좋아요 취소</button>
+      </span>
+
+      <span v-else>
+        <button @click="likesTogether" class=" badge bg-primary">좋아요</button>
+      </span>
+
+      <button class="">
+        <span data-bs-toggle="modal" data-bs-target="#togetherDeleteModal">
+          삭제  
+        </span>
+      </button>
+
+        <router-link :to="{ name : 'TogetherUpdateView'}">수정</router-link>
+        </div>
     </div>
-    <div v-else>
-      <button @click="likesTogether">좋아요</button>
-    </div>
-    <!-- 삭제 -->
-    <button @click="deleteTogether">삭제</button>
+    <br>
     <!-- 맵컴포넌트 -->
     <TogetherMap
     :map-lat="together.map_lat"
@@ -25,6 +44,23 @@
     :together-comments="together.togethercomment_set"
     :together-id="together.id"
     />
+
+    <div class="modal fade" id="togetherDeleteModal" tabindex="-1" aria-labelledby="togetherDeleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-body">
+            <p>게시글을 삭제하시겠습니까?</p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <button class=" btn btn-danger" @click="deleteTogether" data-bs-dismiss="modal">삭제</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 
