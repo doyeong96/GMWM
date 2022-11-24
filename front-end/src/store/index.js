@@ -111,6 +111,7 @@ export default new Vuex.Store({
     SET_SELECTEDMOVIESTITLE : (state, data) => state.selectedMovieTitle = data,
     SET_SELECTEDMOVIESPOSTER : (state,data) => state.selectedMoviePoster = data,
     SEARCH_MOVIE_HOME : (state, searchMovieHome) => state.searchMovieHome = searchMovieHome,
+    RESET_DETAIL_MOVIE : (state, data) => state.movie = data,
     // genre
     GET_GENRES : (state, genres) => state.genres = genres,
     SET_GENRES : (state, data) => state.selectedGenres = data,
@@ -657,14 +658,28 @@ export default new Vuex.Store({
       .catch((err) => console.log(err))
     },
     getMovieDetail({commit}, movieId){
-      
-      axios({
+    axios
+      .all([axios({
         url : `${API_URL}/movies/${movieId}/`,
-      })
-      .then((res) => {
+      }),axios({
+        url : `${API_URL}/movies/recommend/genres/`,
+        method : 'POST',
+        data : {movieId},})
+        ,axios({
+          url : `${API_URL}/movies/recommend/actors/`,
+          method : 'POST',
+          data : {movieId},
+        })
+    ])
+      .then(
+        axios.spread((res1,res2,res3) => {
         // console.log(res);
-        commit('GET_MOVIE',res.data)
+        commit('GET_MOVIE',res1.data)
+        commit('GET_MOVIE_GENRES', res2.data)
+        commit('GET_MOVIE_ACTORS', res3.data)
+        console.log('완료')
       })
+      )
       .catch((err) => console.log(err))
     },
     // genre
@@ -708,29 +723,29 @@ export default new Vuex.Store({
       commit('SELECT_GENRE_NUM',0)
     },
     // 영화배우 정보 가져오기
-    getMovieGenres({commit}, movieId){
-      axios({
-        url : `${API_URL}/movies/recommend/genres/`,
-        method : 'POST',
-        data : {movieId},
-      })
-      .then((res) => {
-        commit('GET_MOVIE_GENRES', res.data)
-      })
-      .catch((err) => console.log(err))
-    },
-    getMovieActors({commit}, movieId){
-      axios({
-        url : `${API_URL}/movies/recommend/actors/`,
-        method : 'POST',
-        data : {movieId},
-      })
-      .then((res) => {
-        // console.log(res)
-        commit('GET_MOVIE_ACTORS', res.data)
-      })
-      .catch((err) => console.log(err))
-    },
+    // getMovieGenres({commit}, movieId){
+      // axios({
+      //   url : `${API_URL}/movies/recommend/genres/`,
+      //   method : 'POST',
+      //   data : {movieId},
+    //   })
+    //   .then((res) => {
+        // commit('GET_MOVIE_GENRES', res.data)
+    //   })
+    //   .catch((err) => console.log(err))
+    // },
+    // getMovieActors({commit}, movieId){
+      // axios({
+      //   url : `${API_URL}/movies/recommend/actors/`,
+      //   method : 'POST',
+      //   data : {movieId},
+      // })
+    //   .then((res) => {
+    //     // console.log(res)
+        // commit('GET_MOVIE_ACTORS', res.data)
+    //   })
+    //   .catch((err) => console.log(err))
+    // },
     // 리뷰 작성시 영화 검색
     searchMovie({commit}, movie_name){
       axios({

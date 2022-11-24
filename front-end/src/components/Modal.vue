@@ -1,7 +1,7 @@
 <template>
   <portal to="modal">
     <div class="modal-wrapper1">
-      <div class="overlay1" @click="$router.back()"></div>
+      <div class="overlay1" @click="backs"></div>
       <div class="modal1">
         <component :is="component" v-bind="$attrs" />
       </div>
@@ -14,16 +14,16 @@ export default {
   
   name: "Modal",
   props: ["component"],
-  // watch: {
-  //   '$route' (to,from) {
-  //     to
-  //     from
-  //     window.scrollTo(0,0)
-  //   }
-  // },
+  methods : {
+    backs() {
+      this.$store.commit('RESET_DETAIL_MOVIE',null)
+      this.$router.back()
+
+    }
+  },
   mounted() {
     window.scrollTo(0,0)
-  }
+  },
 };
 </script>
 
