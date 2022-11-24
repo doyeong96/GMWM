@@ -1,15 +1,27 @@
 <template>
   <div class="home">
 
-    <label for="moviename">홈에서 영화검색</label>
+    <label for="moviename">돋보기 아이콘 달기</label>
     <input id="moviename" @input="searchMovieHome" type="text">
+    <div>
+      <div v-for="findMovie in findMovies" :key="findMovie.id" style="width: 330px; display:inline-block;">
+        <div class="card mx-2 my-2">
+          
+          <div class="card-body">
+            <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" style="width: 280px; height:400px;" alt="">
+          </div>
 
-    <div v-for="findMovie in findMovies" :key="findMovie.id">
-      <p><a :href="`http://localhost:8080/showmovie/${findMovie.id}`"> {{findMovie.title}}</a></p>
-      <!-- <img :src="`https://image.tmdb.org/t/p/w500${findMovie.poster_path}`" alt=""> -->
-      <!-- <button @click="select(findMovie)">확정</button> -->
-      <!-- <a :href="findMovieId">{{}}</a> -->
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a :href="`http://localhost:8080/showmovie/${findMovie.id}`"> {{findMovie.title}}</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+
     </div>
+
   </div>
 </template>
 
@@ -46,3 +58,13 @@ export default {
   
 }
 </script>
+
+<style scoped>
+.home{
+  height: 500px;
+  width: 1500px;
+  margin-left: auto;
+  margin-right: auto ;
+  margin-top: 100px ;
+}
+</style>

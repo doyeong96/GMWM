@@ -16,11 +16,14 @@
     <div>
 
       <span  v-if="together.like_users.includes(user.pk)">
-        <button @click="likesTogether" class=" badge bg-primary">좋아요 취소</button>
+        <!-- <button @click="likesTogether" class=" badge bg-primary">좋아요 취소</button> -->
+        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+
       </span>
 
       <span v-else>
-        <button @click="likesTogether" class=" badge bg-primary">좋아요</button>
+        <!-- <button @click="likesTogether" class=" badge bg-primary">좋아요</button> -->
+        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
       </span>
 
       <button class="">

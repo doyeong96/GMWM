@@ -12,11 +12,16 @@
       <div>
 
         <span v-if="forum.like_users.includes(user.pk)">
-          <button @click="likesForum" class=" badge bg-primary">좋아요 취소</button>
+          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+
+          <!-- <button @click="likesForum" class=" badge bg-primary">좋아요 취소</button>
+          <img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"> -->
         </span>
 
         <span v-else>
-          <button @click="likesForum" class=" badge bg-primary">좋아요</button>
+          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+
+          <!-- <button @click="likesForum" class=" badge bg-primary">좋아요</button> -->
         </span>
 
         <button class="">
