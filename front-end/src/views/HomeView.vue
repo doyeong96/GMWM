@@ -10,11 +10,10 @@
     </div> -->
     <div class="input-group mx-auto w-25 mb-3">
       <span class="input-group-text"><img src="@/assets/search.png" style="width:30px; height:30px;" alt=""></span>
-      <input @input="searchMovieHome" type="text" class="form-control" id="search" placeholder="search movie">
+      <input @input="searchMovieHome" type="text" class="form-control" id="search" placeholder="search movie" :value="keyword">
     </div>
 
-    <!-- <label for="moviename">돋보기 아이콘 달기</label> -->
-    <!-- <input id="moviename" @input="searchMovieHome" type="search"> -->
+
     <div>
       <div v-for="findMovie in findMovies" :key="findMovie.id" style="width: 330px; display:inline-block;">
         <div class="card mx-2 my-2">
@@ -25,7 +24,7 @@
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <a :href="`http://localhost:8080/showmovie/${findMovie.id}`"> {{findMovie.title}}</a>
+              <a :href="`http://localhost:8080/movieDetail/${findMovie?.id}`"> {{findMovie.title}}</a>
             </li>
           </ul>
           
@@ -41,14 +40,18 @@
 // @ is an alias to /src
 export default {
   name: 'HomeView',
-  components: {
+  data() {
+    return {
+      keyword : ''
+    }
   },
   methods : {
     searchMovieHome(event){
       if (event.target.value) {
-        const movie_name = event.target.value
-      this.$store.dispatch('searchMovieHome', movie_name)
+        this.keyword = event.target.value
+      this.$store.dispatch('searchMovieHome', this.keyword)
       } else {
+        this.keyword = ''
         this.$store.dispatch('searchMovieHome', 'dsofkasozvoxckvoxckvo')
       }
     },

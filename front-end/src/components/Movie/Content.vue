@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name : 'MovieDetailView',
+  name : 'MovieDetailModal',
   computed : {
   movie() {
     return this.$store.getters.movie 

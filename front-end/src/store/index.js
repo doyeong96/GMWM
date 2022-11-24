@@ -209,50 +209,71 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     } ,
-    userLikesForums({getters,commit}, username) {
-      axios({
-        url: `${API_URL}/userlikesforum/${username}/`,
-        method : 'get',
-        headers : this.getters.authHead
-      })
-      .then((res) => {
-        commit('SET_USERLIKESFORUM',res.data)
-      })
-      .catch((err) => console.log(err))
-    },
-    userLikesReviews({getters,commit}, username) {
-      axios({
+    userLikesFour({getters,commit}, username) {
+      axios
+      .all([axios({
         url: `${API_URL}/userlikesreview/${username}/`,
         method : 'get',
         headers : this.getters.authHead
-      })
-      .then((res) => {
-        commit('SET_USERLIKESREVIEW',res.data)
-      })
-      .catch((err) => console.log(err))
-    },
-    userLikesTogethers({getters,commit}, username) {
-      axios({
+      }),axios({
+        url: `${API_URL}/userlikesforum/${username}/`,
+        method : 'get',
+        headers : this.getters.authHead
+      }),axios({
         url: `${API_URL}/userlikestogether/${username}/`,
         method : 'get',
         headers : this.getters.authHead
+        }),axios({
+          url: `${API_URL}/userlikesmovie/${username}/`,
+          method : 'get',
+          headers : this.getters.authHead
+        })
+    ])
+      .then(
+        axios.spread((res1,res2,res3,res4) => {
+        // console.log(res);
+        commit('SET_USERLIKESREVIEW',res1.data)
+        commit('SET_USERLIKESFORUM', res2.data)
+        commit('SET_USERLIKESTOGETHER', res3.data)
+        commit('SET_USERLIKESMOVIE',res4.data)
+        console.log('완료')
       })
-      .then((res) => {
-        commit('SET_USERLIKESTOGETHER',res.data)
-      })
+      )
       .catch((err) => console.log(err))
     },
-    userLikesMovies({getters,commit}, username) {
-      axios({
-        url: `${API_URL}/userlikesmovie/${username}/`,
-        method : 'get',
-        headers : this.getters.authHead
-      })
-      .then((res) => {
-        commit('SET_USERLIKESMOVIE',res.data)
-      })
-      .catch((err) => console.log(err))
-    },
+    // userLikesReviews({getters,commit}, username) {
+      // axios({
+      //   url: `${API_URL}/userlikesreview/${username}/`,
+      //   method : 'get',
+      //   headers : this.getters.authHead
+      // })
+    //   .then((res) => {
+        // commit('SET_USERLIKESREVIEW',res.data)
+    //   })
+    //   .catch((err) => console.log(err))
+    // },
+    // userLikesTogethers({getters,commit}, username) {
+      // axios({
+      //   url: `${API_URL}/userlikestogether/${username}/`,
+      //   method : 'get',
+      //   headers : this.getters.authHead
+    //   })
+    //   .then((res) => {
+    //     commit('SET_USERLIKESTOGETHER',res.data)
+    //   })
+    //   .catch((err) => console.log(err))
+    // },
+    // userLikesMovies({getters,commit}, username) {
+      // axios({
+      //   url: `${API_URL}/userlikesmovie/${username}/`,
+      //   method : 'get',
+      //   headers : this.getters.authHead
+      // })
+    //   .then((res) => {
+        // commit('SET_USERLIKESMOVIE',res.data)
+    //   })
+    //   .catch((err) => console.log(err))
+    // },
     passwordChange({commit,getters},payload) {
       console.log(payload)
       axios({

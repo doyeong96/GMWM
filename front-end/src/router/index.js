@@ -136,11 +136,11 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path : '/showmovie/:id',
-  //   name : 'MovieDetailView',
-  //   component : MovieDetailView,
-  // },
+  {
+    path : '/movieDetail/:movieId',
+    name : 'MovieDetailView',
+    component : MovieDetailView,
+  },
   {
     path: '/selectgenre',
     name: 'SelectGenreView',

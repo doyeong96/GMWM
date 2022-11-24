@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container" style="margin-top: 50px;">
       <div class="row">
         <div class="col-4">
           <ProfileInfo
@@ -8,10 +8,10 @@
           :username="userProfile?.username"
           />
           <div class="container">
+            <button @click="select('movie')" class="Btn purple col-5 m-2">좋아요한 영화</button>
             <button @click="select('forum')"   class="Btn purple col-5 m-2">좋아요한 포럼</button>
             <button @click="select('review')"  class="Btn purple col-5 m-2">좋아요한 리뷰</button>
             <button @click="select('together')"  class="Btn purple col-5 m-2">좋아요한 구해</button>
-            <button @click="select('movie')" class="Btn purple col-5 m-2">좋아요한 영화</button>
           </div>
             
         </div>
@@ -66,10 +66,10 @@ export default {
   },
   created() {
     this.$store.dispatch('customGetUserInfo',this.$route.params.username)
-    this.$store.dispatch('userLikesForums', this.$route.params.username)
-    this.$store.dispatch('userLikesReviews', this.$route.params.username)
-    this.$store.dispatch('userLikesTogethers', this.$route.params.username)
-    this.$store.dispatch('userLikesMovies', this.$route.params.username)
+    this.$store.dispatch('userLikesFour', this.$route.params.username)
+    // this.$store.dispatch('userLikesReviews', this.$route.params.username)
+    // this.$store.dispatch('userLikesTogethers', this.$route.params.username)
+    // this.$store.dispatch('userLikesMovies', this.$route.params.username)
   },
   computed : {
     userProfile() {
