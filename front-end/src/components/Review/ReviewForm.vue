@@ -4,7 +4,7 @@
         <div v-if="trues">
           <div class="mx-auto w-25 form-floating">
             <input class="form-control" id="moviename" @input="searchMovie" type="text" v-model="movie_titleDirect" >
-            <label for="moviename">영화검색</label>
+            <label style="color : #02020B;" for="moviename">영화검색</label>
             {{selectDirect()}}
           </div>
         </div>
@@ -13,7 +13,7 @@
         <h2>리뷰 작성</h2>
         <div class="mx-auto w-25 form-floating" >
           <input class=" form-control" id="moviename" @input="searchMovie" type="text" v-model="movie_title" >
-          <label for="moviename">영화검색</label>
+          <label style="color : #02020B;" for="moviename">영화검색</label>
         </div>
       </div>      
     </div>
@@ -22,18 +22,18 @@
       <div class="row g-3">
         <div class="form-floating col-sm-9 m-3">
           <input class="form-control" id="title" type="text" v-model="title">
-          <label for="title">title</label>
+          <label style="color : #02020B;" for="title">title</label>
         </div>
 
         <div class="form-floating m-3 col-sm m-3">
           <input class="form-control" id="score" type="number" v-model="score">
-          <label for="score">1~5점</label>
+          <label style="color : #02020B;" for="score">1~5점</label>
         </div>
       </div>
 
       <div class="form-floating m-3">
         <textarea class="form-control" id="review" type="text" v-model="review" style="height:300px"></textarea>
-        <label for="review">review</label>
+        <label style="color : #02020B;" for="review">review</label>
       </div>
       
 

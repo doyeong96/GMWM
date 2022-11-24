@@ -19,11 +19,11 @@
         <p>{{ likeUsers }} 명이 좋아합니다 </p>
         <div>
           <span v-if="review.like_users.includes(user.pk)">
-            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/like.png" style="width:30px; height:30px;"></h2>
             <!-- <button @click="likesReview">좋아요 취소</button> -->
           </span>
           <span v-else>
-            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
             <!-- <button @click="likesReview">좋아요</button> -->
           </span>
 

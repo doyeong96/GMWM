@@ -3,7 +3,7 @@
     <form @submit.prevent="reviewCommentUpdate">
       <div class="form-floating col-sm-11 mb-3">
     <input class="form-control" placeholder="제목을 작성하세요" type="text" id="ReviewComment" v-model="content">
-    <label for="ReviewComment">댓글 수정</label>
+    <label style="color : #02020B;" for="ReviewComment">댓글 수정</label>
     </div>
     <input class="createBtn" type="submit" value="작성">
     </form>

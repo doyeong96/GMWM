@@ -9,10 +9,10 @@
         <h3><img src="@/assets/stars.png" alt="평점" style="width:50px; height:40px;"> : {{movie.vote_average	}}</h3>
         <h3>좋아요 : {{likeUsers}} </h3>
       <div v-if="movie.like_users.includes(user.pk)">
-        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/like.png" style="width:30px; height:30px;"></h2>
       </div>
       <div v-else>
-        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+        <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
       </div>
         <iframe width="560" height="320" :src="`https://www.youtube.com/embed/${movie?.youtube_key}`"></iframe>
       </div>

@@ -11,18 +11,18 @@
         <div class="row g-3">
           <div class="form-floating col-sm-7 m-3">
             <input class="form-control" id="title" type="text" v-model="title">
-            <label for="title">title</label>
+            <label style="color : #02020B;" for="title">title</label>
           </div>
 
           <div class="form-floating m-3 col-sm m-3">
-            <input id='endtime' type="datetime-local" @change="inputTime">
+            <input style="color : #02020B;" id='endtime' type="datetime-local" @change="inputTime">
           </div>
         
         </div>
 
         <div class="form-floating m-3">
           <textarea class="form-control" id="content" type="text" v-model="content" style="height:300px"></textarea>
-          <label for="content">Together</label>
+          <label style="color : #02020B;" for="content">Together</label>
         </div>
 
 
