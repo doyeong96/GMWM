@@ -3,8 +3,8 @@
     <div class="detail_page">
       <div class="detail_info">
         <h1 >{{movie.title}}</h1>
-        <h2>장르 : <span v-for="genre in movieGenres" :key="genre.id">{{ genre.name }},</span></h2>
-        <h3>출연진 : <span v-for="actor in movieActors" :key="actor.id">{{ actor.name }},</span></h3>
+        <h2>장르 : <span v-for="genre in movieGenres" :key="genre.id">{{ genre.name }}, </span></h2>
+        <h3>출연진 : <span v-for="actor in movieActors" :key="actor.id">{{ actor.name }}, </span></h3>
         <h3>개봉일 : {{movie.release_date}}</h3>
         <h3><img src="@/assets/stars.png" alt="평점" style="width:50px; height:40px;"> : {{movie.vote_average	}}</h3>
         <h3>좋아요 : {{likeUsers}} </h3>
@@ -14,7 +14,7 @@
       <div v-else>
         <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
       </div>
-        <iframe width="560" height="315" :src="movieYoutube"></iframe>
+        <iframe width="560" height="320" :src="movieYoutube"></iframe>
       </div>
       <div class="posterimg">
       <img :src="movieImg" alt="">
@@ -101,13 +101,16 @@ h1 {
   float: left;
   padding: 10px;
   text-align: left;
+  
 }
 .posterimg {
   width:70%;
   float:left;
   margin-right : 30px;
   text-align: right;
-  padding-top:92px;
+  display: flex;
+  align-items:flex-end;
+  margin-bottom:17px;
 }
 .detail_page {
   width : 100%;

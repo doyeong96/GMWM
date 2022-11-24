@@ -173,7 +173,7 @@ export default new Vuex.Store({
         commit('SET_USER', null)
         router.push({name : 'LoginView'})
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err, '에러뜨나?'))
     },
     getUserInfo({commit, getters}) {
       axios({
