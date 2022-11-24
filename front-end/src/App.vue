@@ -3,26 +3,40 @@
     <nav id="navBar" class="navbar navbar-expand-md justify-content-end">
       <div class="container-fluid">
         <span id="navspan" class="navbar-brand"><img id="navImg" src="@/assets/nav.png" alt="logo"></span>
-
         <div>
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
-      <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
-      <router-link :to="{name :'ForumView'}">Forum</router-link> |
-      <router-link :to="{name :'ReviewView'}">Review</router-link> |
-      <router-link :to="{name :'TogetherView'}">Together</router-link> |
-      <span v-if="this.isLogin">
-        <!-- <router-link :to="{name : 'ProfileView',params : { username : userNow.username} }">Profile</router-link> | -->
-        <a :href="`http://localhost:8080/profile/${userNow?.username}/`">Profile</a> |
-        
-      </span>
-      <router-link :to="{name :'SignupView'}">Signup</router-link> |
-      <router-link :to="{name :'LoginView'}">Login</router-link> | 
-      <router-link :to="{name :'PasswordChangeView'}">Passwordchange</router-link> |
-      <button @click="Withdrawal">회원탈퇴</button>
-      <button @click="Logout">Logout</button>
+        <span id="sets">
+        <router-link to="/">Home</router-link> |
+        <router-link :to="{name :'ShowMoviesView'}">Movie</router-link> |
+        <router-link :to="{name :'SelectGenreView'}">Genre</router-link> |
+        <router-link :to="{name :'ForumView'}">Forum</router-link> |
+        <router-link :to="{name :'ReviewView'}">Review</router-link> |
+        <router-link :to="{name :'TogetherView'}">Together</router-link> |
+        <router-link :to="{name :'SignupView'}">Signup</router-link> |
+        <router-link :to="{name :'LoginView'}">Login</router-link> | 
+        </span>
+      <div class="dropdown">
+        <span  type="button" class="dropbtn">
+          <span  v-if="this.isLogin">
+            <NavbarAv
+            :username="userNow.username"
+            />
+          </span>
+          <span v-else>
+            <NavbarAv
+            :username="unknown"
+            />
+          </span>
+        </span>
+        <div class="dropdown-content">
+          <span v-if="isLogin">
+          <a :href="`http://localhost:8080/profile/${userNow?.username}/`">Profile</a>
+          </span>
+          <router-link  :to="{name :'PasswordChangeView'}">Passwordchange</router-link> 
+          <a href="" @click.prevent="Withdrawal">회원탈퇴</a>
+          <a href="" @click.prevent="Logout">Logout</a>
         </div>
-      
+      </div>
+        </div>
       </div>
 
     </nav>
@@ -31,7 +45,7 @@
   </div>
 </template>
 <script>
-
+import NavbarAv from '@/components/NavbarAv'
 
 export default {
   methods : {
@@ -41,7 +55,7 @@ export default {
     },
   },
   components : {
-    
+    NavbarAv,
   },
   computed : {
       isLogin() {
@@ -62,6 +76,10 @@ export default {
   text-align: center;
   /* color: #2c3e50; */
   /* background: linear-gradient(#292929 , #141414); */
+}
+
+#sets {
+  
 }
 
 nav {
@@ -88,7 +106,7 @@ nav a.router-link-exact-active {
 }
 
 #navspan > img {
-  width: 50;
+  width: 50px;
   height: 50px;
 }
 
@@ -96,4 +114,42 @@ nav a.router-link-exact-active {
   background:rgba(20, 20, 20);
   margin-bottom: 20px;
 } */
+
+.dropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;  
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right : -11px;
+  top : 43px;
+  
+  
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
 </style>
