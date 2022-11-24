@@ -9,7 +9,7 @@
 
     <div class="forum">
       <div id="forum-title" >
-        <h2> 제목 : {{ forum.title }} </h2>
+        <h2 > 제목 : {{ forum.title }} </h2>
         <div id="forum-content">
           <p> 내용 : {{ forum.content }} </p>
         </div>
@@ -21,14 +21,14 @@
       <div>
 
         <span v-if="forum.like_users.includes(user.pk)">
-          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/like.png" style="width:30px; height:30px;"></h2>
 
           <!-- <button @click="likesForum" class=" badge bg-primary">좋아요 취소</button>
           <img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"> -->
         </span>
 
         <span v-else>
-          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+          <h2 type="button" @click="likesForum"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
 
           <!-- <button @click="likesForum" class=" badge bg-primary">좋아요</button> -->
         </span>

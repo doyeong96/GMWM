@@ -3,7 +3,7 @@
     <h4>어디서 만날까요?</h4>
     <div class="my-3 mx-auto w-25 form-floating">
       <input class="form-control" type="text" @keyup.enter="searchPlace" v-model.trim="keyword">
-      <label for="moviename">주소를 입력하세요</label>
+      <label style="color : #02020B;" for="moviename">주소를 입력하세요</label>
     </div>
     <div id="map"></div>
   </div>
@@ -39,7 +39,7 @@ export default {
             position: center
         });
       var infowindow = new kakao.maps.InfoWindow({
-            content: `<div style="width:150px;text-align:center;padding:6px 0;">기준장소</div>`
+            content: `<div style=" color : #02020B; width:150px;text-align:center;padding:6px 0;">기준장소</div>`
         });
         infowindow.open(this.map, marker);
     },

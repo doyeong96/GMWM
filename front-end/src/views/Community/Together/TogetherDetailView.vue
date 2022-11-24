@@ -1,12 +1,12 @@
 <template>
   <div class="togetherContainer">
     <div class="card">
-      <h2 class="card-header">
+      <h2 style="color : #02020B;" class="card-header">
         {{together.title}}
       </h2>
       <div class="card-body">
-        <p class="card-title">내용 : {{together.content}}</p>
-        <p class="card-text">{{endtims}} 모여요</p>
+        <p style="color : #02020B;"  class="card-title">내용 : {{together.content}}</p>
+        <p style="color : #02020B;" class="card-text">{{endtims}} 모여요</p>
       </div>
     </div>
 
@@ -17,13 +17,13 @@
 
       <span  v-if="together.like_users.includes(user.pk)">
         <!-- <button @click="likesTogether" class=" badge bg-primary">좋아요 취소</button> -->
-        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/like.png" style="width:30px; height:30px;"></h2>
 
       </span>
 
       <span v-else>
         <!-- <button @click="likesTogether" class=" badge bg-primary">좋아요</button> -->
-        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+        <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/unlike.png" style="width:30px; height:30px;"></h2>
       </span>
 
       <button class="deleteBtn mx-2">

@@ -7,12 +7,12 @@
 
             <div class="form-floating mb-3">
               <input class="form-control" placeholder="제목을 작성하세요" id="title" type="text" v-model="title">
-              <label for="title">제목</label>
+              <label style="color : #02020B;" for="title">제목</label>
             </div>
 
             <div class="form-floating mb-3">
               <textarea style="height:300px" class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" v-model="content"></textarea>
-              <label for="content">내용</label>
+              <label style="color : #02020B;" for="content">내용</label>
             </div>
 
             <button class="createBtn">작성</button>

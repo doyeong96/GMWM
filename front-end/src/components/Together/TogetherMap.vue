@@ -33,7 +33,7 @@ export default {
             position: center
         });
       var infowindow = new kakao.maps.InfoWindow({
-            content: `<div style="width:150px;text-align:center;padding:6px 0;">모임장소</div>`
+            content: `<div style="width:150px; color : #02020B; text-align:center;padding:6px 0;">모임장소</div>`
         });
         infowindow.open(this.map, marker);
     },
