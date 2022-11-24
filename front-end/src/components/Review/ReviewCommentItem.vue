@@ -1,6 +1,6 @@
 <template>
   <li>
-    {{reviewComment.content}}
+    {{reviewComment.nickname}} : {{reviewComment.content}}
     <button @click="deleteReviewComment">삭제</button>
   </li>
 </template>

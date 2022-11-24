@@ -1,7 +1,7 @@
 <template>
   <div id="whole">
     <div id="changeContainer" class="">
-      <h2 id="changeTitle">비밀번호좀 기억해라</h2>
+      <h2 id="changeTitle">비밀번호를 바꾸실래요?</h2>
       <form @submit.prevent="login">
           <span>
             <input placeholder='변경할 비밀번호' type="password" id="password1" v-model="password1"><br>
@@ -11,7 +11,7 @@
             <input placeholder='비밀번호 확인' type="password" id="password2" v-model="password2"><br>
           </span>
 
-          <button type="submit" id="changeBtn">비밀번호 바꾸기</button>
+          <button type="submit" id="changeBtn">비밀번호 변경</button>
       </form>
     </div>
   </div>  
@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   text-align: center;
   position: relative;
-  width: 440px;
+  width: 490px;
   padding: 70px;
   background-color: #02111B;
   opacity: 0.9;
@@ -68,7 +68,7 @@ export default {
   margin-top: 10px;
   border-radius: 10px;
   background-color: #710627;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold ;
 }
 
@@ -91,5 +91,6 @@ input::placeholder{
   padding-bottom: 10px;
   color: white;
   font-size: xx-large;
+  font-weight: bold;
 }
 </style>

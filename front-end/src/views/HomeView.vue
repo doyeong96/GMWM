@@ -1,8 +1,20 @@
 <template>
   <div class="home">
+    
+    <!-- <div class="input-group mb-3">
+      <span class="input-group-text">돋보기</span>
+      <div class="form-floating">
+        <input @input="searchMovieHome" type="text" class="form-control" id="floatingInputGroup1" placeholder="search movie">
+        <label for="floatingInputGroup1">search movie</label>
+      </div>
+    </div> -->
+    <div class="input-group mx-auto w-25 mb-3">
+      <span class="input-group-text"><img src="@/assets/search.png" style="width:30px; height:30px;" alt=""></span>
+      <input @input="searchMovieHome" type="text" class="form-control" id="search" placeholder="search movie">
+    </div>
 
-    <label for="moviename">돋보기 아이콘 달기</label>
-    <input id="moviename" @input="searchMovieHome" type="text">
+    <!-- <label for="moviename">돋보기 아이콘 달기</label> -->
+    <!-- <input id="moviename" @input="searchMovieHome" type="search"> -->
     <div>
       <div v-for="findMovie in findMovies" :key="findMovie.id" style="width: 330px; display:inline-block;">
         <div class="card mx-2 my-2">

@@ -1,18 +1,18 @@
 <template>
   <div id="whole">
     <div id="loginContainer" class="">
-      <h1 id="loginTitle">로그인 하셈</h1>
+      <h1 id="loginTitle">같이 영화 보실래요?</h1>
       <form @submit.prevent="login">
           <span>
-            <input placeholder='아이디를 입력하도록' type="text" id="username" v-model="username"><br>
+            <input placeholder='Id' type="text" id="username" v-model="username"><br>
           </span>
 
           <span>
-            <input placeholder='비밀번호를 입력하도록' type="password" id="password" v-model="password"><br>
+            <input placeholder='PassWord' type="password" id="password" v-model="password"><br>
           </span>
 
 
-          <button type="submit" id="logInButton">로그인</button>
+          <button type="submit" id="logInButton">LogIn</button>
       </form>
     </div>
   </div>
@@ -68,7 +68,7 @@ export default {
   height: 50px;
   margin-top: 10px;
   border-radius: 10px;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold ;
   background-color: #710627;
 }
@@ -90,5 +90,6 @@ input::placeholder{
   padding-bottom: 10px;
   font-size: xx-large;
   color: white;
+  font-weight: bold ;
 }
 </style>

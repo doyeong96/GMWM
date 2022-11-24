@@ -2,7 +2,7 @@
   <div id="whole">
     <div id="signUpContainer" class="">
 
-      <h2 id="signUpTitle">회원가입 하쉴?</h2>
+      <h2 id="signUpTitle">우리랑 같이 영화 볼래요?</h2>
       <form @submit.prevent="signUp">
         <span>
           <input placeholder = '아이디를 입력하세요' type="text" id="username" v-model="username"><br>
@@ -71,7 +71,7 @@ export default {
   flex-direction: column;
   text-align: center;
   position: relative;
-  width: 440px;
+  width: 540px;
   padding: 70px;
   background-color: #02111B;
   opacity: 0.9;
@@ -85,7 +85,7 @@ export default {
   border-radius: 10px;
   /* font-size: large; */
   background-color: #710627;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold ;
 }
 
@@ -93,7 +93,7 @@ export default {
 #nickname,
 #password1,
 #password2{
-  width: 300px;
+  width: 350px;
   height: 50px;
   margin-top: 10px;
   border-radius: 10px;
@@ -109,5 +109,6 @@ input::placeholder{
   padding-bottom: 10px;
   font-size: xx-large;
   color: white;
+  font-weight: bold;
 }
 </style>
