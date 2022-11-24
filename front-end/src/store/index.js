@@ -591,6 +591,20 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    togetherCommentUpdate({getters}, payload) {
+      const togetherCommentId = payload.commentId
+      const content = payload.content
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/togethercomments/${togetherCommentId}/`,
+        headers : getters.authHead,
+        data : {content}
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => console.log(err))
+    },
     deleteTogetherComment({getters}, togetherCommentId) {
       axios({
         method : 'delete',
@@ -600,6 +614,7 @@ export default new Vuex.Store({
       .then(() => {
         router.go(router.currentRoute)
       })
+      .catch((err) => console.log(err))
     },
     deleteTogether({getters}, togetherId){
       axios({
