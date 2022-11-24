@@ -405,7 +405,10 @@ export default new Vuex.Store({
         .then((res) => {
           commit('GET_FORUMS', res.data)
         })
-        .catch((err) => console.log(err))
+        .catch((err) =>{
+          console.log('에러');
+          console.log(err)
+        })
     },
     getForumDetail({commit},forumId) {
       axios({
@@ -414,7 +417,14 @@ export default new Vuex.Store({
       .then((res) => {
         commit('GET_FORUM',res.data)
       })
-      .catch((err) => console.log(err))
+      .catch((err) =>{
+        if (err.response.status === 404){
+          router.push({ name: 'NotFound404' })
+        } else {
+          console.log(err)
+          console.log('에러');
+        }
+      })
     },
     forumCommentCreate({getters}, payload){
       const forumId = payload.forumId
@@ -516,7 +526,10 @@ export default new Vuex.Store({
         .then((res) => {
           commit('GET_REVIEWS', res.data)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err)
+          console.log('에러')
+        })
     },
     getReviewDetail({commit},reviewId) {
       axios({
@@ -525,7 +538,13 @@ export default new Vuex.Store({
       .then((res) => {
         commit('GET_REVIEW',res.data)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        } else {
+          console.log(err)
+        }
+      })
     },
     reviewCommentCreate({getters},payload) {
       const content = payload.content
@@ -636,7 +655,14 @@ export default new Vuex.Store({
       .then((res) => {
         commit('GET_TOGETHER',res.data)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          router.push({ name: 'NotFound404' })
+        } else {
+          console.log(err)
+          console.log('에러');
+        }
+      })
     },
     togetherCommentCreate({getters},payload) {
       const content = payload.content
