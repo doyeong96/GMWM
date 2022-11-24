@@ -101,7 +101,11 @@ def movie_search(request):
     movie_title = request.data.get('movie_name')
 
     movies = Movie.objects.filter(title__contains = movie_title)
-
+    movies = list(movies)
+    if len(movies) < 13:
+        movies = movies
+    else:
+        movies = movies[:12]
     serializer =  MovieSerializer(movies, many=True)
     return Response(serializer.data)
 

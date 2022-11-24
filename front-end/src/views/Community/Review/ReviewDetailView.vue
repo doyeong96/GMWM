@@ -8,7 +8,7 @@
 
       <div id="review-poster">
         <p>{{review.movie_title}}</p>
-        <img :src="`https://image.tmdb.org/t/p/w500${review.poster_path}`" alt="">
+        <img class="poster" :src="`https://image.tmdb.org/t/p/w500${review.poster_path}`" alt="">
       </div>
 
       <div id="review-content">
@@ -19,10 +19,12 @@
         <p>{{ likeUsers }} 명이 좋아합니다 </p>
         <div>
           <span v-if="review.like_users.includes(user.pk)">
-            <button @click="likesReview">좋아요 취소</button>
+            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/heart (2).png" style="width:30px; height:30px;"></h2>
+            <!-- <button @click="likesReview">좋아요 취소</button> -->
           </span>
           <span v-else>
-            <button @click="likesReview">좋아요</button>
+            <h2 type="button" @click="likesReview"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
+            <!-- <button @click="likesReview">좋아요</button> -->
           </span>
 
           <button>
@@ -100,7 +102,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #review-container{
   width: 940px;
   margin: 0px auto;
@@ -150,5 +152,8 @@ export default {
   margin-left: auto;
   margin-right: auto ;
   margin-top: 50px ;
+}
+.poster{
+  border-radius: 10px;
 }
 </style>

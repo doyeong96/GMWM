@@ -412,14 +412,15 @@ export default new Vuex.Store({
     },
 
     // review /////////////////////////////////////////////////////////
-    likesReview({getters}, reviewId) {
+    likesReview({getters, dispatch}, reviewId) {
       axios({
         method : 'post',
         url : `${API_URL}/community/reviewlikes/${reviewId}/`,
         headers : getters.authHead
       })
       .then(() => {
-        router.go(router.currentRoute)
+        dispatch('getReviewDetail', reviewId)
+        // router.go(router.currentRoute)
       })
       .catch((err) => {
         console.log(err)
@@ -521,14 +522,15 @@ export default new Vuex.Store({
       })
     },
     // together /////////////////////////////////////////////////////////
-    likesTogether({getters}, togetherId) {
+    likesTogether({getters, dispatch}, togetherId) {
       axios({
         method : 'post',
         url : `${API_URL}/community/togetherlikes/${togetherId}/`,
         headers : getters.authHead
       })
       .then(() => {
-        router.go(router.currentRoute)
+        dispatch('getTogetherDetail', togetherId)
+        // router.go(router.currentRoute)
       })
       .catch((err) => {
         console.log(err)
