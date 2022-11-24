@@ -27,6 +27,8 @@ import SelectGenreView from '@/views/Movie/SelectGenreView'
 import MovieDetailView from '@/views/Movie/MovieDetailView'
 import Modal from '@/components/Modal.vue'
 import Content from '@/components/Movie/Content'
+//404
+import NotFound404 from '@/views/NotFound'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,6 +36,12 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  // 404 페이지
+  {
+    path : '/404-not-found',
+    name : 'NotFound404',
+    component : NotFound404,
   },
   //Forum router
   {
@@ -145,6 +153,11 @@ const routes = [
     path: '/selectgenre',
     name: 'SelectGenreView',
     component : SelectGenreView,
+  },
+  //404
+  {
+    path : '*',
+    redirect : { name : 'NotFound404' }
   }
 ]
 
