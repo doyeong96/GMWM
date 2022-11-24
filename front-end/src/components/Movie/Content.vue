@@ -14,10 +14,10 @@
       <div v-else>
         <h2 type="button" @click="likesMovie"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
       </div>
-        <iframe width="560" height="320" :src="movieYoutube"></iframe>
+        <iframe width="560" height="320" :src="`https://www.youtube.com/embed/${movie?.youtube_key}`"></iframe>
       </div>
       <div class="posterimg">
-      <img :src="movieImg" alt="">
+      <img :src="`https://image.tmdb.org/t/p/w400${movie?.poster_path}`" alt="">
       </div>
     </div>
     <div class="detail_page">
@@ -44,12 +44,12 @@ export default {
   movie() {
     return this.$store.getters.movie 
   },
-  movieImg(){
-    return `https://image.tmdb.org/t/p/w400${this.$store.getters.movie.poster_path}`
-  },
-  movieYoutube(){
-    return `https://www.youtube.com/embed/${this.$store.getters.movie.youtube_key}`
-  },
+  // movieImg(){
+  //   return `https://image.tmdb.org/t/p/w400${this.movie.poster_path}`
+  // },
+  // movieYoutube(){
+  //   return `https://www.youtube.com/embed/${this.$store.getters.movie.youtube_key}`
+  // },
   movieActors(){
     return this.$store.getters.actors 
   },
@@ -73,8 +73,6 @@ export default {
   },
   created(){
     this.$store.dispatch('getMovieDetail', this.$route.params.movieId)
-    this.$store.dispatch('getMovieActors', this.$route.params.movieId)
-    this.$store.dispatch('getMovieGenres', this.$route.params.movieId)
   },
 }
 </script>
