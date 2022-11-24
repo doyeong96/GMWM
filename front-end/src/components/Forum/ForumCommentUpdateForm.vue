@@ -7,7 +7,7 @@
         </div>
 
     <!-- <input type="text" id="ForumComment" v-model="content"> -->
-    <input type="submit" value="작성">
+    <input class="createBtn " type="submit" value="작성">
     </form>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <li>
     {{togetherComment.nickname}} : {{togetherComment.content}}
-    <button @click="deleteTogetherComment">삭제</button>
+    <button class="deleteBtn" @click="deleteTogetherComment">삭제</button>
   </li>
 </template>
 

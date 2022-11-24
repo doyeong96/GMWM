@@ -12,7 +12,7 @@
         </div>
       <!-- <button class="col-sm-1">등록</button> -->
       </div>
-        <button class="ml-auto">등록</button>
+        <button class="ml-auto createBtn">등록</button>
     </form>
   </div>
 

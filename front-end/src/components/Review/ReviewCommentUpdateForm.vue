@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h2>댓글수정</h2>
-    <form @submit.prevent="forumCommentUpdate">
-    <input type="text" id="ForumComment" v-model="content">
-    <input type="submit" value="작성">
+    <form @submit.prevent="reviewCommentUpdate">
+      <div class="form-floating col-sm-11 mb-3">
+    <input class="form-control" placeholder="제목을 작성하세요" type="text" id="ReviewComment" v-model="content">
+    <label for="ReviewComment">댓글 수정</label>
+    </div>
+    <input class="createBtn" type="submit" value="작성">
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name : 'ForumCommentUpdateForm',
+  name : 'ReivewCommentUpdateForm',
   props : {
     commentAll : Object,
   },
@@ -20,13 +22,13 @@ export default {
     }
   },
   methods  : {
-    forumCommentUpdate() {
+    reviewCommentUpdate() {
       const content = this.content
       const commentId = this.commentAll.id
       const payload = {
         content, commentId
       }
-      this.$store.dispatch('forumCommentUpdate',payload)
+      this.$store.dispatch('reviewCommentUpdate',payload)
     }
   }
 }

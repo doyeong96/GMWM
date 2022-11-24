@@ -27,12 +27,12 @@
             <!-- <button @click="likesReview">좋아요</button> -->
           </span>
 
-          <button>
-            <span data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
+          <button class="deleteBtn ">
+            <span  data-bs-toggle="modal" data-bs-target="#reveiwDeleteModal">
               삭제  
             </span>
           </button>
-          <router-link :to="{ name : 'ReviewUpdateView'}">UPDATE</router-link> <br>	
+          <router-link class="createBtn mx-2" :to="{ name : 'ReviewUpdateView'}">수정</router-link> <br>	
 
       <div class="modal fade" id="reveiwDeleteModal" tabindex="-1" aria-labelledby="reveiwDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

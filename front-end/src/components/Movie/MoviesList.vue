@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>당신이 좋아하는 {{this.genre}}장르</h2>
+    <h2 id="TTTT">당신이 좋아하는 {{this.genre}}장르</h2>
     <swiper
       class="swiper"
       :options="swiperOption">
@@ -41,7 +41,7 @@ export default {
             grabCursor : "true",
             centeredSlides : "true",
             slidesPerView : 5,
-            spaceBetween: 10, 
+            spaceBetween: -800, 
             loop: true, 
             slidesPerGroup : 5,
             navigation: { 
@@ -55,6 +55,10 @@ export default {
 </script>
 
 <style scoped>
+#TTTT{
+  text-align: left;
+  margin-left:50px;
+}
 a {
   color: #FCF7FF;
   font-size: 24px;

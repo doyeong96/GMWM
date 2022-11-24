@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>당신을 위한 강력추천 영화</h1>
+    <h1 id="TTTT">당신을 위한 강력추천 영화</h1>
     <swiper
       class="swiper"
       :options="swiperOption">       
       
       <swiper-slide v-for="(bestMovie,idx) in bestMovies" :key="idx" id="swiperSlid">
           <figure class="hover-img">
-            <img id="swiperSlidImg" :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
+            <img id="swiperSlidImg"  :src="`https://image.tmdb.org/t/p/w500${bestMovie.poster_path}`" alt="">
               <figcaption >
                 <router-view />
               <router-link  :to="`/showmovie/${bestMovie.id}`">
@@ -56,7 +56,7 @@ export default {
               modifier: 1,
               slideShadows: false,
             },
-            spaceBetween: 10, 
+            spaceBetween: -1000, 
             loop: true, 
         },
         showModal : false,
@@ -95,6 +95,11 @@ export default {
     transform: translate(-50%, -50%);
     background: rgb(198, 142, 142);
   } */
+#TTTT{
+  text-align: left;
+  margin-left:50px;
+}
+
 #swiperSlidImg{
   height: 450px;
   width: 350px;

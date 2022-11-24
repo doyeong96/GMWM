@@ -26,13 +26,13 @@
         <h2 type="button" @click="likesTogether"><img alt="likes" src="@/assets/heart (1).png" style="width:30px; height:30px;"></h2>
       </span>
 
-      <button class="">
+      <button class="deleteBtn mx-2">
         <span data-bs-toggle="modal" data-bs-target="#togetherDeleteModal">
           삭제  
         </span>
       </button>
 
-        <router-link :to="{ name : 'TogetherUpdateView'}">수정</router-link>
+        <router-link class="createBtn" :to="{ name : 'TogetherUpdateView'}">수정</router-link>
         </div>
     </div>
     <br>

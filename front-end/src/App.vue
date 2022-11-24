@@ -67,14 +67,16 @@ export default {
 <style>
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nanum Gothic Coding', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   /* color: #2c3e50; */
   /* background: linear-gradient(#292929 , #141414); */
 }
-
+a:visited {
+  color :  #EBEBEB;;
+}
 #navImg {
   width: 50px;
   height: 50px;

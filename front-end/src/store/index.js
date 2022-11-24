@@ -458,6 +458,20 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    reviewCommentUpdate({getters}, payload) {
+      const reviewCommentId = payload.commentId
+      const content = payload.content
+      axios({
+        method : 'put',
+        url : `${API_URL}/community/reviewcomments/${reviewCommentId}/`,
+        headers : getters.authHead,
+        data : {content}
+      })
+      .then(() => {
+        router.go(router.currentRoute)
+      })
+      .catch((err) => console.log(err))
+    },
     deleteReviewComment({getters}, reviewCommentId) {
       axios({
         method : 'delete',

@@ -8,9 +8,9 @@
         <span class="title-word title-word-4">유글</span>
       </h2>
     </div>
-    <ul class="list-group" v-for="(forum,idxForum) in userLikesForums" :key="idxForum">
-      <li class="list-group-item"><router-link :to="{ name : 'ForumDetailView', params : { id : forum.id} }">{{forum.title}}</router-link></li>
-    </ul>
+    <div id="border" v-for="(forum,idxForum) in userLikesForums" :key="idxForum+'l'">
+      <router-link :to="{ name : 'ForumDetailView', params : { id : forum.id} }"><h5>{{forum.title}}</h5></router-link>
+    </div>
   </div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
 </script>
 
 <style scoped>
+#border {
+  margin-top: 20px;
+  border-bottom:rgb(114, 99, 99) solid 2px;
+}
 .title-word {
   animation: color-animation 4s linear infinite;
 }
