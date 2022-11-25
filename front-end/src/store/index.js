@@ -159,9 +159,9 @@ export default new Vuex.Store({
         dispatch('getUserInfo')
         dispatch('getNowUserInfo')
         alert('로그인 되셨습니다.')
-        router.push({name : 'ForumView'})
+        router.push({name : 'home'})
       })
-      .catch((err) => console.log(err))
+      .catch((err) => alert('회원 정보가 잘못됐습니다.'))
     },
     logout({commit,getters}) {
       axios({

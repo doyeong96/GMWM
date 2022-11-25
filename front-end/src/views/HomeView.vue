@@ -26,7 +26,7 @@
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <a :href="`http://localhost:8080/movieDetail/${findMovie.id}`"> {{findMovie.title}}</a>
+              <a :href="`http://localhost:8080/movieDetail/${findMovie.id}`" style="color : #02020B;"> {{findMovie.title}}</a>
             </li>
           </ul>
           
@@ -131,7 +131,7 @@ h1 span:nth-child(17){ animation-delay:.8s; }
   width: 1500px;
   margin-left: auto;
   margin-right: auto ;
-  margin-bottom: 800px ;
+  margin-bottom: 400px ;
   
 }
 #whole {

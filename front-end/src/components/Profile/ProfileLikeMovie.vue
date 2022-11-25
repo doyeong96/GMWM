@@ -17,7 +17,7 @@
 
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <a :href="`http://localhost:8080/movieDetail/${likesMovie?.id}`"> {{likesMovie.title}}</a>
+              <a :href="`http://localhost:8080/movieDetail/${likesMovie?.id}`" style="color : #02020B;"> {{likesMovie.title}}</a>
             </li>
           </ul>
           

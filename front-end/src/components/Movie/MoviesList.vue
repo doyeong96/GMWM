@@ -41,7 +41,7 @@ export default {
             grabCursor : "true",
             centeredSlides : "true",
             slidesPerView : 5,
-            spaceBetween: -800, 
+            spaceBetween: -700, 
             loop: true, 
             slidesPerGroup : 5,
             navigation: { 

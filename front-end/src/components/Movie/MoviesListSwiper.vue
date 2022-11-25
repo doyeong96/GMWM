@@ -56,7 +56,7 @@ export default {
               modifier: 1,
               slideShadows: false,
             },
-            spaceBetween: -1000, 
+            spaceBetween: -800, 
             loop: true, 
         },
         showModal : false,

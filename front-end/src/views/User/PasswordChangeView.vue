@@ -2,7 +2,7 @@
   <div id="whole">
     <div id="changeContainer" class="">
       <h2 id="changeTitle">비밀번호를 바꾸실래요?</h2>
-      <form @submit.prevent="login">
+      <form @submit.prevent="passwordChange">
           <span>
             <input placeholder='변경할 비밀번호' type="password" id="password1" v-model="password1"><br>
           </span>

@@ -22,7 +22,6 @@ from .models import  (
 
 # 리뷰 전체 페이지 (겟 포스트)
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def review_list(request):
     if request.method == 'GET':
         reviews = Review.objects.order_by('-pk')
@@ -39,7 +38,6 @@ def review_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
-@permission_classes([IsAuthenticated])
 # 리뷰 상세 페이지 (겟 딜리트 풋)
 def review_detail(request, review_pk):
     # review = Review.objects.get(pk=review_pk)
@@ -63,7 +61,6 @@ def review_detail(request, review_pk):
 
 # 리뷰 댓글 전체 (겟)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def review_comment_list(request):
     if request.method == 'GET':
         # comments = ReviewComment.objects.all()
@@ -73,7 +70,6 @@ def review_comment_list(request):
         return Response(serializer.data)
 
 # 리뷰 댓글 상세 (겟 딜리트 풋)
-@permission_classes([IsAuthenticated])
 @api_view(['GET', 'DELETE', 'PUT'])
 def review_comment_detail(request, comment_pk):
     # comment = ReviewComment.objects.get(pk=comment_pk)
@@ -96,7 +92,6 @@ def review_comment_detail(request, comment_pk):
 
 # 리뷰 댓글 생성 (포스트)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def review_comment_create(request, review_pk):
     # review = Review.objects.get(pk=review_pk)
     review = get_object_or_404(Review, pk=review_pk)
@@ -108,7 +103,6 @@ def review_comment_create(request, review_pk):
 
 # 리뷰 좋아요 (포스트)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def likes_review(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     print('**********************************')
@@ -129,7 +123,6 @@ def likes_review(request, review_pk):
 
 # 자유게시판 전체 페이지 (겟 포스트)
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def forum_list(request):
     if request.method == 'GET':
         forums = Forum.objects.order_by('-pk')
@@ -146,7 +139,6 @@ def forum_list(request):
 
 # 자유게시판 상세 페이지 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-@permission_classes([IsAuthenticated])
 def forum_detail(request, forum_pk):
     # forum = Forum.objects.get(pk=forum_pk)
     forum = get_object_or_404(Forum, pk=forum_pk)
@@ -167,7 +159,6 @@ def forum_detail(request, forum_pk):
 
 # 자유게시판 댓글 전체 (겟)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def forum_comment_list(request):
     if request.method == 'GET':
         # comments = ForumComment.objects.all()
@@ -178,7 +169,6 @@ def forum_comment_list(request):
 
 # 자유게시판 댓글 상세 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-@permission_classes([IsAuthenticated])
 def forum_comment_detail(request, comment_pk):
     # comment = ForumComment.objects.get(pk=comment_pk)
     comment = get_object_or_404(ForumComment, pk=comment_pk)
@@ -200,7 +190,6 @@ def forum_comment_detail(request, comment_pk):
 
 # 자유게시판 댓글 생성 (포스트)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def forum_comment_create(request, forum_pk):
     # forum = Forum.objects.get(pk=forum_pk)
     forum = get_object_or_404(Forum, pk=forum_pk)
@@ -213,7 +202,6 @@ def forum_comment_create(request, forum_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def likes_forum(request, forum_pk):
     forum = get_object_or_404(Forum, pk=forum_pk)
     if forum.like_users.filter(pk=request.user.pk).exists():
@@ -229,7 +217,6 @@ def likes_forum(request, forum_pk):
 
 # 모여요 전체 페이지 (겟 포스트)
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def together_list(request):
     if request.method == 'GET':
         together = Together.objects.order_by('-pk')
@@ -245,7 +232,6 @@ def together_list(request):
 
 # 모여요 상세 페이지 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-@permission_classes([IsAuthenticated])
 def together_detail(request, together_pk):
     # together = Together.objects.get(pk=together_pk)
     together = get_object_or_404(Together, pk=together_pk)
@@ -265,7 +251,6 @@ def together_detail(request, together_pk):
 
 # 모여요 댓글 전체 (겟)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def together_comment_list(request):
     if request.method == 'GET':
         # comments = TogetherComment.objects.all()
@@ -277,7 +262,6 @@ def together_comment_list(request):
 
 # 모여요 댓글 상세 (겟 딜리트 풋)
 @api_view(['GET', 'DELETE', 'PUT'])
-@permission_classes([IsAuthenticated])
 def together_comment_detail(request, comment_pk):
     # comment = TogetherComment.objects.get(pk=comment_pk)
     comment = get_object_or_404(TogetherComment, pk=comment_pk)
@@ -298,7 +282,6 @@ def together_comment_detail(request, comment_pk):
     
 # 모여요 댓글 생성 (포스트)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def together_comment_create(request, together_pk):
     # together = Together.objects.get(pk=together_pk)
     together = get_object_or_404(Together, pk=together_pk)
@@ -309,7 +292,6 @@ def together_comment_create(request, together_pk):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def likes_together(request, together_pk):
     together = get_object_or_404(Together, pk=together_pk)
     if together.like_users.filter(pk=request.user.pk).exists():
