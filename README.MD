@@ -136,7 +136,7 @@
 - 백엔드
   - 소셜 로그인 기능
   - 이메일 인증 기능
-  - 내가 작성한 게시글, 댓글만 정보 변경 가능
+  - 
   - 대댓글
 - 프론트엔드
   - 팔로잉 팔로워
@@ -148,23 +148,15 @@
 
 ![3257a3794e0a5e798c20bf06e84346042ad98c38.jpg](README_assets/1dcff52179978626ac703eba7e95cad735408017.jpg)
 
-
-
 # Vue component
 
 ![e51709c165e12c716085a0b1932f02907749ca7b.png](README_assets/a7472b0a434753286074dbade2ec7ae59b737de6.png)
-
-
 
 # mockup
 
 ![b664ad588f0d63cac60b1a33f496af5123f83b1f.png](README_assets/6a06c71fcbfe6fdcec96b0176fc3056c6e988547.png)
 
-
-
 # API
-
-
 
 ![b2ac6b0719f3d1111501e8d6a05711efa31a2436.png](README_assets/2b74e5e193666f67a5149a488b751eb86e270bd9.png)
 
@@ -198,10 +190,6 @@
 ![Untitled 2.png](README_assets/864c10babe03a811fdb27d1cb98ab527ede7f3ef.png)
 
 ![Untitled 3.png](README_assets/2f7f87a93f64d4cb4edd1fd88b0cd44c82a3a332.png)
-
-
-
-
 
 카카오 맵 Api 를 활용해서 게시글 작성 시 주소 확인 가능
 
